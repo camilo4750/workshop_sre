@@ -1,0 +1,32 @@
+version: "3.9"
+
+# Ports se definen en override
+
+services:
+  workshop-sre:
+    container_name: workshop-sre
+    build:
+      context: ../../../
+      dockerfile: ./.devops/docker/develop/Dockerfile
+    volumes:
+      - ../../../:/var/www/app
+      - ~/storage_block/workshop-sre/volumen_files:/var/www/volumen_files
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+
+#Nginx Service (Solo sirve archivos estaticos por eso solo dejo que copie los archivos publicos)
+  workshop-sre-nginx:
+    image: nginx:alpine
+    container_name: workshop-sre-nginx
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ../../../public:/var/www/app/public
+      - ./nginx/conf.d/:/etc/nginx/templates
+    environment:
+      NGINX_FASTCGI_PASS: "workshop-sre:9000"
+
+#docker network create workshop-sre-network
+networks:
+    default:
+        external:
+            name: workshop-sre-network
