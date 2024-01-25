@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba936c49b83e8012d851246238a6a539",
+    "content-hash": "45950a38753ad23fe64b408d8c5481c6",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1194,22 +1194,22 @@
         },
         {
             "name": "jeroennoten/laravel-adminlte",
-            "version": "v3.9.4",
+            "version": "v3.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeroennoten/Laravel-AdminLTE.git",
-                "reference": "479197945506d691d9b73c56dc365d3f5e7a9a9b"
+                "reference": "31fd44fd200487f15099e3fae622b0228266372e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/479197945506d691d9b73c56dc365d3f5e7a9a9b",
-                "reference": "479197945506d691d9b73c56dc365d3f5e7a9a9b",
+                "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/31fd44fd200487f15099e3fae622b0228266372e",
+                "reference": "31fd44fd200487f15099e3fae622b0228266372e",
                 "shasum": ""
             },
             "require": {
                 "almasaeed2010/adminlte": "3.2.*",
-                "laravel/framework": ">=7.0",
-                "php": ">=7.2.5"
+                "laravel/framework": ">=6.0",
+                "php": ">=7.2.0"
             },
             "require-dev": {
                 "orchestra/testbench": ">=4.0",
@@ -1248,9 +1248,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jeroennoten/Laravel-AdminLTE/issues",
-                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.9.4"
+                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.8.5"
             },
-            "time": "2024-01-19T14:51:27+00:00"
+            "time": "2022-12-07T19:04:55+00:00"
         },
         {
             "name": "laravel/fortify",
