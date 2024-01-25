@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    if(Auth::guest()) return response()->redirectTo('login');
+//    else return response()->redirectToRoute('panel');
+    return response()->redirectTo('login');
 });
