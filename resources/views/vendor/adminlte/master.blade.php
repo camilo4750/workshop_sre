@@ -21,6 +21,7 @@
 
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
+
     {{-- Base Stylesheets --}}
     @if(!config('adminlte.enabled_laravel_mix'))
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
@@ -37,7 +38,8 @@
     @else
         <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
     @endif
-
+    <link rel="stylesheet" href="{{ asset('styles/settings/colors.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
     {{-- Livewire Styles --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)

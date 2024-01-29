@@ -18,3 +18,7 @@ Route::get('/', function () {
 //    else return response()->redirectToRoute('panel');
     return response()->redirectTo('login');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});

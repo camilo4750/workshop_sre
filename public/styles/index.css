@@ -1,0 +1,75 @@
+.main-header ul li  a {
+    color: white !important;
+}
+
+.main-sidebar .brand-link{
+    border-bottom: 1px solid #030025;
+}
+
+.sidebar {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.nav-sidebar>.nav-item> .nav-link {
+    color: #000000 !important;
+}
+
+
+/*.sidebar nav ul li a:hover {*/
+/*    background-color: #030025 !important    ;*/
+/*    color: #D3DDBF !important;*/
+/*}*/
+
+
+/*.sidebar nav ul li a:hover p{*/
+/*    color: #D3DDBF !important;*/
+/*    font-weight: bold;*/
+/*}*/
+
+
+
+.nav-link {
+    padding: 0.5rem 0.5rem !important;
+    width: 100% !important;
+}
+
+/*.nav-pills .nav-link.active{*/
+/*    background-color: #030025 !important    ;*/
+/*    color: #D3DDBF !important;*/
+/*}*/
+
+/*.nav-pills .nav-link.active p {*/
+/*    color: #D3DDBF !important;*/
+/*    font-weight: bold;*/
+/*}*/
+
+.nav-pills .nav-link{
+    color: #000000;
+}
+
+.sidebar-white-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #030025 !important    ;
+    color: #D3DDBF !important;
+    font-weight: bold;
+}
+
+
+[class*=sidebar-white-] .nav-treeview>.nav-item>.nav-link:hover {
+    background-color: #030025 !important    ;
+    color: #D3DDBF !important;
+    font-weight: bold;
+}
+
+[class*=sidebar-white-] .nav-sidebar>.nav-item.menu-open>.nav-link {
+    background-color: #030025 !important    ;
+    color: #D3DDBF !important;
+    font-weight: bold;
+}
+
+
+[class*=sidebar-white-] .nav-sidebar>.nav-item.menu-open>.nav-link {
+    background-color: #030025 !important    ;
+    color: #D3DDBF !important;
+    font-weight: bold;
+}
