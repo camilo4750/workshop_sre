@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'img/logo_sre.png',
+    'logo_img' => '',
     'logo_img_class' => 'img-fluid p-0',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -301,20 +301,9 @@ return [
             'topnav_right' => true,
         ],
         [
-            'text' => 'Panel',
-            'url'  => '/dashboard',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-
-        [
-            'text' => 'Panel',
-            'url'  => '/',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Panel',
-            'url'  => '/',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Usuarios',
+            'route'  => 'User.Index',
+            'icon' => 'fas fa-fw fa-users',
         ],
 
         [
