@@ -75,6 +75,8 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+{{-- Vue3 --}}
+    <script src="{{ asset('js/Vue/vue3.js') }}"></script>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
