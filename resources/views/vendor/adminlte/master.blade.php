@@ -40,6 +40,12 @@
     @endif
     <link rel="stylesheet" href="{{ asset('styles/settings/colors.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css"
+          integrity="sha512-eBNnVs5xPOVglLWDGXyZnZZ2K2ixXhR/3aECgCpFnW2dGCd/yiqXZ6fcB3BubeA91kM6NX234b6Wrah8RiYAPA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- Livewire Styles --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)
@@ -74,9 +80,16 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
-
-{{-- Vue3 --}}
+    {{-- Vue3 --}}
     <script src="{{ asset('js/Vue/vue3.js') }}"></script>
+
+    {{-- jQuery --}}
+    <script src="{{ asset('js/Jquery/jquery-3.7.1.min.js') }}"></script>
+
+    {{-- dataTables --}}
+    <script src="{{ asset('js/DataTables/dataTables.js') }}"></script>
+    <script src="{{ asset('js/DataTables/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('js/DataTables/es.js') }}"></script>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
