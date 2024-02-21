@@ -41,8 +41,11 @@
     <link rel="stylesheet" href="{{ asset('styles/settings/colors.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/Toastr/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/datatable.css') }}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css"
           integrity="sha512-eBNnVs5xPOVglLWDGXyZnZZ2K2ixXhR/3aECgCpFnW2dGCd/yiqXZ6fcB3BubeA91kM6NX234b6Wrah8RiYAPA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -83,13 +86,19 @@
     {{-- Vue3 --}}
     <script src="{{ asset('js/Vue/vue3.js') }}"></script>
 
-    {{-- jQuery --}}
-    <script src="{{ asset('js/Jquery/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+    {{-- Utilidades --}}
+    <script src="{{asset('js/Utilities.js')}}"></script>
+
+    {{-- Toastr --}}
+    <script src="{{ asset('js/Toastr/toastr.js') }}"></script>
 
     {{-- dataTables --}}
     <script src="{{ asset('js/DataTables/dataTables.js') }}"></script>
     <script src="{{ asset('js/DataTables/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/DataTables/es.js') }}"></script>
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -99,7 +108,6 @@
 
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
