@@ -2,16 +2,15 @@
 
 namespace App\Mapper;
 
-use App\Dto\BaseDto;
+use App\Dto\CoreDto;
 
 abstract class CoreMapper
 {
-    protected BaseDto $dto;
-    protected $entity;
+    protected CoreDto $dto;
 
-    abstract protected function getNewDto():BaseDto;
+    abstract protected function getNewDto():CoreDto;
 
-    public function getDto():BaseDto{
+    public function getDto():CoreDto{
         return $this->dto;
     }
 

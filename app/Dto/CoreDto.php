@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-abstract class BaseDto
+abstract class CoreDto
 {
     public $entity__= null;
 
