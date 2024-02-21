@@ -40,7 +40,7 @@
                                 <select name="typeUser" id="typeUser"  class="form-control"
                                         v-model="createUser.typeUser" aria-label="typeUser">
                                     <option value="" selected disabled>- Seleccionar Rol -</option>
-                                    <option value="2">2</option>
+                                    <option value="1">Administrador</option>
                                 </select>
                             </div>
                         </div>
@@ -50,8 +50,14 @@
                                        v-model="createUser.email" aria-label="email">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Contraseña"
+                                <input type="password" class="form-control" placeholder="Contraseña"
                                        v-model="createUser.password" aria-label="password">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="password" class="form-control" placeholder="Contraseña"
+                                       v-model="createUser.password_confirmation" aria-label="password">
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
