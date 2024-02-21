@@ -73,3 +73,7 @@
     color: #D3DDBF !important;
     font-weight: bold;
 }
+
+.content-header {
+    padding: 30px 0.5rem !important;
+}
