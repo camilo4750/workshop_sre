@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-//    if(Auth::guest()) return response()->redirectTo('login');
-//    else return response()->redirectToRoute('panel');
-    return response()->redirectTo('login');
+    if(Auth::guest()) return response()->redirectTo('login');
+    else return response()->redirectToRoute('home');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/home', function () {
     return view('dashboard');
-});
+})->name('home')->middleware('auth');;

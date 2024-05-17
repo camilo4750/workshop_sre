@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link" data-widget="pushmenu" href="#"
+    <a class="nav-link d-flex align-items-center" data-widget="pushmenu" href="#"
         @if(config('adminlte.sidebar_collapse_remember'))
             data-enable-remember="true"
         @endif
