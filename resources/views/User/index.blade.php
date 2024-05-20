@@ -41,9 +41,9 @@
                         <td>@{{ user.type_user_id == 1 ? 'Administrador'  : 'Empleador'}}</td>
                         <td>@{{ user.email }}</td>
                         <td>@{{ user.active == true ? 'Activo'  : 'Inactivo'}}</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-warning mr-1"  data-toggle="tooltip" data-placement="top" title="Editar Usuario"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-sm btn-info ml-1"  data-toggle="tooltip" data-placement="top" title="Permisos Usuario"><i class="fas fa-key"></i></button>
+                        <td class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-warning"  data-toggle="tooltip" data-placement="top" title="Editar Usuario"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-sm btn-info"  data-toggle="tooltip" data-placement="top" title="Permisos Usuario"><i class="fas fa-key"></i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -70,7 +70,18 @@
                         password_confirmation: '',
                         isActive: true
                     },
-                    message: 'Hello Vue!'
+                    fieldsStatus: {
+                        firstName: false,
+                        secondName: false,
+                        firstSurname: false,
+                        secondSurname: false,
+                        telephone: false,
+                        typeUser: false,
+                        email: false,
+                        password: false,
+                        password_confirmation: false,
+                    },
+                    fetchErrors: [],
                 }
             },
             mounted(){
@@ -111,7 +122,6 @@
                 },
 
                 storeUser() {
-                    this.users = null;
                     fetch('{{ route('User.Create') }}', {
                         method: 'POST',
                         headers: {
@@ -126,6 +136,7 @@
                         .then(response => {
                             if(!response.success) {
                                 utilities.toastr_('error', 'Alerta', 'Error al almacenar el usuario');
+                                this.validateFieldsStatus(response.errors);
                                 return false;
                             }
                             utilities.toastr_('success', response.message);
@@ -138,12 +149,19 @@
                 },
 
                 executeDataTable() {
-                  setTimeout(function () {
+                    setTimeout(function () {
                       $('#tableUsers').DataTable({
                           language: es_datatables,
                           retrieve: true,
                       });
                   })
+                },
+
+                validateFieldsStatus(errors) {
+                    this.fetchErrors = errors;
+                    Object.keys(this.fetchErrors).forEach(key => {
+                        this.fieldsStatus[key] = true;
+                    })
                 }
             }
         });
