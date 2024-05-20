@@ -63,8 +63,8 @@
         <div class="row">
             <div class="col-12">
                 <button type=submit class="btn btn-dark btn-block">
-                    <span class="fas fa-sign-in-alt"></span>
-                    {{ __('adminlte::adminlte.sign_in') }}
+                    Iniciar Session
+                    <span class="fas fa-sign-in-alt ml-1"></span>
                 </button>
             </div>
         </div>
