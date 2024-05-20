@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wrappers;
 
 use App\Exceptions\AlertException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
@@ -54,6 +55,14 @@ class ControllerWrapper
                 'message'=> $exception->getMessage()
             ], $response), 200);
         }catch (\Exception $exception){
+            $errors = [];
+            $messagesValidation = $exception->validator->messages();
+
+            foreach ($messagesValidation->messages() as $key => $messages) {
+                foreach ($messages as $message) {
+                    $errors[$key] = $message;
+                }
+            }
             DB::rollBack();
             report($exception);
 
@@ -62,7 +71,8 @@ class ControllerWrapper
 
             $response= response()->json(array_merge([
                 'success'=> false,
-                'message'=> $exception->getMessage()
+                'message'=> $exception->getMessage(),
+                'errors' => $errors,
             ], $response), 200);
         }catch (\Throwable $exception){
             DB::rollBack();
