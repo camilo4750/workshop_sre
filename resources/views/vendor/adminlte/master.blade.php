@@ -40,6 +40,7 @@
     @endif
     <link rel="stylesheet" href="{{ asset('styles/settings/colors.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/global.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('js/Toastr/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.css') }}">
@@ -130,6 +131,21 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+<script>
+    $.fn.loading = function () {
+        let elementsToLoading = $(this).is("div, form") ? $(this).find('[type="submit"], .submit') : [this];
+        elementsToLoading[0].prop('disabled', true);
+        elementsToLoading[0].append(
+            '<span class="__loading"><i class="fa fa-spinner fa-spin"></i></span>'
+        );
+    }
+
+    $.fn.unLoading = function () {
+        let elementsToLoading = $(this).is("div, form") ? $(this).find('[type="submit"], .submit') : [this];
+        elementsToLoading[0].find('.__loading').remove()
+        elementsToLoading[0].prop('disabled', false);
+    }
+</script>
 
 </body>
 
