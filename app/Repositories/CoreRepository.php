@@ -94,4 +94,13 @@ abstract class CoreRepository implements CoreRepositoryInterface
         return $this->query;
     }
 
+    /**
+     * @return $this
+     */
+    public function find($id){
+        $entity = $this->newQuery()->find($id);
+        $this->setEntity($entity);
+        return $this;
+    }
+
 }
