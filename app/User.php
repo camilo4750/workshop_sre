@@ -14,7 +14,7 @@ class User extends Authenticate
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
     protected $table = 'users';
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
