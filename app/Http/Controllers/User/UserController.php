@@ -5,18 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Exceptions\RepositoryBaseException;
 use App\Http\Controllers\Wrappers\ControllerWrapper;
 use App\Mapper\users\userNewDtoMapper;
-use App\Repositories\System\user\UserRepository;
+use App\Mapper\users\userUpdateDtoMapper;
 use App\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\JsonResponse;
+
 class UserController
 {
-
-
     /**
      * @var UserServiceInterface
      */
@@ -34,11 +30,10 @@ class UserController
         return view('User/index');
     }
 
-    public function allUsers()
+    public function allUsers(): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () {
             $users = $this->userService->getAllUsers();
-
             return [
                 'users' => $users
             ];
@@ -47,33 +42,31 @@ class UserController
 
     public function store(Request $request): array|JsonResponse
     {
-        return ControllerWrapper::execWithJsonSuccessResponse(function () use($request) {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             $this->validateForm($request);
             try {
-                $this->userService->createUser($request);
+                $userNewDtoMapper = new userNewDtoMapper();
+                $userNewDto = $userNewDtoMapper->createFormRequest($request);
+                $this->userService->createUser($userNewDto);
                 return [
                     'message' => 'Usuario creado con éxito',
                 ];
-            }catch (\Exception $e) {
+            } catch (\Exception $e) {
                 throw new RepositoryBaseException("No almacenado", $e->getCode(), $e);
             }
         });
     }
 
-    public function validateForm(Request $request) {
-        Validator::make($request['data'], [
+    public function validateForm(Request $request): void
+    {
+        $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
             'secondName' => ['required', 'string', 'max:255'],
             'firstSurname' => ['required', 'string', 'max:255'],
             'secondSurname' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'int'],
             'typeUser' => ['required'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-            ],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', Password::default(), 'confirmed'],
         ], [
             'firstName.required' => 'El nombre es obligatorio.',
@@ -87,6 +80,47 @@ class UserController
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'password.required' => 'La contraseña es obligatoria.',
             'password.confirmed' => 'La confirmación de la contraseña no coincide.',
-        ])->validate();
+        ]);
+    }
+
+    public function update(Request $request): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
+            $this->validateFormUpdate($request);
+            try {
+                $userEditDtoMapper = new userUpdateDtoMapper();
+                $userEditDto = $userEditDtoMapper->updateFormRequest($request);
+                $this->userService->updateUser($userEditDto);
+                return [
+                    "message" => "usuario actualizado"
+                ];
+            } catch (\Exception $e) {
+                throw new RepositoryBaseException("Fallo al actulizar ", $e->getCode(), $e);
+            }
+        });
+    }
+
+    public function validateFormUpdate(Request $request): void
+    {
+        $request->validate([
+            'firstName' => ['required', 'string', 'max:255'],
+            'secondName' => ['required', 'string', 'max:255'],
+            'firstSurname' => ['required', 'string', 'max:255'],
+            'secondSurname' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'int'],
+            'typeUser' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ], [
+            'firstName.required' => 'El nombre es obligatorio.',
+            'secondName.required' => 'El segundo nombre es obligatorio.',
+            'firstSurname.required' => 'El primer apellido es obligatorio.',
+            'secondSurname.required' => 'El segundo apellido es obligatorio.',
+            'telephone.required' => 'El número de teléfono es obligatorio.',
+            'telephone.int' => 'El número de teléfono debe ser un número entero.',
+            'typeUser.required' => 'El tipo de usuario es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser una dirección válida.',
+        ]);
     }
 }
+

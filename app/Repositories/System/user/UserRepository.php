@@ -3,9 +3,10 @@
 namespace App\Repositories\System\user;
 
 use App\Dto\user\userNewDto;
+use App\Dto\user\userUpdateDto;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Mapper\users\userNewDtoMapper;
 use App\Repositories\CoreRepository;
+use Illuminate\Support\Collection;
 use App\User;
 
 class UserRepository extends CoreRepository implements UserRepositoryInterface
@@ -18,7 +19,7 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
         return new User();
     }
 
-    public function store(userNewDto $userNewDto)
+    public function store(userNewDto $userNewDto): static
     {
         $this->setNewEntity();
         $this->fillDto($userNewDto);
@@ -26,13 +27,18 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
         return $this;
     }
 
-    public function findUserByEmail($email)
+    public function findAllUsers(): Collection
     {
-        return $this->newQuery()->where('email', '=', "$email")->get();
+        return $this->newQuery()
+            ->selectRaw('*')
+            ->orderBy('id')
+            ->get();
     }
 
-    public function findAllUsers()
+    public function update(userUpdateDto $userUpdateDto): static
     {
-        return $this->newQuery()->selectRaw('*')->get();
+        $this->fillDto($userUpdateDto);
+        $this->getEntity()->save();
+        return $this;
     }
 }
