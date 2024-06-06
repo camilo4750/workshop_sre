@@ -42,18 +42,20 @@
                         <td>@{{ user.type_user_id == 1 ? 'Administrador' : 'Empleador'}}</td>
                         <td>@{{ user.email }}</td>
                         <td>@{{ user.active == true ? 'Activo' : 'Inactivo'}}</td>
-                        <td class="d-flex gap-2">
-                            <button type="button" class="btn btn-sm btn-warning"
-                                    data-toggle="tooltip" data-placement="top" title="Editar Usuario"
-                                    @click="openModalEditUser(user)">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-info"
-                                    data-toggle="tooltip" data-placement="top"
-                                    @click="openModalPermissions"
-                                    title="Permisos Usuario">
-                                <i class="fas fa-key"></i>
-                            </button>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-sm btn-warning"
+                                        data-toggle="tooltip" data-placement="top" title="Editar Usuario"
+                                        @click="openModalEditUser(user)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-info"
+                                        data-toggle="tooltip" data-placement="top"
+                                        @click="openModalPermissions"
+                                        title="Permisos Usuario">
+                                    <i class="fas fa-key"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
