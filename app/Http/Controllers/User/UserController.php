@@ -61,18 +61,14 @@ class UserController
     {
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
-            'secondName' => ['required', 'string', 'max:255'],
             'firstSurname' => ['required', 'string', 'max:255'],
-            'secondSurname' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'int'],
             'typeUser' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', Password::default(), 'confirmed'],
         ], [
             'firstName.required' => 'El nombre es obligatorio.',
-            'secondName.required' => 'El segundo nombre es obligatorio.',
             'firstSurname.required' => 'El primer apellido es obligatorio.',
-            'secondSurname.required' => 'El segundo apellido es obligatorio.',
             'telephone.required' => 'El número de teléfono es obligatorio.',
             'telephone.int' => 'El número de teléfono debe ser un número entero.',
             'typeUser.required' => 'El tipo de usuario es obligatorio.',
@@ -104,17 +100,13 @@ class UserController
     {
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
-            'secondName' => ['required', 'string', 'max:255'],
             'firstSurname' => ['required', 'string', 'max:255'],
-            'secondSurname' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'int'],
             'typeUser' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ], [
             'firstName.required' => 'El nombre es obligatorio.',
-            'secondName.required' => 'El segundo nombre es obligatorio.',
             'firstSurname.required' => 'El primer apellido es obligatorio.',
-            'secondSurname.required' => 'El segundo apellido es obligatorio.',
             'telephone.required' => 'El número de teléfono es obligatorio.',
             'telephone.int' => 'El número de teléfono debe ser un número entero.',
             'typeUser.required' => 'El tipo de usuario es obligatorio.',
