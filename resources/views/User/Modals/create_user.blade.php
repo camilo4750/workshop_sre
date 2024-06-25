@@ -52,24 +52,14 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <select name="typeUser" id="typeUser" class="form-control"
-                                        v-model="createUser.typeUser" aria-label="typeUser">
-                                    <option value="" selected disabled>- Seleccionar Rol -</option>
-                                    <option value="1">Administrador</option>
-                                </select>
-                                <span class="text-danger text-sm" v-if="fieldsStatus.typeUser">
-                                    @{{ fetchErrors?.typeUser }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
                                 <input type="text" class="form-control" placeholder="Correo"
                                        v-model="createUser.email" aria-label="email" autocomplete="username">
                                 <span class="text-danger text-sm" v-if="fieldsStatus.email">
                                     @{{ fetchErrors?.email }}
                                 </span>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="form-group col-md-6">
                                 <input type="password" class="form-control" placeholder="Contraseña"
                                        v-model="createUser.password" aria-label="password"
@@ -78,8 +68,6 @@
                                     @{{ fetchErrors?.password }}
                                 </span>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="form-group col-md-6">
                                 <input type="password" class="form-control" placeholder="Confirmar contraseña"
                                        v-model="createUser.password_confirmation" aria-label="password_confirmation"

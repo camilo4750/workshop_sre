@@ -27,7 +27,6 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Telefono</th>
-                        <th>Rol</th>
                         <th>Correo</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -39,7 +38,6 @@
                         <td>@{{ user.name_1 + ' ' + user.name_2 }}</td>
                         <td>@{{ user.surname_1 + ' ' + user.surname_2 }}</td>
                         <td>@{{ user.phone }}</td>
-                        <td>@{{ user.type_user_id == 1 ? 'Administrador' : 'Empleador'}}</td>
                         <td>@{{ user.email }}</td>
                         <td>@{{ user.active == true ? 'Activo' : 'Inactivo'}}</td>
                         <td>
@@ -82,7 +80,6 @@
                         firstSurname: '',
                         secondSurname: '',
                         telephone: '',
-                        typeUser: '',
                         email: '',
                         password: '',
                         password_confirmation: '',
@@ -95,7 +92,6 @@
                         firstSurname: '',
                         secondSurname: '',
                         telephone: '',
-                        typeUser: '',
                         email: '',
                         isActive: null
                     },
@@ -105,7 +101,6 @@
                         firstSurname: false,
                         secondSurname: false,
                         telephone: false,
-                        typeUser: false,
                         email: false,
                         password: false,
                         password_confirmation: false,
@@ -116,7 +111,6 @@
                         firstSurname: false,
                         secondSurname: false,
                         telephone: false,
-                        typeUser: false,
                         email: false,
                     },
                     fetchErrors: [],
@@ -196,7 +190,6 @@
                     this.editUser.firstSurname = user.surname_1;
                     this.editUser.secondSurname = user.surname_2;
                     this.editUser.telephone = user.phone;
-                    this.editUser.typeUser = user.type_user_id;
                     this.editUser.email = user.email;
                     this.editUser.isActive = user.active;
                     $('#editUserModal').modal('show')

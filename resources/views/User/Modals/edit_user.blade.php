@@ -58,18 +58,6 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <select name="editTypeUser" id="editTypeUser" class="form-control"
-                                        v-model="editUser.typeUser" aria-label="editTypeUser">
-                                    <option value="" selected disabled>- Seleccionar Rol -</option>
-                                    <option value="1">Administrador</option>
-                                </select>
-                                <span class="text-danger text-sm" v-if="fieldsStatusEdit.typeUser">
-                                    @{{ fetchErrors?.typeUser }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
                                 <input type="text" name="editEmail" id="editEmail"
                                        class="form-control" placeholder="Correo"
                                        v-model="editUser.email" aria-label="editEmail">

@@ -21,6 +21,4 @@ class userNewDto extends CoreDto
     public int $phone;
 
     public bool $active;
-
-    public int $type_user_id;
 }

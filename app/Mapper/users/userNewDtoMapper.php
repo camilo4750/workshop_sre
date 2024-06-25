@@ -22,7 +22,6 @@ class userNewDtoMapper extends CoreMapper
         $dto->surname_1 = $request['firstSurname'];
         $dto->surname_2 = $request['secondSurname'];
         $dto->phone = $request['telephone'];
-        $dto->type_user_id = $request['typeUser'];
         $dto->email = $request['email'];
         $dto->password = Hash::make($request['password']);
         $dto->active = $request['isActive'];
