@@ -65,7 +65,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <label class="mb-0 w">Activar proveedor:</label>
-                        <input type="checkbox" id="state" name="state" class="ml-2" v-model="supplier.state">
+                        <input type="checkbox" id="status" name="status" class="ml-2" v-model="supplier.active">
                     </div>
                 </div>
                 <div class="modal-footer">

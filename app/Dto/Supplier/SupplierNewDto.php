@@ -20,5 +20,5 @@ class SupplierNewDto extends CoreDto
 
     public string $phone_representative;
 
-    public string $state;
+    public bool $active;
 }

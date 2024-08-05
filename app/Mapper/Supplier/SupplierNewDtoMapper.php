@@ -22,7 +22,7 @@ class SupplierNewDtoMapper extends CoreMapper
         $dto->address = $request['address'];
         $dto->representative = $request['representative'];
         $dto->phone_representative = $request['phoneRepresentative'];
-        $dto->state = $request['state'];
+        $dto->active = $request['active'];
         return $dto;
     }
 }

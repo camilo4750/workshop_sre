@@ -1,6 +1,9 @@
 @extends('adminlte::page')
-@section('title', 'Panel de usuarios')
+@section('title', 'Gestion de proveedores')
 <style>
+    #supplierTable th, #supplierTable td {
+        text-align: left;
+    }
 </style>
 @section('content_header')
     <div class="d-flex align-items-center">
@@ -14,11 +17,8 @@
             <div class="d-flex justify-content-end mb-2">
                 <button class="btn btn-secondary" @click="openModalCreate()">Crear proveedor</button>
             </div>
-            <div class="d-flex justify-content-center align-items-center" v-if="isLoading">
-                @include('preloader')
-            </div>
-            <div class="my-3" v-else>
-                <table id="supplierTable" class="table table-striped table-bordered nowrap" style="width:100%">
+            <div class="my-3" v-if="!isLoading">
+                <table id="supplierTable" class="display nowrap table-striped table-bordered w-100">
                     <thead>
                     <tr>
                         <th>Empresa</th>
@@ -39,12 +39,15 @@
                         <td>@{{ supplier?.address }}</td>
                         <td>@{{ supplier?.email }}</td>
                         <td>
-                            <span v-if="supplier.state === 'active'" class="badge badge-success" >Activo</span>
+                            <span v-if="supplier.active" class="badge badge-success" >Activo</span>
                             <span v-else class="badge badge-danger">Inactivo</span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="d-flex justify-content-center align-items-center" v-else>
+                @include('preloader')
             </div>
         </div>
         @include('Supplier.Modals.create_supplier')
@@ -65,7 +68,7 @@
                         address: '',
                         representative: '',
                         phoneRepresentative: '',
-                        state: null
+                        active: false
                     },
                     fieldsStatus: {
                         companyName: false,
@@ -75,7 +78,7 @@
                         address: false,
                         representative: false,
                         phoneRepresentative: false,
-                        state: false
+                        active: false
                     }
                 }
             },
@@ -118,7 +121,6 @@
                     const btn = $('#btnStoreSupplier')
                     btn.loading()
                     let formDataCopy = this.supplier;
-                    formDataCopy.state = this.supplier.state ? 'active' : 'inactive'
                     try {
                         const res = await fetch('{{ route('Supplier.Store') }}', {
                             method: 'POST',
