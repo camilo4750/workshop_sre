@@ -267,12 +267,6 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -282,21 +276,26 @@ return [
             'route'  => 'User.Index',
             'icon' => 'fas fa-fw fa-users',
         ],
-
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+            'text' => 'Proveedores',
+            'route'  => 'Supplier.Index',
+            'icon' => 'fas fa-fw fa-car',
         ],
+
+//        [
+//            'text'    => 'Gestión de repuestos',
+//            'icon'    => 'fas fa-fw fa-share',
+//            'submenu' => [
+//                [
+//                    'text' => 'Proveedores',
+//                    'route'  => 'Supplier.Index',
+//                ],
+//                [
+//                    'text' => 'Repuestos',
+//                    'url'  => '#',
+//                ],
+//            ],
+//        ],
     ],
 
     /*
