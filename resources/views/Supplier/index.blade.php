@@ -38,7 +38,10 @@
                         <td>@{{ supplier?.phone }}</td>
                         <td>@{{ supplier?.address }}</td>
                         <td>@{{ supplier?.email }}</td>
-                        <td>@{{ supplier?.state }}</td>
+                        <td>
+                            <span v-if="supplier.state === 'active'" class="badge badge-success" >Activo</span>
+                            <span v-else class="badge badge-danger">Inactivo</span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
