@@ -46,6 +46,8 @@
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/datatable.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/DataTables/responsive.bootstrap4.css') }}">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css"
           integrity="sha512-eBNnVs5xPOVglLWDGXyZnZZ2K2ixXhR/3aECgCpFnW2dGCd/yiqXZ6fcB3BubeA91kM6NX234b6Wrah8RiYAPA=="
@@ -99,6 +101,8 @@
     <script src="{{ asset('js/DataTables/dataTables.js') }}"></script>
     <script src="{{ asset('js/DataTables/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/DataTables/es.js') }}"></script>
+    <script src="{{ asset('js/DataTables/dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('js/DataTables/responsive.bootstrap4.js') }}"></script>
 
 </head>
 
