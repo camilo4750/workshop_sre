@@ -62,7 +62,7 @@ class UserController
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
             'firstSurname' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'int'],
+            'telephone' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', Password::default(), 'confirmed'],
         ], [
@@ -99,7 +99,7 @@ class UserController
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
             'firstSurname' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'int'],
+            'telephone' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ], [
             'firstName.required' => 'El nombre es obligatorio.',
