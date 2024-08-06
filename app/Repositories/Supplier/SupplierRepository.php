@@ -29,4 +29,11 @@ class SupplierRepository extends CoreRepository implements SupplierRepositoryInt
         $this->getEntity()->save();
         return $this;
     }
+
+    public function toggleStatus(bool $active, int $id): static
+    {
+        $this->getEntity()->active = $active;
+        $this->getEntity()->save();
+        return $this;
+    }
 }

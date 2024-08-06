@@ -10,4 +10,6 @@ interface SupplierServiceInterface
     public function getAllSuppliers(): Collection;
 
     public function createSupplier(supplierNewDto $supplierNewDto);
+
+    public function toggleStatus(bool $active, int $id);
 }

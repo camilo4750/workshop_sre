@@ -28,6 +28,7 @@
                         <th>Direccion empresa</th>
                         <th>Email</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,8 +40,18 @@
                         <td>@{{ supplier?.address }}</td>
                         <td>@{{ supplier?.email }}</td>
                         <td>
-                            <span v-if="supplier.active" class="badge badge-success" >Activo</span>
+                            <span v-if="supplier.active" class="badge badge-success">Activo</span>
                             <span v-else class="badge badge-danger">Inactivo</span>
+                        </td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button type="button" class="btn btn-sm btn-info"
+                                        :id="'btnToggleStatus' + supplier.id"
+                                        data-toggle="tooltip" data-placement="top" title="Cambiar estado del proveedor"
+                                        @click="toggleSupplierStatus(supplier.id, supplier.active)">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
@@ -151,6 +162,36 @@
                     Object.keys(this.fetchErrors).forEach(key => {
                         this.fieldsStatus[key] = true
                     })
+                },
+
+                async toggleSupplierStatus(id, status) {
+                    const btn = $('#btnToggleStatus' + id);
+                    btn.loading()
+                    try {
+                        const newStatus = !status
+                        const res = await fetch('{{ route('Supplier.ToggleStatus') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                'supplierId': id,
+                                'active': newStatus
+                            })
+                        });
+                        const response = await res.json()
+                        btn.unLoading()
+                        if (!response.success) {
+                            utilities.toastr_('error', 'Alerta', response.message)
+                            return false;
+                        }
+                        await this.getSuppliers();
+                        utilities.toastr_('success', 'Exito', response.message)
+                    } catch (e) {
+                        btn.unLoading()
+                        alert(e)
+                    }
                 },
 
                 async executeDataTable() {

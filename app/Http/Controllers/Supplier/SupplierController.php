@@ -53,6 +53,20 @@ class SupplierController
             }
         });
     }
+
+    public function toggleStatus(Request $request): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
+            try {
+                $this->supplierService->toggleStatus($request->active, $request->supplierId);
+                return [
+                    "message" => 'Cambio de estado exitoso',
+                ];
+            } catch (\Exception $e) {
+                throw new RepositoryBaseException("Fallo al cambiar el estado ", $e->getCode(), $e);
+            }
+        });
+    }
 }
 
 

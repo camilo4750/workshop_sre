@@ -11,4 +11,6 @@ interface SupplierRepositoryInterface extends CoreRepositoryInterface
     public function findAll(): Collection;
 
     public function store(supplierNewDto $supplierNewDto): static;
+
+    public function toggleStatus(bool $active, int $id): static;
 }
