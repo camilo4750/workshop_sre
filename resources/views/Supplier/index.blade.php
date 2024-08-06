@@ -23,7 +23,6 @@
                     <tr>
                         <th>Empresa</th>
                         <th>Nit</th>
-                        <th>representante</th>
                         <th>phone</th>
                         <th>Direccion empresa</th>
                         <th>Email</th>
@@ -33,10 +32,9 @@
                     </thead>
                     <tbody>
                     <tr v-for="supplier in suppliers">
-                        <td>@{{ supplier?.company_name }}</td>
+                        <td>@{{ supplier?.companyName }}</td>
                         <td>@{{ supplier?.nit }}</td>
-                        <td>@{{ supplier?.representative }}</td>
-                        <td>@{{ supplier?.phone }}</td>
+                        <td>@{{ supplier?.phoneCompany }}</td>
                         <td>@{{ supplier?.address }}</td>
                         <td>@{{ supplier?.email }}</td>
                         <td>
@@ -44,12 +42,17 @@
                             <span v-else class="badge badge-danger">Inactivo</span>
                         </td>
                         <td>
-                            <div class="flex gap-2">
+                            <div class="d-flex gap-2">
                                 <button type="button" class="btn btn-sm btn-info"
                                         :id="'btnToggleStatus' + supplier.id"
                                         data-toggle="tooltip" data-placement="top" title="Cambiar estado del proveedor"
                                         @click="toggleSupplierStatus(supplier.id, supplier.active)">
                                     <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-warning"
+                                        data-toggle="tooltip" data-placement="top" title="Editar proveedor"
+                                        @click="openSupplierEditingModal(supplier)">
+                                    <i class="fas fa-pencil-alt"></i>
                                 </button>
                             </div>
                         </td>
@@ -62,6 +65,7 @@
             </div>
         </div>
         @include('Supplier.Modals.create_supplier')
+        @include('Supplier.Modals.edit_supplier')
     </div>
 
     <script>
@@ -80,6 +84,15 @@
                         representative: '',
                         phoneRepresentative: '',
                         active: false
+                    },
+                    editSupplier: {
+                        companyName: '',
+                        nit: '',
+                        phoneCompany: '',
+                        email: '',
+                        address: '',
+                        representative: '',
+                        phoneRepresentative: '',
                     },
                     fieldsStatus: {
                         companyName: false,
@@ -125,6 +138,7 @@
                 },
 
                 openModalCreate() {
+                    this.fetchErrors = []
                     $('#createSupplier').modal('show')
                 },
 
@@ -170,7 +184,7 @@
                     try {
                         const newStatus = !status
                         const res = await fetch('{{ route('Supplier.ToggleStatus') }}', {
-                            method: 'POST',
+                            method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -187,6 +201,41 @@
                             return false;
                         }
                         await this.getSuppliers();
+                        utilities.toastr_('success', 'Exito'. response.message)
+                    } catch (e) {
+                        btn.unLoading()
+                        alert(e)
+                    }
+                },
+
+                openSupplierEditingModal(supplierData) {
+                    this.fetchErrors = []
+                    this.editSupplier = supplierData
+                    $('#updateSupplier').modal('show')
+                },
+
+                async updateSupplier() {
+                    console.log(21)
+                    const btn = $('#btnUpdateSupplier')
+                    btn.loading()
+                    try {
+                        const res = await fetch('{{ route('Supplier.Update') }}', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(this.editSupplier)
+                        })
+                        const response = await res.json()
+                        btn.unLoading()
+                        if (!response.success) {
+                            this.validateFieldsStatus(response.errors)
+                            utilities.toastr_('error', 'Alerta', response.message);
+                            return false
+                        }
+                        await this.getSuppliers()
+                        $('#updateSupplier').modal('hide');
                         utilities.toastr_('success', 'Exito', response.message)
                     } catch (e) {
                         btn.unLoading()

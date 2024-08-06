@@ -6,6 +6,7 @@ use App\Exceptions\RepositoryBaseException;
 use App\Http\Controllers\Wrappers\ControllerWrapper;
 use App\Interfaces\services\Supplier\SupplierServiceInterface;
 use App\Mapper\Supplier\SupplierNewDtoMapper;
+use App\Mapper\Supplier\SupplierUpdateDtoMapper;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -58,12 +59,34 @@ class SupplierController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             try {
-                $this->supplierService->toggleStatus($request->active, $request->supplierId);
+                $this->supplierService->toggleStatus(
+                    $request->input('active'),
+                    $request->input('supplierId')
+                );
                 return [
                     "message" => 'Cambio de estado exitoso',
                 ];
             } catch (\Exception $e) {
                 throw new RepositoryBaseException("Fallo al cambiar el estado ", $e->getCode(), $e);
+            }
+        });
+    }
+
+    public function update(Request $request): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
+            (new SupplierControllerValidate())->validateForm($request);
+            try {
+                $supplierUpdateDto = (new SupplierUpdateDtoMapper())->createFormRequest($request);
+                $this->supplierService->update(
+                    $supplierUpdateDto,
+                    $request->input('id')
+                );
+                return [
+                    $this->supplierService
+                ];
+            } catch (\Exception $e) {
+                throw new RepositoryBaseException("Fallo al actualizar el proveedor", $e->getCode(), $e);
             }
         });
     }

@@ -16,7 +16,6 @@ class SupplierControllerValidate
             'address' => ['required', 'string'],
             'representative' => ['required', 'string'],
             'phoneRepresentative' => ['required', 'string'],
-            'active' => ['required', 'boolean'],
         ], [
             'companyName.required' => 'El campo nombre es obligatorio',
             'nit.required' => 'El campo nit es obligatorio',
@@ -25,7 +24,6 @@ class SupplierControllerValidate
             'address.required' => 'El campo direccion es obligatorio',
             'representative.required' => 'El campo representante es obligatorio',
             'phoneRepresentative.required' => 'El campo telefono es obligatorio',
-            'active.required' => 'El campo estado es obligatorio',
         ]);
     }
 }

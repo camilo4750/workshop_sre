@@ -3,14 +3,14 @@
 namespace App\Services\Supplier;
 
 use App\Dto\Supplier\supplierNewDto;
+use App\Dto\Supplier\SupplierUpdateDto;
 use App\Interfaces\Repositories\Supplier\SupplierRepositoryInterface;
 use App\Interfaces\services\Supplier\SupplierServiceInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class SupplierService implements SupplierServiceInterface
 {
     /**
-     * @var SupplierServiceInterface
+     * @var SupplierRepositoryInterface
      */
     protected $supplierRepository;
 
@@ -21,7 +21,7 @@ class SupplierService implements SupplierServiceInterface
         $this->supplierRepository = $supplierRepository;
     }
 
-    public function getAllSuppliers(): Collection
+    public function getAllSuppliers()
     {
         return $this->supplierRepository->findAll();
     }
@@ -35,6 +35,13 @@ class SupplierService implements SupplierServiceInterface
     {
         return $this->supplierRepository
             ->find($id)
-            ->toggleStatus($active, $id);
+            ->toggleStatus($active);
+    }
+
+    public function update(SupplierUpdateDto $supplierUpdateDto, int $id)
+    {
+        return $this->supplierRepository
+            ->find($id)
+            ->update($supplierUpdateDto);
     }
 }

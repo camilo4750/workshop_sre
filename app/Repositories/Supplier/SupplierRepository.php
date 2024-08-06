@@ -3,8 +3,10 @@
 namespace App\Repositories\Supplier;
 
 use App\Dto\Supplier\supplierNewDto;
+use App\Dto\Supplier\SupplierUpdateDto;
 use App\Entities\Supplier\SupplierEntity;
 use App\Interfaces\Repositories\Supplier\SupplierRepositoryInterface;
+use App\Mapper\Supplier\supplierDtoMapper;
 use App\Repositories\CoreRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +18,13 @@ class SupplierRepository extends CoreRepository implements SupplierRepositoryInt
         return new SupplierEntity();
     }
 
-    public function findAll(): Collection
+    public function findAll(): array
     {
-        return SupplierEntity::orderBy('id')->get();
+        $suppliers = SupplierEntity::orderBy('id')->get()->toArray();
+        return array_map(function ($suppliers) {
+            return (new supplierDtoMapper())
+                ->createFromDbRecord($suppliers);
+        }, $suppliers);
     }
 
     public function store(supplierNewDto $supplierNewDto): static
@@ -30,9 +36,16 @@ class SupplierRepository extends CoreRepository implements SupplierRepositoryInt
         return $this;
     }
 
-    public function toggleStatus(bool $active, int $id): static
+    public function toggleStatus(bool $active): static
     {
         $this->getEntity()->active = $active;
+        $this->getEntity()->save();
+        return $this;
+    }
+
+    public function update(SupplierUpdateDto $supplierUpdateDto): static
+    {
+        $this->fillDto($supplierUpdateDto);
         $this->getEntity()->save();
         return $this;
     }
