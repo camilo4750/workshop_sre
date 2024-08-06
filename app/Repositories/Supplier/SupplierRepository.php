@@ -18,7 +18,7 @@ class SupplierRepository extends CoreRepository implements SupplierRepositoryInt
 
     public function findAll(): Collection
     {
-        return SupplierEntity::all();
+        return SupplierEntity::orderBy('id')->get();
     }
 
     public function store(supplierNewDto $supplierNewDto): static
