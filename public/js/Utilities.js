@@ -1,5 +1,5 @@
 var utilities = (function () {
-    var toastr_ = function (type, title, msg) {
+    const toastr_ = function (type, title, msg) {
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -20,9 +20,15 @@ var utilities = (function () {
         toastr[type](msg, title);
     }
 
+    const formatterDate = function (date) {
+        let currentDate = new Date(date)
+        return currentDate.toISOString().split('T')[0];
+    }
+
     function construct() {
         return {
-            toastr_             : toastr_
+            toastr_             : toastr_,
+            formatterDate       : formatterDate
         }
     }
     return {construct:construct}
