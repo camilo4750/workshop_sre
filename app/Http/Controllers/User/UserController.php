@@ -44,16 +44,13 @@ class UserController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             $this->validateForm($request);
-            try {
-                $userNewDtoMapper = new userNewDtoMapper();
-                $userNewDto = $userNewDtoMapper->createFormRequest($request);
-                $this->userService->createUser($userNewDto);
-                return [
-                    'message' => 'Usuario creado con éxito',
-                ];
-            } catch (\Exception $e) {
-                throw new RepositoryBaseException("No almacenado", $e->getCode(), $e);
-            }
+
+            $userNewDtoMapper = new userNewDtoMapper();
+            $userNewDto = $userNewDtoMapper->createFormRequest($request);
+            $this->userService->createUser($userNewDto);
+            return [
+                'message' => 'Usuario creado con éxito',
+            ];
         });
     }
 
@@ -81,16 +78,14 @@ class UserController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             $this->validateFormUpdate($request);
-            try {
-                $userEditDtoMapper = new userUpdateDtoMapper();
-                $userEditDto = $userEditDtoMapper->updateFormRequest($request);
-                $this->userService->updateUser($userEditDto);
-                return [
-                    "message" => "usuario actualizado"
-                ];
-            } catch (\Exception $e) {
-                throw new RepositoryBaseException("Fallo al actulizar ", $e->getCode(), $e);
-            }
+
+            $userEditDtoMapper = new userUpdateDtoMapper();
+            $userEditDto = $userEditDtoMapper->updateFormRequest($request);
+            $this->userService->updateUser($userEditDto);
+            return [
+                "message" => "usuario actualizado"
+            ];
+
         });
     }
 

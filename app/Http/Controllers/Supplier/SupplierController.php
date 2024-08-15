@@ -43,32 +43,25 @@ class SupplierController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             (new SupplierControllerValidate())->validateForm($request);
-            try {
-                $supplierNewDto = (new SupplierNewDtoMapper())->createFormRequest($request->all());
-                $this->supplierService->createSupplier($supplierNewDto);
-                return [
-                    'message' => 'Proveedor registrado exitosamente',
-                ];
-            } catch (\Exception $e) {
-                throw new RepositoryBaseException("Fallo al crear ", $e->getCode(), $e);
-            }
+
+            $supplierNewDto = (new SupplierNewDtoMapper())->createFormRequest($request->all());
+            $this->supplierService->createSupplier($supplierNewDto);
+            return [
+                'message' => 'Proveedor registrado exitosamente',
+            ];
         });
     }
 
     public function toggleStatus(Request $request): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            try {
-                $this->supplierService->toggleStatus(
-                    $request->input('active'),
-                    $request->input('supplierId')
-                );
-                return [
-                    "message" => 'Cambio de estado exitoso',
-                ];
-            } catch (\Exception $e) {
-                throw new RepositoryBaseException("Fallo al cambiar el estado ", $e->getCode(), $e);
-            }
+            $this->supplierService->toggleStatus(
+                $request->input('active'),
+                $request->input('supplierId')
+            );
+            return [
+                "message" => 'Cambio de estado exitoso',
+            ];
         });
     }
 
@@ -76,18 +69,14 @@ class SupplierController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             (new SupplierControllerValidate())->validateForm($request);
-            try {
-                $supplierUpdateDto = (new SupplierUpdateDtoMapper())->createFormRequest($request);
-                $this->supplierService->update(
-                    $supplierUpdateDto,
-                    $request->input('id')
-                );
-                return [
-                    $this->supplierService
-                ];
-            } catch (\Exception $e) {
-                throw new RepositoryBaseException("Fallo al actualizar el proveedor", $e->getCode(), $e);
-            }
+            $supplierUpdateDto = (new SupplierUpdateDtoMapper())->createFormRequest($request);
+            $this->supplierService->update(
+                $supplierUpdateDto,
+                $request->input('id')
+            );
+            return [
+                $this->supplierService
+            ];
         });
     }
 }
