@@ -49,6 +49,11 @@
                                         @click="toggleSupplierStatus(supplier.id, supplier.active)">
                                     <i class="fas fa-exchange-alt"></i>
                                 </button>
+                                <button type="button" class="btn btn-sm btn-primary"
+                                        data-toggle="tooltip" data-placement="top" title="Editar proveedor"
+                                        @click="openSupplierShowModal(supplier)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                                 <button type="button" class="btn btn-sm btn-warning"
                                         data-toggle="tooltip" data-placement="top" title="Editar proveedor"
                                         @click="openSupplierEditingModal(supplier)">
@@ -66,6 +71,7 @@
         </div>
         @include('Supplier.Modals.create_supplier')
         @include('Supplier.Modals.edit_supplier')
+        @include('Supplier.Modals.show_supplier')
     </div>
 
     <script>
@@ -94,6 +100,7 @@
                         representative: '',
                         phoneRepresentative: '',
                     },
+                    showSupplier: [],
                     fieldsStatus: {
                         companyName: false,
                         nit: false,
@@ -201,8 +208,9 @@
                             return false;
                         }
                         await this.getSuppliers();
-                        utilities.toastr_('success', 'Exito'. response.message)
+                        utilities.toastr_('success', 'Exito', response.message)
                     } catch (e) {
+                        console.log(11123)
                         btn.unLoading()
                         alert(e)
                     }
@@ -215,7 +223,6 @@
                 },
 
                 async updateSupplier() {
-                    console.log(21)
                     const btn = $('#btnUpdateSupplier')
                     btn.loading()
                     try {
@@ -241,6 +248,12 @@
                         btn.unLoading()
                         alert(e)
                     }
+                },
+
+                openSupplierShowModal (supplier) {
+                    supplier.createdAt = utilities.formatterDate(supplier.createdAt)
+                    this.showSupplier = supplier
+                    $('#showSupplier').modal('show')
                 },
 
                 async executeDataTable() {
