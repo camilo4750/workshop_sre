@@ -1,0 +1,48 @@
+.card-info-danger {
+    background: #dc3545;
+}
+
+.card-info-warning {
+    background: #ffc107;
+}
+
+.card-info-success {
+    background: #28a745;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-info-danger:hover {
+    background: #ed2f42;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .175), 0 1px 3px rgba(0, 0, 0, .4) !important;
+    transition: all ease-out 0.3s;
+    transform: translateY(-3px);
+}
+
+.card-info-warning:hover {
+    background: #ffc70c;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .175), 0 1px 3px rgba(0, 0, 0, .4) !important;
+    transition: all ease-out 0.3s;
+    transform: translateY(-3px);
+}
+
+.card-info-success:hover {
+    background: #25b746;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .175), 0 1px 3px rgba(0, 0, 0, .4) !important;
+    transition: all ease-out 0.3s;
+    transform: translateY(-3px);
+}
+
+
+@media screen and (max-width: 600px) {
+    .card-info-danger {
+       width: 100%;
+    }
+
+    .card-info-warning {
+       width: 100%;
+    }
+
+    .card-info-success {
+     width: 100%;
+    }
+}
