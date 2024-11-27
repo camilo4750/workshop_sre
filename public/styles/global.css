@@ -4,6 +4,41 @@
     justify-content: center !important;
 }
 
+.btn:hover {
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-table {
+    padding: 6px;
+    border-radius: 9999px;
+    font-size: .875rem;
+    line-height: 1.5;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    padding-right: 50px; /* Espacio para el botón */
+}
+
+.password-container button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    font-size: 14px;
+}
+
+.password-container button:hover {
+    color: #0644f0c4;
+}
+
 .__loading {
     font-size: 18px;
     margin-left: 8px;
@@ -28,3 +63,5 @@
 .gap-5 {
     gap: 2rem;
 }
+
+

@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Admin</b>LTE',
-    'logo_img' => '',
+    'logo_img' => '../img/logo_sre.png',
     'logo_img_class' => 'img-fluid p-0',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',

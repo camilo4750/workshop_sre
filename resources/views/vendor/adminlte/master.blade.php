@@ -94,6 +94,12 @@
     {{-- Utilidades --}}
     <script src="{{asset('js/Utilities.js')}}"></script>
 
+    {{-- Utilidades datatables --}}
+    <script src="{{asset('js/DataTableUtils.js')}}"></script>
+
+    {{-- Utilidades fetch --}}
+    <script src="{{asset('js/FetchUtils.js')}}"></script>
+
     {{-- Toastr --}}
     <script src="{{ asset('js/Toastr/toastr.js') }}"></script>
 

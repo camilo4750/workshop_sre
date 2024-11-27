@@ -6,13 +6,16 @@
 
 <li class="nav-item">
     <div class="dropdown">
-        <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn text-white dropdown-toggle h-100" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button class="dropdown-item d-flex align-items-center" type="submit">Cerrar session <i class="fas fa-power-off ml-2 text-red"></i></button>
+                <button class="dropdown-item d-flex align-items-center" type="submit">
+                    Cerrar session <i class="fas fa-power-off ml-2 text-red"></i>
+                </button>
             </form>
         </div>
     </div>

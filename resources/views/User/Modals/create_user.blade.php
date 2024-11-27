@@ -1,5 +1,5 @@
 <div class="modal fade bd-example-modal-lg" id="createUser" data-bs-backdrop="static" data-bs-keyboard="false"
-     aria-labelledby="createUserLabel" aria-hidden="true">
+    aria-labelledby="createUserLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,71 +8,60 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form @submit.prevent="storeUser">
+            <form @submit.prevent="submintFormStoreUser">
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Primer Nombre"
-                                       v-model="createUser.firstName" aria-label="firstName">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.firstName">
-                                    @{{ fetchErrors?.firstName }}
-                                </span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Segundo Nombre"
-                                       v-model="createUser.secondName" aria-label="secondName">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.secondName">
-                                    @{{ fetchErrors?.secondName }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Primer Apellido"
-                                       v-model="createUser.firstSurname" aria-label="firstSurname">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.firstSurname">
-                                    @{{ fetchErrors?.firstSurname }}
-                                </span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Segundo apellido"
-                                       v-model="createUser.secondSurname" aria-label="secondSurname">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.secondSurname">
-                                    @{{ fetchErrors?.secondSurname }}
+                            <div class="form-group col-12">
+                                <input type="text" class="form-control" placeholder="Nombre completo"
+                                    v-model="createUser.fullName" aria-label="fullName">
+                                <span class="text-alert-error" v-if="fieldsStatus.fullName">
+                                    @{{ fetchErrors?.fullName }}
                                 </span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" placeholder="Telefono"
-                                       v-model="createUser.telephone" aria-label="Telephone">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.telephone">
+                                    v-model="createUser.telephone" aria-label="Telephone">
+                                <span class="text-alert-error" v-if="fieldsStatus.telephone">
                                     @{{ fetchErrors?.telephone }}
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Correo"
-                                       v-model="createUser.email" aria-label="email" autocomplete="username">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.email">
+                                <input type="text" class="form-control" placeholder="Correo" v-model="createUser.email"
+                                    aria-label="email" autocomplete="username">
+                                <span class="text-alert-error" v-if="fieldsStatus.email">
                                     @{{ fetchErrors?.email }}
                                 </span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" placeholder="Contraseña"
-                                       v-model="createUser.password" aria-label="password"
-                                       autocomplete="new-password">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.password">
+                                <div class="password-container">
+                                    <input type="password" id="password" class="form-control" placeholder="Contraseña"
+                                        v-model="createUser.password" aria-label="password" autocomplete="new-password">
+                                    <button class="px-1" id="togglePassword" type="button"
+                                        @click="togglePassword('password')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+
+                                <span class="text-alert-error" v-if="fieldsStatus.password">
                                     @{{ fetchErrors?.password }}
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" placeholder="Confirmar contraseña"
-                                       v-model="createUser.password_confirmation" aria-label="password_confirmation"
-                                       autocomplete="new-password">
-                                <span class="text-danger text-sm" v-if="fieldsStatus.password_confirmation">
+                                <div class="password-container">
+                                    <input type="password" id="passwordConfirmation" class="form-control"
+                                        placeholder="Confirmar contraseña" v-model="createUser.password_confirmation"
+                                        aria-label="passwordConfirmation" autocomplete="new-password">
+                                    <button class="px-1" id="togglePassword" type="button"
+                                        @click="togglePassword('passwordConfirmation')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <span class="text-alert-error" v-if="fieldsStatus.password_confirmation">
                                     @{{ fetchErrors?.password_confirmation }}
                                 </span>
                             </div>
@@ -80,13 +69,13 @@
                         <div class="d-flex align-items-center">
                             <label for="isActive" class="mb-0">Usuario activo?</label>
                             <input type="checkbox" class="ml-2" name="isActive" id="isActive"
-                                   v-model="createUser.isActive">
+                                v-model="createUser.isActive">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" id="btnCreateUser">Crear Usuario</button>
+                    <button type="submit" class="btn btn-color-create" id="btnCreateUser">Crear Usuario</button>
                 </div>
             </form>
         </div>
