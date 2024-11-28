@@ -11,7 +11,7 @@ interface UserRepositoryInterface extends CoreRepositoryInterface
 {
     public function store(userNewDto $userNewDto): static;
 
-    public function findAllUsers(): Collection;
+    public function getAllUsers(): Collection;
 
     public function update(userUpdateDto $userUpdateDto): static;
 }

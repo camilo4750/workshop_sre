@@ -22,10 +22,7 @@ class User extends Authenticate
      * @var array<int, string>
      */
     protected $fillable = [
-        'name_1',
-        'name_2',
-        'surname_1',
-        'surname_2',
+        'full_name',
         'phone',
         'email',
     ];

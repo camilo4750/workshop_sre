@@ -33,11 +33,12 @@ class UserController
     public function allUsers(): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () {
-            $users = $this->userService->getAllUsers();
             return [
-                'users' => $users
+                'users' => $this->userService->getAllUsers(),
+                'message' => 'Usuarios obtenidos correctamente'
             ];
         });
+
     }
 
     public function store(Request $request): array|JsonResponse

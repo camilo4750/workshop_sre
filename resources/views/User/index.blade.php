@@ -131,7 +131,7 @@
                         this.isLoading = false;
 
                         if (!response.success) {
-                            alert('Fallo en la peticion: ', response.message);
+                            alert(response.message);
                             return;
                         }
 
@@ -142,7 +142,7 @@
              
                     } catch (error) {
                         this.isLoading = false;
-                        alert('Error al obtener usuarios: ' + error.message);
+                        alert(error.message);
                     }
                 },
 

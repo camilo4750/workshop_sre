@@ -27,12 +27,9 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
         return $this;
     }
 
-    public function findAllUsers(): Collection
+    public function getAllUsers(): Collection
     {
-        return $this->newQuery()
-            ->selectRaw('*')
-            ->orderBy('id')
-            ->get();
+        return User::all();
     }
 
     public function update(userUpdateDto $userUpdateDto): static
