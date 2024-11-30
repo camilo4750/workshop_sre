@@ -8,7 +8,7 @@ use Illuminate\Validation\Rules\Password;
 class UserControllerValidate
 {
 
-    public function validateForm(Request $request): void
+    public function validateStoreRequest(Request $request): void
     {
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
@@ -28,7 +28,7 @@ class UserControllerValidate
         ]);
     }
 
-    public function validateFormUpdate(Request $request): void
+    public function validateUpdateRequest(Request $request): void
     {
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],

@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Mapper\users;
+namespace App\Mapper\user;
 
-use App\Dto\user\userNewDto;
+use App\Dto\User\UserUpdateDto;
 use App\Mapper\CoreMapper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class userNewDtoMapper extends CoreMapper
+class UserUpdateDtoMapper extends CoreMapper
 {
-    protected function getNewDto(): userNewDto
+    protected function getNewDto(): UserUpdateDto
     {
-        return new userNewDto();
+        return new UserUpdateDto();
     }
 
-    public function createFormRequest(Request $request)
+    public function updateFormRequest(Request $request): UserUpdateDto
     {
         $dto = $this->getNewDto();
+        $dto->id = $request['id'];
         $dto->name_1 = $request['firstName'];
         $dto->name_2 = $request['secondName'];
         $dto->surname_1 = $request['firstSurname'];
         $dto->surname_2 = $request['secondSurname'];
         $dto->phone = $request['telephone'];
         $dto->email = $request['email'];
-        $dto->password = Hash::make($request['password']);
         $dto->active = $request['isActive'];
         return $dto;
     }

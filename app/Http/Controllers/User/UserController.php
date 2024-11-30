@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Exceptions\RepositoryBaseException;
 use App\Http\Controllers\Wrappers\ControllerWrapper;
-use App\Mapper\users\userNewDtoMapper;
-use App\Mapper\users\userUpdateDtoMapper;
-use App\Services\User\UserServiceInterface;
+use App\Interfaces\services\User\UserServiceInterface;
+use App\Mapper\User\UserUpdateDtoMapper;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\JsonResponse;
 
 class UserController
@@ -20,8 +17,7 @@ class UserController
 
     public function __construct(
         UserServiceInterface $userService,
-    )
-    {
+    ) {
         $this->userService = $userService;
     }
 
@@ -38,19 +34,22 @@ class UserController
                 'message' => 'Usuarios obtenidos correctamente'
             ];
         });
-
     }
 
     public function store(Request $request): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            (new UserControllerValidate())->validateForm($request);
 
-            $userNewDtoMapper = new userNewDtoMapper();
-            $userNewDto = $userNewDtoMapper->createFormRequest($request);
-            $this->userService->createUser($userNewDto);
+            (new UserControllerValidate())
+                ->validateStoreRequest($request);
+
+
+            $user = $this->userService
+                ->store($request);
+
             return [
                 'message' => 'Usuario creado con éxito',
+                'id' => $user->id,
             ];
         });
     }
@@ -60,7 +59,7 @@ class UserController
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             (new UserControllerValidate())->validateFormUpdate($request);
 
-            $userEditDtoMapper = new userUpdateDtoMapper();
+            $userEditDtoMapper = new UserUpdateDtoMapper();
             $userEditDto = $userEditDtoMapper->updateFormRequest($request);
             $this->userService->updateUser($userEditDto);
             return [
@@ -69,4 +68,3 @@ class UserController
         });
     }
 }
-

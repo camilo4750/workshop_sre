@@ -2,12 +2,12 @@
 
 namespace App\Repositories\System\user;
 
-use App\Dto\user\userNewDto;
-use App\Dto\user\userUpdateDto;
+use App\Dto\User\UserNewDto;
+use App\Dto\User\UserUpdateDto;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\Models\User;
 use App\Repositories\CoreRepository;
 use Illuminate\Support\Collection;
-use App\User;
 
 class UserRepository extends CoreRepository implements UserRepositoryInterface
 {
@@ -19,12 +19,21 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
         return new User();
     }
 
-    public function store(userNewDto $userNewDto): static
+    public function getById(int $id): ?User
+    {
+        $user = User::findOrFail($id);
+
+        return $user;
+    }
+
+    public function store(UserNewDto $dto): ?User
     {
         $this->setNewEntity();
-        $this->fillDto($userNewDto);
+        $this->fillDto($dto);
         $this->getEntity()->save();
-        return $this;
+        return $this->getById(
+            $this->getEntity()->id
+        );
     }
 
     public function getAllUsers(): Collection
@@ -32,7 +41,12 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
         return User::all();
     }
 
-    public function update(userUpdateDto $userUpdateDto): static
+    public function existByEmail(string $email): bool
+    {
+        return User::where("email", $email)->exists();
+    }
+
+    public function update(UserUpdateDto $userUpdateDto): static
     {
         $this->fillDto($userUpdateDto);
         $this->getEntity()->save();

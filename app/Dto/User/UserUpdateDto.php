@@ -4,8 +4,9 @@ namespace App\Dto\user;
 
 use App\Dto\CoreDto;
 
-class userNewDto extends CoreDto
+class UserUpdateDto extends CoreDto
 {
+    public int $id;
     public string $name_1;
 
     public ?string $name_2;
@@ -15,8 +16,6 @@ class userNewDto extends CoreDto
     public ?string $surname_2;
 
     public string $email;
-
-    public string $password;
 
     public int $phone;
 

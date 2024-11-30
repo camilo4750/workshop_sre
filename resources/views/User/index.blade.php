@@ -31,16 +31,18 @@
                         <th>Nombre completo</th>
                         <th>Telefono</th>
                         <th>Correo</th>
+                        <th>Fecha Creacion</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="">
                     <tr v-for="(user, index) in users" :key="index">
-                        <td>@{{ user.full_name }}</td>
+                        <td>@{{ user.fullName }}</td>
                         <td>@{{ user.phone }}</td>
                         <td>@{{ user.email }}</td>
-                        <td>@{{ user.active == true ? 'Activo' : 'Inactivo'}}</td>
+                        <td>@{{ user.createAt }}</td>
+                        <td :class="">@{{ user.active == true ? 'Activo' : 'Inactivo'}}</td>
                         <td>
                             <div class="d-flex gap-2">
                                 <button type="button" class="btn btn-table "
@@ -53,8 +55,9 @@
                                     data-placement="top" title="Editar Usuario" @click="openModalEditUser(user)">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button type="button" class="btn btn-color-table-permissions btn-table" data-toggle="tooltip"
-                                    data-placement="top" title="Permisos Usuario" @click="openModalPermissions">
+                                <button type="button" class="btn btn-color-table-permissions btn-table"
+                                    data-toggle="tooltip" data-placement="top" title="Permisos Usuario"
+                                    @click="openModalPermissions">
                                     <i class="fas fa-key"></i>
                                 </button>
 
