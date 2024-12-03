@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Exceptions\RepositoryBaseException;
 use App\Http\Controllers\Wrappers\ControllerWrapper;
-use App\Mapper\users\userNewDtoMapper;
-use App\Mapper\users\userUpdateDtoMapper;
-use App\Services\User\UserServiceInterface;
+use App\Interfaces\services\User\UserServiceInterface;
+use App\Mapper\User\UserUpdateDtoMapper;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\JsonResponse;
 
 class UserController
 {
-    /**
-     * @var UserServiceInterface
-     */
     protected $userService;
 
     public function __construct(
         UserServiceInterface $userService,
-    )
-    {
+    ) {
         $this->userService = $userService;
     }
 
@@ -33,9 +26,9 @@ class UserController
     public function allUsers(): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () {
-            $users = $this->userService->getAllUsers();
             return [
-                'users' => $users
+                'users' => $this->userService->getAllUsers(),
+                'message' => 'Usuarios obtenidos correctamente'
             ];
         });
     }
@@ -43,29 +36,33 @@ class UserController
     public function store(Request $request): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            (new UserControllerValidate())->validateForm($request);
 
-            $userNewDtoMapper = new userNewDtoMapper();
-            $userNewDto = $userNewDtoMapper->createFormRequest($request);
-            $this->userService->createUser($userNewDto);
+            (new UserControllerValidate())
+                ->validateStoreRequest($request);
+
+
+            $user = $this->userService
+                ->store($request);
+
             return [
                 'message' => 'Usuario creado con éxito',
+                'id' => $user->id,
             ];
         });
     }
 
-    public function update(Request $request): array|JsonResponse
+    public function update(Request $request, int $userId): array|JsonResponse
     {
-        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            (new UserControllerValidate())->validateFormUpdate($request);
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request, $userId,) {
+            (new UserControllerValidate())
+                ->validateUpdateRequest($request);
 
-            $userEditDtoMapper = new userUpdateDtoMapper();
-            $userEditDto = $userEditDtoMapper->updateFormRequest($request);
-            $this->userService->updateUser($userEditDto);
+            $this->userService
+                ->update($userId, $request);
+                
             return [
                 "message" => "usuario actualizado"
             ];
         });
     }
 }
-

@@ -8,6 +8,7 @@ const dataTableUtils = {
     
     initializeDataTable(tableId, options = {}, overrideDefaults = false) {
         const defaultOptions = {
+            responsive: true,
             pagingType: 'simple_numbers',
             language: es_datatables,
             retrieve: true,

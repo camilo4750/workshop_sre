@@ -7,9 +7,9 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -31,18 +31,21 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Fortify::loginView('vendor.adminlte.auth.login');
+        Fortify::loginView(function () {
+            return view('vendor.adminlte.auth.login');
+        });
+
         Fortify::authenticateUsing(function (Request $request) {
-            $request->validate([
-                'email' => 'required|string|email',
-                'password' => 'required|string',
-            ]);
+            $user = User::where("email", $request->email)->first();
 
-            $user = \App\User::where("email", $request->email)->first();
-
-            if(!is_null($user) && $user->active === true && Hash::check($request->password, $user->password)) {
+            if (
+                $user &&
+                $user->active === true &&
+                Hash::check($request->password, $user->password)
+            ) {
                 return $user;
             }
+            
             return null;
         });
 

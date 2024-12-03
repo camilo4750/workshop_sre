@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createUserLabel">Crear Usuario</h5>
+                <h5 class="modal-title" id="createUserLabel">Creación de usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,13 +23,13 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" placeholder="Telefono"
-                                    v-model="createUser.telephone" aria-label="Telephone">
-                                <span class="text-alert-error" v-if="fieldsStatus.telephone">
-                                    @{{ fetchErrors?.telephone }}
+                                    v-model="createUser.phone" aria-label="Telephone">
+                                <span class="text-alert-error" v-if="fieldsStatus.phone">
+                                    @{{ fetchErrors?.phone }}
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Correo" v-model="createUser.email"
+                                <input type="text" class="form-control" placeholder="Correo electronico" v-model="createUser.email"
                                     aria-label="email" autocomplete="username">
                                 <span class="text-alert-error" v-if="fieldsStatus.email">
                                     @{{ fetchErrors?.email }}
@@ -56,7 +56,7 @@
                                     <input type="password" id="passwordConfirmation" class="form-control"
                                         placeholder="Confirmar contraseña" v-model="createUser.password_confirmation"
                                         aria-label="passwordConfirmation" autocomplete="new-password">
-                                    <button class="px-1" id="togglePassword" type="button"
+                                    <button class="px-1" id="togglePasswordConfirm" type="button"
                                         @click="togglePassword('passwordConfirmation')">
                                         <i class="fas fa-eye"></i>
                                     </button>
@@ -74,8 +74,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-color-create" id="btnCreateUser">Crear Usuario</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-color-create" id="btnCreateUser">Crear usuario</button>
                 </div>
             </form>
         </div>

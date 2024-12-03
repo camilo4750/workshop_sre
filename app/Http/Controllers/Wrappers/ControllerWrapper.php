@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Wrappers;
 
 
 use App\Exceptions\AlertException;
+use Illuminate\Validation\ValidationException;
+use App\Exceptions\ApplicationLogicException;
+use App\Exceptions\BusinessLogicException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Debug\Exception\FatalErrorException;
@@ -11,123 +14,50 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class ControllerWrapper
 {
-
-    public static function execWithJsonResponse($callback)
+    public static function execWithJsonSuccessResponse($callback, $fallback = null)
     {
-        try{
+        try {
             DB::beginTransaction();
-            $response= $callback();
-            DB::commit();
-        }catch (AlertException  $exception){
-            DB::rollBack();
-            $response= response()->json(['errors'=> [
-                '0'=> [$exception->getMessage()]
-            ]],  422);
-        }catch (\Exception $exception){
-            DB::rollBack();
-            report($exception);
-            $response= response()->json(['errors'=> [
-                '0'=> [$exception->getMessage()]
-            ]],  422);
-        }
-        return $response;
-    }
-
-    public static function execWithJsonSuccessResponse($callback, $fallback= null)
-    {
-        try{
-            DB::beginTransaction();
-            $response= $callback();
-            $response= array_merge([
-                'success'=> true,
-                'message'=> ''
+            $response = $callback();
+            $response = array_merge([
+                'success' => true,
+                'message' => ''
             ], $response);
 
             DB::commit();
-        }catch (AlertException $exception){
-            DB::rollBack();
-
-            if(!is_null($fallback)) $response= $fallback($exception);
-            else $response=[];
-
-            $response= response()->json(array_merge([
-                'success'=> false,
-                'message'=> $exception->getMessage()
-            ], $response), 200);
-        }catch (\Exception $exception){
-            $errors = [];
-            $messagesValidation = $exception->validator->messages();
-
-            foreach ($messagesValidation->messages() as $key => $messages) {
-                foreach ($messages as $message) {
-                    $errors[$key] = $message;
-                }
-            }
+        } catch (ValidationException $exception) {
             DB::rollBack();
             report($exception);
-
-            if(!is_null($fallback)) $response= $fallback($exception);
-            else $response=[];
-
-            $response= response()->json(array_merge([
-                'success'=> false,
-                'message'=> $exception->getMessage(),
-                'errors' => $errors,
-            ], $response), 200);
-        }catch (\Throwable $exception){
+            $errors = [];
+            foreach ($exception->errors() as $field => $error) {
+                $errors[$field] = join(',', $error) . " ";
+            }
+            $response = response()->json([
+                'success' => false,
+                'code' => 422,
+                'message' => 'Error al validar los datos',
+                'errors' => $errors
+            ], 422);
+        } catch (ApplicationLogicException | BusinessLogicException $exception) {
             DB::rollBack();
-
-            if(!is_null($fallback)) $response= $fallback($exception);
-            else $response=[];
-
-            $response= response()->json(array_merge([
-                'success'=> false,
-                'message'=> $exception->getMessage()
-            ], $response), 200);
-        }catch (FatalThrowableError $exception){
-            DB::rollBack();
-
-            if(!is_null($fallback)) $response= $fallback($exception);
-            else $response=[];
-
-            $response= response()->json(array_merge([
-                'success'=> false,
-                'message'=> $exception->getMessage()
-            ], $response), 200);
-        }catch (\ErrorException $exception){
-            DB::rollBack();
-
-            if(!is_null($fallback)) $response= $fallback($exception);
-            else $response=[];
-
-            $response= response()->json(array_merge([
-                'success'=> false,
-                'message'=> $exception->getMessage()
-            ], $response), 200);
-        }catch (FatalErrorException $exception){
-            DB::rollBack();
-
-            if(!is_null($fallback)) $response= $fallback($exception);
-            else $response=[];
-
-            $response= response()->json(array_merge([
-                'success'=> false,
-                'message'=> $exception->getMessage()
-            ], $response), 200);
+            report($exception);
+            $response = response()->json([
+                'success' => false,
+                'code' => $exception->getCode(),
+                'message' => $exception->getMessage(),
+                'errors' => $exception->getErrors()
+            ], $exception->getCode());
         }
         return $response;
     }
 
     public static function execWithHttpResponse($callback)
     {
-        try{
+        try {
             DB::beginTransaction();
-            $response= $callback();
+            $response = $callback();
             DB::commit();
-        }catch (AlertException $exception){
-            DB::rollBack();
-            return back()->withErrors($exception->getMessage());
-        }catch (\Exception $exception){
+        } catch (ApplicationLogicException|BusinessLogicException $exception) { 
             DB::rollBack();
             report($exception);
             return back()->withErrors($exception->getMessage());
@@ -137,33 +67,25 @@ class ControllerWrapper
 
     public static function execWithRawResponse($callback, $fallback)
     {
-        try{
+        try {
             DB::beginTransaction();
-            $response= $callback();
+            $response = $callback();
             DB::commit();
-        }catch (AlertException $exception){
+        } catch (ValidationException $exception) {
             DB::rollBack();
-            $response= $fallback($exception);
-        }catch (\Exception $exception){
-            DB::rollBack();
-            report($exception);
-            $response= $fallback($exception);
-        }catch (\Throwable $exception){
+            $response = $fallback($exception);
+        } catch (\Exception $exception) {
             DB::rollBack();
             report($exception);
-            $response= $fallback($exception);
-        }catch (FatalThrowableError $exception){
+            $response = $fallback($exception);
+        } catch (\Throwable $exception) {
             DB::rollBack();
             report($exception);
-            $response= $fallback($exception);
-        }catch (\ErrorException $exception){
+            $response = $fallback($exception);
+        } catch (\ErrorException $exception) {
             DB::rollBack();
             report($exception);
-            $response= $fallback($exception);
-        }catch (FatalErrorException $exception){
-            DB::rollBack();
-            report($exception);
-            $response= $fallback($exception);
+            $response = $fallback($exception);
         }
         return $response;
     }

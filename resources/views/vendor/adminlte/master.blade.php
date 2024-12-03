@@ -155,6 +155,10 @@
         elementsToLoading[0].find('.__loading').remove()
         elementsToLoading[0].prop('disabled', false);
     }
+
+    setTimeout(() => {
+        $('[data-toggle="tooltip"]').tooltip()
+    }, 100);   
 </script>
 
 </body>

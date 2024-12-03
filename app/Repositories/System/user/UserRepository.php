@@ -2,43 +2,76 @@
 
 namespace App\Repositories\System\user;
 
-use App\Dto\user\userNewDto;
-use App\Dto\user\userUpdateDto;
+use App\Dto\User\UserNewDto;
+use App\Dto\User\UserUpdateDto;
+use Illuminate\Support\Facades\DB;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\Models\User;
 use App\Repositories\CoreRepository;
 use Illuminate\Support\Collection;
-use App\User;
 
 class UserRepository extends CoreRepository implements UserRepositoryInterface
 {
-    /**
-     * @return User
-     */
-    public function getNewEntity()
+
+    public function getTableName(): string
     {
-        return new User();
+        return 'users';
     }
 
-    public function store(userNewDto $userNewDto): static
+    public function getDatabaseConnection(): string
     {
-        $this->setNewEntity();
-        $this->fillDto($userNewDto);
-        $this->getEntity()->save();
-        return $this;
+        return 'pgsql';
     }
 
-    public function findAllUsers(): Collection
+
+    public function getById(int $id): ?User
     {
-        return $this->newQuery()
-            ->selectRaw('*')
-            ->orderBy('id')
-            ->get();
+        $user = User::findOrFail($id);
+
+        return $user;
     }
 
-    public function update(userUpdateDto $userUpdateDto): static
+    public function store(UserNewDto $dto): ?User
     {
-        $this->fillDto($userUpdateDto);
-        $this->getEntity()->save();
+        $userId = DB::connection($this->getDatabaseConnection())
+            ->table($this->getTableName())
+            ->insertGetId([
+                'full_name' => $dto->full_name,
+                'email' => $dto->email,
+                'phone' => $dto->phone,
+                'password' => bcrypt($dto->password),
+                'active' => 1,
+                'user_who_created_id' => $this->user->id,
+                'created_at' => 'now()'
+            ]);
+
+        return $this->getById($userId);
+    }
+
+    public function getAllUsers(): Collection
+    {
+        return User::all();
+    }
+
+    public function existByEmail(string $email): bool
+    {
+        return User::where("email", $email)->exists();
+    }
+
+    public function update(UserUpdateDto $dto): self
+    {
+        DB::connection($this->getDatabaseConnection())
+            ->table($this->getTableName())
+            ->where('id', '=', $dto->id)
+            ->update([
+                'full_name' => $dto->full_name,
+                'email' => $dto->email,
+                'phone' => $dto->phone,
+                'active' => $dto->active,
+                'user_who_updated_id' => $this->user->id,
+                'updated_at' => 'now()',
+            ]);
+            
         return $this;
     }
 }

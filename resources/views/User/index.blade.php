@@ -1,10 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Panel de usuarios')
 <style>
-    #tableUsers colgroup {
-        display: none;
-    }
-
     .mx-3px {
         padding-inline: 3px;
     }
@@ -18,7 +14,7 @@
 @section('content')
 <div id="app">
     <div class="card border-color-1 p-2">
-        <div class="d-flex justify-content-end mb-2     ">
+        <div class="d-flex justify-content-end mb-2">
             <button type="button" class="btn btn-color-dark font-weight-bolder" @click="openModalCreateUser">
                 Crear Usuario
             </button>
@@ -31,30 +27,29 @@
                         <th>Nombre completo</th>
                         <th>Telefono</th>
                         <th>Correo</th>
+                        <th>Fecha Creación</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="">
                     <tr v-for="(user, index) in users" :key="index">
-                        <td>@{{ user.full_name }}</td>
+                        <td>@{{ user.fullName }}</td>
                         <td>@{{ user.phone }}</td>
                         <td>@{{ user.email }}</td>
-                        <td>@{{ user.active == true ? 'Activo' : 'Inactivo'}}</td>
+                        <td>@{{ user.createAt }}</td>
+                        <td :class="user.active ? 'text-success' : 'text-red'">
+                            @{{ user.active ? 'Activo' : 'Inactivo'}}
+                        </td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button type="button" class="btn btn-table "
-                                    :class="user.active ? 'btn-color-table-active' : 'btn-color-table-inactive'"
-                                    data-toggle="tooltip" data-placement="top" @click="toggleStatus"
-                                    :title="user.active ? 'Inactivar usuario' : 'Activar usuario'">
-                                    <i :class="`fas ${user.active ? 'fa-check' : 'fa-times mx-3px'}`"></i>
-                                </button>
                                 <button type="button" class="btn btn-color-table-edit btn-table" data-toggle="tooltip"
                                     data-placement="top" title="Editar Usuario" @click="openModalEditUser(user)">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button type="button" class="btn btn-color-table-permissions btn-table" data-toggle="tooltip"
-                                    data-placement="top" title="Permisos Usuario" @click="openModalPermissions">
+                                <button type="button" class="btn btn-color-table-permissions btn-table"
+                                    data-toggle="tooltip" data-placement="top" title="Permisos Usuario"
+                                    @click="openModalPermissions">
                                     <i class="fas fa-key"></i>
                                 </button>
 
@@ -81,21 +76,20 @@
                     users: [],
                     createUser: {
                         fullName: '',
-                        telephone: '',
+                        phone: '',
                         email: '',
                         password: '',
                         password_confirmation: '',
-                        isActive: true
+                        active: 1
                     },
                     editUser: {
-                        id: '',
-                        fullName: '',
-                        telephone: '',
-                        email: '',
-                        isActive: null
+                        id: null,
+                        fullName: null,
+                        phone: null,
+                        email: null,
+                        active: null
                     },
                     fieldsStatus: this.initializeFields(),
-                    fieldsStatusEdit: this.initializeFields(),
                     fetchErrors: [],
                 }
             },
@@ -105,11 +99,8 @@
             methods: {
                 initializeFields() {
                     return {
-                        firstName: false,
-                        secondName: false,
-                        firstSurname: false,
-                        secondSurname: false,
-                        telephone: false,
+                        fullName: false,
+                        phone: false,
                         email: false,
                         password: false,
                         password_confirmation: false,
@@ -131,18 +122,16 @@
                         this.isLoading = false;
 
                         if (!response.success) {
-                            alert('Fallo en la peticion: ', response.message);
+                            alert(response.message);
                             return;
                         }
 
                         this.users = response.users;
-
                         await this.$nextTick();
                         dataTableUtils.initializeDataTable('tableUsers')
-             
                     } catch (error) {
                         this.isLoading = false;
-                        alert('Error al obtener usuarios: ' + error.message);
+                        alert(error.message);
                     }
                 },
 
@@ -165,7 +154,6 @@
                         }
 
                         await this.getUsers();
-
                         $('#createUser').modal('hide');
                         utilities.toastr_('success', response.message);
                     } catch (e) {
@@ -176,38 +164,34 @@
 
                 openModalEditUser(user) {
                     this.fetchErrors = []
-                    this.editUser.id = user.id;
-                    this.editUser.firstName = user.full_name;
-                    this.editUser.telephone = user.phone;
-                    this.editUser.email = user.email;
-                    this.editUser.isActive = user.active;
+                    this.fieldsStatus = this.initializeFields()
+                    this.editUser = {...user};
                     $('#editUserModal').modal('show')
                 },
 
-                async updateUser() {
+                async submintFormUpdateUser() {
                     const btn = $('#btnEditUser');
                     btn.loading();
                     try {
+                        let url = "{{ route('User.Update', ['userId' => '?']) }}".replace('?', this.editUser.id);                        
                         const response = await fetchUtils.fetchPost(
-                            '{{ route('User.Update') }}',
+                            url,
                             '{{ csrf_token() }}',
                             this.editUser
                         );
 
                         btn.unLoading();
-                        if (!response.success) {
-                            fetchUtils.validateFields(response.errors, this.fieldsStatus, this.fetchErrors);
-                            utilities.toastr_('error', 'Alerta', 'Error al almacenar el usuario: ' + response.message);
+                        if (!response.success) {                            
+                            this.handleErrors(response.errors, response.message);
                             return;
                         }
 
                         await this.getUsers()
-
                         utilities.toastr_('success', 'Exito', response.message)
                         $('#editUserModal').modal('hide')
-                    } catch (e) {
+                    } catch (error) {
                         btn.unLoading();
-                        alert('Error al actulizar: ' + e);
+                        console.error("Error en la solicitud:", error);                 
                     }
                 },
 
@@ -215,16 +199,16 @@
                     $('#permissionsModal').modal('show')
                 },
 
-
-                toggleStatus () {
-
-                },
-
                 togglePassword(nameInput) {
                     const passwordInput = document.getElementById(nameInput);
                     const isPasswordVisible = passwordInput.type === 'password';
                     passwordInput.type = isPasswordVisible ? 'text' : 'password';
                     this.textContent = isPasswordVisible ? 'Hide' : 'Show';
+                },
+
+                handleErrors(errors, message) {
+                    fetchUtils.validateFields(errors, this.fieldsStatus, this.fetchErrors);
+                    utilities.toastr_('error', 'Alerta', message);
                 }
             }
         });

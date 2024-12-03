@@ -2,16 +2,21 @@
 
 namespace App\Interfaces\Repositories\User;
 
-use App\Dto\user\userNewDto;
-use App\Dto\user\userUpdateDto;
+use App\Dto\User\UserNewDto;
+use App\Dto\User\UserUpdateDto;
 use App\Interfaces\Repositories\CoreRepositoryInterface;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 interface UserRepositoryInterface extends CoreRepositoryInterface
 {
-    public function store(userNewDto $userNewDto): static;
+    public function getById(int $id): ?User;
 
-    public function findAllUsers(): Collection;
+    public function store(UserNewDto $userNewDto): ?User;
 
-    public function update(userUpdateDto $userUpdateDto): static;
+    public function getAllUsers(): Collection;
+
+    public function existByEmail(string $email): bool;
+
+    public function update(UserUpdateDto $dto);
 }
