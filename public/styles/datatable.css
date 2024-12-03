@@ -6,7 +6,8 @@ table.dataTable thead > tr > th {
     text-align: left !important;
 }
 
-table.dataTable > tbody > tr:last-child > * {
+table.dataTable td.dt-type-numeric,
+table.dataTable td.dt-type-date {
     text-align: left !important;
 }
 
