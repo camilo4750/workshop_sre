@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mapper\user;
+namespace App\Mapper\User;
 
 use App\Dto\User\UserUpdateDto;
 use App\Mapper\CoreMapper;
@@ -13,17 +13,13 @@ class UserUpdateDtoMapper extends CoreMapper
         return new UserUpdateDto();
     }
 
-    public function updateFormRequest(Request $request): UserUpdateDto
+    public function createFromRequest(Request $request): UserUpdateDto
     {
         $dto = $this->getNewDto();
-        $dto->id = $request['id'];
-        $dto->name_1 = $request['firstName'];
-        $dto->name_2 = $request['secondName'];
-        $dto->surname_1 = $request['firstSurname'];
-        $dto->surname_2 = $request['secondSurname'];
-        $dto->phone = $request['telephone'];
-        $dto->email = $request['email'];
-        $dto->active = $request['isActive'];
+        $dto->full_name = $request->get('fullName');
+        $dto->phone = $request->get('phone');
+        $dto->email = $request->get('email');
+        $dto->active = $request->get('active');
         return $dto;
     }
 }

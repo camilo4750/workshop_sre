@@ -6,6 +6,8 @@ use App\Dto\CoreDto;
 
 class UserDto extends CoreDto
 {
+    public int $id;
+
     public string $fullName;
 
     public string $email;

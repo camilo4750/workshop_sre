@@ -54,14 +54,15 @@ class UserController
         });
     }
 
-    public function update(Request $request): array|JsonResponse
+    public function update(Request $request, int $userId): array|JsonResponse
     {
-        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            (new UserControllerValidate())->validateFormUpdate($request);
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request, $userId,) {
+            (new UserControllerValidate())
+                ->validateUpdateRequest($request);
 
-            $userEditDtoMapper = new UserUpdateDtoMapper();
-            $userEditDto = $userEditDtoMapper->updateFormRequest($request);
-            $this->userService->updateUser($userEditDto);
+            $this->userService
+                ->update($userId, $request);
+                
             return [
                 "message" => "usuario actualizado"
             ];

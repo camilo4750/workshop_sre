@@ -14,7 +14,9 @@ interface UserServiceInterface
 
     public function getAllUsers(): array;
 
-    public function updateUser(UserUpdateDto $userUpdateDto): UserRepository;
+    public function update(int $userId, Request $request);
 
     public function storeUser(UserNewDto $dto): User;
+
+    public function updateUser(UserUpdateDto $dto);
 }

@@ -1,10 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Panel de usuarios')
 <style>
-    #tableUsers colgroup {
-        display: none;
-    }
-
     .mx-3px {
         padding-inline: 3px;
     }
@@ -18,7 +14,7 @@
 @section('content')
 <div id="app">
     <div class="card border-color-1 p-2">
-        <div class="d-flex justify-content-end mb-2     ">
+        <div class="d-flex justify-content-end mb-2">
             <button type="button" class="btn btn-color-dark font-weight-bolder" @click="openModalCreateUser">
                 Crear Usuario
             </button>
@@ -42,7 +38,9 @@
                         <td>@{{ user.phone }}</td>
                         <td>@{{ user.email }}</td>
                         <td>@{{ user.createAt }}</td>
-                        <td :class="">@{{ user.active == true ? 'Activo' : 'Inactivo'}}</td>
+                        <td :class="user.active ? 'text-success' : 'text-red'">
+                            @{{ user.active ? 'Activo' : 'Inactivo'}}
+                        </td>
                         <td>
                             <div class="d-flex gap-2">
                                 <button type="button" class="btn btn-table "
@@ -84,18 +82,18 @@
                     users: [],
                     createUser: {
                         fullName: '',
-                        telephone: '',
+                        phone: '',
                         email: '',
                         password: '',
                         password_confirmation: '',
-                        isActive: true
+                        active: 1
                     },
                     editUser: {
-                        id: '',
-                        fullName: '',
-                        telephone: '',
-                        email: '',
-                        isActive: null
+                        id: null,
+                        fullName: null,
+                        phone: null,
+                        email: null,
+                        active: null
                     },
                     fieldsStatus: this.initializeFields(),
                     fieldsStatusEdit: this.initializeFields(),
@@ -108,11 +106,8 @@
             methods: {
                 initializeFields() {
                     return {
-                        firstName: false,
-                        secondName: false,
-                        firstSurname: false,
-                        secondSurname: false,
-                        telephone: false,
+                        fullName: false,
+                        phone: false,
                         email: false,
                         password: false,
                         password_confirmation: false,
@@ -179,11 +174,7 @@
 
                 openModalEditUser(user) {
                     this.fetchErrors = []
-                    this.editUser.id = user.id;
-                    this.editUser.firstName = user.full_name;
-                    this.editUser.telephone = user.phone;
-                    this.editUser.email = user.email;
-                    this.editUser.isActive = user.active;
+                    this.editUser = {...user};
                     $('#editUserModal').modal('show')
                 },
 
@@ -191,8 +182,9 @@
                     const btn = $('#btnEditUser');
                     btn.loading();
                     try {
+                        let url = "{{ route('User.Update', ['userId' => '?']) }}".replace('?', this.editUser.id);                        
                         const response = await fetchUtils.fetchPost(
-                            '{{ route('User.Update') }}',
+                            url,
                             '{{ csrf_token() }}',
                             this.editUser
                         );

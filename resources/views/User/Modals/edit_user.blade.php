@@ -21,14 +21,14 @@
                                     @{{ fetchErrors?.fullName }}
                                 </span>
                             </div>
-                        
+
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <input type="text" name="editTelephone" id="editTelephone" class="form-control"
-                                    placeholder="Telefono" v-model="editUser.telephone" aria-label="editTelephone">
-                                <span class="text-danger text-sm" v-if="fieldsStatusEdit.telephone">
-                                    @{{ fetchErrors?.telephone }}
+                                <input type="text" name="editPhone" id="editPhone" class="form-control"
+                                    placeholder="Telefono" v-model="editUser.phone" aria-label="editPhone">
+                                <span class="text-danger text-sm" v-if="fieldsStatusEdit.phone">
+                                    @{{ fetchErrors?.phone }}
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
@@ -41,8 +41,8 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <label for="editIsActive" class="mb-0">Usuario activo?</label>
-                            <input type="checkbox" class="ml-2" name="editIsActive" id="editIsActive"
-                                v-model="editUser.isActive">
+                            <input type="checkbox" class="ml-2" name="editIsActive" id="editIsActive" :true-value="1"
+                                :false-value="0" v-model="editUser.active">
                         </div>
                     </div>
                 </div>

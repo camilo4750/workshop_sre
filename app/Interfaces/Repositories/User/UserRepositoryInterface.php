@@ -18,5 +18,5 @@ interface UserRepositoryInterface extends CoreRepositoryInterface
 
     public function existByEmail(string $email): bool;
 
-    public function update(UserUpdateDto $userUpdateDto): static;
+    public function update(UserUpdateDto $dto);
 }

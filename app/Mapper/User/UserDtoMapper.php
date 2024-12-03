@@ -15,6 +15,7 @@ class UserDtoMapper extends CoreMapper
     public function createFromDbRecord(object  $dbRecord): UserDto
     {
         $dto = $this->getNewDto();
+        $dto->id = $dbRecord->id;
         $dto->fullName = $dbRecord->full_name;
         $dto->phone = $dbRecord->phone;
         $dto->email = $dbRecord->email;
