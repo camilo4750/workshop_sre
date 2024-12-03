@@ -15,13 +15,13 @@ class UserControllerValidate
             'phone' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', Password::default(), 'confirmed'],
+            'password_confirmation' => ['required', 'string'],
         ], [
-            'fullName.required' => 'El nombre es obligatorio.',
-            'phone.required' => 'El número de teléfono es obligatorio.',
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'password.required' => 'La contraseña es obligatoria.',
-            'password.confirmed' => 'La confirmación de la contraseña no coincide.',
+            'fullName' => 'El nombre es obligatorio.',
+            'phone' => 'El número de teléfono es obligatorio.',
+            'email' => 'El correo electrónico es obligatorio.',
+            'password' => 'La contraseña es obligatoria.',
+            'password_confirmation' => 'La confirmación de la contraseña es obligatoria.',
         ]);
     }
 

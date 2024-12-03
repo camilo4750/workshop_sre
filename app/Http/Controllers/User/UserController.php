@@ -10,9 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class UserController
 {
-    /**
-     * @var UserServiceInterface
-     */
     protected $userService;
 
     public function __construct(

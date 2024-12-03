@@ -12,7 +12,7 @@ class UserNewDto extends CoreDto
 
     public string $password;
 
-    public int $phone;
+    public string $phone;
 
     public bool $active;
 }

@@ -27,7 +27,7 @@
                         <th>Nombre completo</th>
                         <th>Telefono</th>
                         <th>Correo</th>
-                        <th>Fecha Creacion</th>
+                        <th>Fecha Creación</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -43,12 +43,6 @@
                         </td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button type="button" class="btn btn-table "
-                                    :class="user.active ? 'btn-color-table-active' : 'btn-color-table-inactive'"
-                                    data-toggle="tooltip" data-placement="top" @click="toggleStatus"
-                                    :title="user.active ? 'Inactivar usuario' : 'Activar usuario'">
-                                    <i :class="`fas ${user.active ? 'fa-check' : 'fa-times mx-3px'}`"></i>
-                                </button>
                                 <button type="button" class="btn btn-color-table-edit btn-table" data-toggle="tooltip"
                                     data-placement="top" title="Editar Usuario" @click="openModalEditUser(user)">
                                     <i class="fas fa-pencil-alt"></i>
@@ -96,7 +90,6 @@
                         active: null
                     },
                     fieldsStatus: this.initializeFields(),
-                    fieldsStatusEdit: this.initializeFields(),
                     fetchErrors: [],
                 }
             },
@@ -134,10 +127,8 @@
                         }
 
                         this.users = response.users;
-
                         await this.$nextTick();
                         dataTableUtils.initializeDataTable('tableUsers')
-             
                     } catch (error) {
                         this.isLoading = false;
                         alert(error.message);
@@ -163,7 +154,6 @@
                         }
 
                         await this.getUsers();
-
                         $('#createUser').modal('hide');
                         utilities.toastr_('success', response.message);
                     } catch (e) {
@@ -174,11 +164,12 @@
 
                 openModalEditUser(user) {
                     this.fetchErrors = []
+                    this.fieldsStatus = this.initializeFields()
                     this.editUser = {...user};
                     $('#editUserModal').modal('show')
                 },
 
-                async updateUser() {
+                async submintFormUpdateUser() {
                     const btn = $('#btnEditUser');
                     btn.loading();
                     try {
@@ -190,19 +181,17 @@
                         );
 
                         btn.unLoading();
-                        if (!response.success) {
-                            fetchUtils.validateFields(response.errors, this.fieldsStatus, this.fetchErrors);
-                            utilities.toastr_('error', 'Alerta', 'Error al almacenar el usuario: ' + response.message);
+                        if (!response.success) {                            
+                            this.handleErrors(response.errors, response.message);
                             return;
                         }
 
                         await this.getUsers()
-
                         utilities.toastr_('success', 'Exito', response.message)
                         $('#editUserModal').modal('hide')
-                    } catch (e) {
+                    } catch (error) {
                         btn.unLoading();
-                        alert('Error al actulizar: ' + e);
+                        console.error("Error en la solicitud:", error);                 
                     }
                 },
 
@@ -210,16 +199,16 @@
                     $('#permissionsModal').modal('show')
                 },
 
-
-                toggleStatus () {
-
-                },
-
                 togglePassword(nameInput) {
                     const passwordInput = document.getElementById(nameInput);
                     const isPasswordVisible = passwordInput.type === 'password';
                     passwordInput.type = isPasswordVisible ? 'text' : 'password';
                     this.textContent = isPasswordVisible ? 'Hide' : 'Show';
+                },
+
+                handleErrors(errors, message) {
+                    fetchUtils.validateFields(errors, this.fieldsStatus, this.fetchErrors);
+                    utilities.toastr_('error', 'Alerta', message);
                 }
             }
         });
