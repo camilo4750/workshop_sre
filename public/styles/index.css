@@ -19,9 +19,20 @@
     padding: 0.5rem 0.5rem !important;
     width: 100% !important;
 }
+.main-header  {
+    background-color: #030025 !important;
+}
 
 .main-header .navbar-nav .nav-link {
     color: white !important;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar {
+    background: #fff;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand):hover {
+    background: #fff;
 }
 
 .nav-pills .nav-link{
