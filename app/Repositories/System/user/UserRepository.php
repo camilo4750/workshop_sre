@@ -12,18 +12,6 @@ use Illuminate\Support\Collection;
 
 class UserRepository extends CoreRepository implements UserRepositoryInterface
 {
-
-    public function getTableName(): string
-    {
-        return 'users';
-    }
-
-    public function getDatabaseConnection(): string
-    {
-        return 'pgsql';
-    }
-
-
     public function getById(int $id): ?User
     {
         $user = User::findOrFail($id);
@@ -33,8 +21,7 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
 
     public function store(UserNewDto $dto): ?User
     {
-        $userId = DB::connection($this->getDatabaseConnection())
-            ->table($this->getTableName())
+        $userId = User::query()
             ->insertGetId([
                 'full_name' => $dto->full_name,
                 'email' => $dto->email,
@@ -60,8 +47,7 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
 
     public function update(UserUpdateDto $dto): self
     {
-        DB::connection($this->getDatabaseConnection())
-            ->table($this->getTableName())
+        User::query()
             ->where('id', '=', $dto->id)
             ->update([
                 'full_name' => $dto->full_name,
@@ -69,9 +55,9 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
                 'phone' => $dto->phone,
                 'active' => $dto->active,
                 'user_who_updated_id' => $this->user->id,
-                'updated_at' => 'now()',
+                'updated_at' => now(), // Usamos la función `now()` de Laravel
             ]);
-            
+        
         return $this;
     }
 }

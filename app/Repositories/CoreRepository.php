@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\Repositories\CoreRepositoryInterface;
 use App\Models\User;
 
-abstract class CoreRepository extends DbRepository implements CoreRepositoryInterface
+abstract class CoreRepository implements CoreRepositoryInterface
 {
     protected ?User $user = null;
     

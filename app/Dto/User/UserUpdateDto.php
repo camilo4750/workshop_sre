@@ -12,7 +12,7 @@ class UserUpdateDto extends CoreDto
 
     public string $email;
 
-    public int $phone;
+    public string $phone;
 
     public bool $active;
 }
