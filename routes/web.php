@@ -21,4 +21,8 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('dashboard');
-})->name('home')->middleware('auth');;
+})->name('home')->middleware('auth');
+
+Route::get('/session-expired', function () {
+    return view('Error.419');
+})->name('session.expired');
