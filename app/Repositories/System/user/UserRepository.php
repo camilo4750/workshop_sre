@@ -55,7 +55,7 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
                 'phone' => $dto->phone,
                 'active' => $dto->active,
                 'user_who_updated_id' => $this->user->id,
-                'updated_at' => now(), // Usamos la función `now()` de Laravel
+                'updated_at' => now(),
             ]);
         
         return $this;
