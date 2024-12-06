@@ -3,7 +3,7 @@
 namespace App\Services\Geographic;
 
 use App\Interfaces\Repositories\Geographic\DepartmentRepositoryInterface;
-use App\Interfaces\services\Geographic\DepartmentServiceInterface;
+use App\Interfaces\Services\Geographic\DepartmentServiceInterface;
 
 class DepartmentService implements DepartmentServiceInterface
 {
@@ -17,6 +17,11 @@ class DepartmentService implements DepartmentServiceInterface
 
     public function getDepartment(int $id)
     {
-        $department = $this->departmentRepo->find($id);
+        return $this->departmentRepo->find($id);
+    }
+
+    public function getDepartments()
+    {
+        return $this->departmentRepo->getAll();
     }
 }

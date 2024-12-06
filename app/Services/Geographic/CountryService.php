@@ -3,9 +3,10 @@
 namespace App\Services\Geographic;
 
 use App\Interfaces\Repositories\Geographic\CountryRepositoryInterface;
-use App\Interfaces\services\Geographic\CountryEntityServiceInterface;
+use App\Interfaces\Services\Geographic\CountryServiceInterface;
+use Illuminate\Support\Collection;
 
-class CountryEntityService implements CountryEntityServiceInterface
+class CountryService implements CountryServiceInterface
 {
     private array $errors = [];
     protected CountryRepositoryInterface $countryRepo;
@@ -15,7 +16,7 @@ class CountryEntityService implements CountryEntityServiceInterface
         $this->countryRepo = app(CountryRepositoryInterface::class);
     }
     
-    public function getCountries()
+    public function getCountries(): Collection  
     {
         return $this->countryRepo->findAll();
     }

@@ -13,4 +13,9 @@ class DepartmentRepository extends CoreRepository implements DepartmentRepositor
     {
         return DepartmentEntity::find($id);
     }
+
+    public function getAll(): Collection
+    {
+        return DepartmentEntity::all();
+    }
 }

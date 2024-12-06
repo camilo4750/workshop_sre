@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Interfaces\services\Geographic;
+namespace App\Interfaces\Services\Geographic;
 
 interface DepartmentServiceInterface 
 {
+    public function getDepartment(int $id);
 
+    public function getDepartments();
 }

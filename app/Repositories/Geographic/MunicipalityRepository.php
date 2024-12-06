@@ -13,4 +13,9 @@ class MunicipalityRepository extends CoreRepository implements MunicipalityRepos
     {
         return MunicipalityEntity::find($id);
     }
+
+    public function getAll(): Collection
+    {
+        return MunicipalityEntity::all();
+    }
 }

@@ -11,6 +11,8 @@ class CountryRepository extends CoreRepository implements CountryRepositoryInter
 {
     public function findAll(): Collection
     {
-        return CountryEntity::all();
+        return CountryEntity::query() 
+            ->select('id', 'code', 'name')
+            ->get();
     }
 }

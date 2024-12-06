@@ -3,7 +3,7 @@
 namespace App\Services\Geographic;
 
 use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
-use App\Interfaces\services\Geographic\MunicipalityServiceInterface;
+use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
 
 class MunicipalityService implements MunicipalityServiceInterface
 {
@@ -17,6 +17,11 @@ class MunicipalityService implements MunicipalityServiceInterface
 
     public function getMunicipality(int $id)
     {
-        $municipality = $this->municipalityRepo->find($id);
+        return $this->municipalityRepo->find($id);
+    }
+
+    public function getMunicipalities()
+    {
+        return $this->municipalityRepo->getAll();
     }
 }
