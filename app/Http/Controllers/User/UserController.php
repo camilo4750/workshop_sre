@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Wrappers\ControllerWrapper;
-use App\Interfaces\services\User\UserServiceInterface;
-use App\Mapper\User\UserUpdateDtoMapper;
+use App\Interfaces\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 

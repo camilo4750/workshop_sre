@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\services\User;
+namespace App\Interfaces\Services\User;
 
 use App\Dto\User\UserNewDto;
 use App\Dto\User\UserUpdateDto;
