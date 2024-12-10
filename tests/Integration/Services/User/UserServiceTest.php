@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Services\User;
 
-use App\Interfaces\services\User\UserServiceInterface;
+use App\Interfaces\Services\User\UserServiceInterface;
 use App\Mapper\user\UserNewDtoMapper;
 use App\Mapper\User\UserUpdateDtoMapper;
 use App\Models\User;
