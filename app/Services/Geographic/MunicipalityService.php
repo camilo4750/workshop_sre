@@ -4,6 +4,7 @@ namespace App\Services\Geographic;
 
 use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
 use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
+use Illuminate\Support\Collection;
 
 class MunicipalityService implements MunicipalityServiceInterface
 {
@@ -15,9 +16,9 @@ class MunicipalityService implements MunicipalityServiceInterface
         $this->municipalityRepo = app(MunicipalityRepositoryInterface::class);
     }
 
-    public function getMunicipality(int $id)
+    public function getById(int $id): Collection
     {
-        return $this->municipalityRepo->find($id);
+        return $this->municipalityRepo->getById($id);
     }
 
     public function getMunicipalities()

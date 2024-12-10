@@ -2,9 +2,11 @@
 
 namespace App\Interfaces\Services\Geographic;
 
+use Illuminate\Support\Collection;
+
 interface MunicipalityServiceInterface 
 {
-    public function getMunicipality(int $id);
+    public function getById(int $id): Collection;
 
     public function getMunicipalities();
 }

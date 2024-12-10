@@ -9,9 +9,12 @@ use Illuminate\Support\Collection;
 
 class MunicipalityRepository extends CoreRepository implements MunicipalityRepositoryInterface
 {
-    public function find(int $id): Collection
+    public function getById(int $id): Collection
     {
-        return MunicipalityEntity::find($id);
+        return MunicipalityEntity::query()
+        ->where('department_id' ,'=', $id)
+        ->select('id', 'name', 'code')
+        ->get();
     }
 
     public function getAll(): Collection
