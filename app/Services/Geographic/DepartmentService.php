@@ -4,6 +4,7 @@ namespace App\Services\Geographic;
 
 use App\Interfaces\Repositories\Geographic\DepartmentRepositoryInterface;
 use App\Interfaces\Services\Geographic\DepartmentServiceInterface;
+use Illuminate\Support\Collection;
 
 class DepartmentService implements DepartmentServiceInterface
 {
@@ -15,12 +16,12 @@ class DepartmentService implements DepartmentServiceInterface
         $this->departmentRepo = app(DepartmentRepositoryInterface::class);
     }
 
-    public function getDepartment(int $id)
+    public function getById(int $id): Collection
     {
-        return $this->departmentRepo->find($id);
+        return $this->departmentRepo->getById($id);
     }
 
-    public function getDepartments()
+    public function getDepartments(): Collection
     {
         return $this->departmentRepo->getAll();
     }

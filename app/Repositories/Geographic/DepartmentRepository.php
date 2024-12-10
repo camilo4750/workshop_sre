@@ -9,13 +9,18 @@ use Illuminate\Support\Collection;
 
 class DepartmentRepository extends CoreRepository implements DepartmentRepositoryInterface
 {
-    public function find(int $id): Collection
+    public function getById(int $id): Collection
     {
-        return DepartmentEntity::find($id);
+        return DepartmentEntity::query()
+            ->where('country_id', '=', $id)
+            ->select('id', 'name', 'code')
+            ->get($id);
     }
 
     public function getAll(): Collection
     {
-        return DepartmentEntity::all();
+        return DepartmentEntity::query()
+            ->select('id','name')
+            ->get();
     }
 }

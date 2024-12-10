@@ -2,9 +2,11 @@
 
 namespace App\Interfaces\Services\Geographic;
 
+use Illuminate\Support\Collection;
+
 interface DepartmentServiceInterface 
 {
-    public function getDepartment(int $id);
+    public function getById(int $id): Collection;
 
-    public function getDepartments();
+    public function getDepartments(): Collection;
 }

@@ -9,5 +9,5 @@ class DepartmentEntity extends CoreEntity
 {
     use HasFactory;
 
-    protected $table = 'departaments';
+    protected $table = 'departments';
 }

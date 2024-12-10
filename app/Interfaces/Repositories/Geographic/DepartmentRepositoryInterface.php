@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 interface DepartmentRepositoryInterface extends CoreRepositoryInterface
 {
-    public function find(int $id): Collection;
+    public function getById(int $id): Collection;
 
     public function getAll(): Collection;
 }
