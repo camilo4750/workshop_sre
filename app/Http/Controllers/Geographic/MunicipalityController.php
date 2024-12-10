@@ -20,7 +20,7 @@ class MunicipalityController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function() use ($departmentId) {
             return [
-                'messagee' => 'Lista municipios',
+                'message' => 'Lista municipios',
                 'data' => $this->municipalityService->getById($departmentId),
             ];
         });

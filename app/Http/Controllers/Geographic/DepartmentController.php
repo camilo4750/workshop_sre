@@ -20,7 +20,7 @@ class DepartmentController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function() use ($countryId) {
             return [
-                'messagee' => 'Lista departamentos',
+                'message' => 'Lista departamentos',
                 'data' => $this->departmentService->getById($countryId),
             ];
         });
