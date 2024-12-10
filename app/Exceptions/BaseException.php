@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Exceptions;
+use App\Exceptions\Throwable;
 
 class BaseException extends \Exception
 {
@@ -8,7 +9,7 @@ class BaseException extends \Exception
     protected $code= 0;
     protected array $errors;
 
-    public function __construct(array $errors = [], string $message = null, int $code = 0, ?Throwable $previous = null)
+    public function __construct(array $errors = [], string $message = null, int $code = 0, ?\Throwable $previous = null)
     {
         $this->errors = $errors;
         parent::__construct($message ?? $this->message, $code, $previous);
