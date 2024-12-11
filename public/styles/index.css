@@ -76,6 +76,12 @@
     font-weight: bold;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #030025 !important;
+    color: #C0A241 !important;
+    font-weight: bold;
+}
+
 .content-header {
     padding: 30px 0.5rem !important;
 }
