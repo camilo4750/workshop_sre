@@ -286,7 +286,7 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'empleados',
+                    'text' => 'Empleados',
                     'route'  => 'Employee.Index',
                 ],
             ],
