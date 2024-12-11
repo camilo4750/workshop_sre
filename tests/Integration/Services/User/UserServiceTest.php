@@ -2,13 +2,10 @@
 
 namespace Tests\Integration\Services\User;
 
-use App\Interfaces\services\User\UserServiceInterface;
+use App\Interfaces\Services\User\UserServiceInterface;
 use App\Mapper\user\UserNewDtoMapper;
 use App\Mapper\User\UserUpdateDtoMapper;
 use App\Models\User;
-use Carbon\Factory;
-use Database\Factories\UserFactory;
-use Faker\Factory as FakerFactory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;

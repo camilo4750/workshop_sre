@@ -8,7 +8,7 @@ use App\Exceptions\User\CustomValidationException;
 use App\Exceptions\User\UserNotFoundException;
 use App\Exceptions\User\UsersNotFoundException;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\services\User\UserServiceInterface;
+use App\Interfaces\Services\User\UserServiceInterface;
 use App\Mapper\User\UserNewDtoMapper;
 use App\Mapper\User\UserDtoMapper;
 use App\Mapper\User\UserUpdateDtoMapper;

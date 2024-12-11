@@ -283,7 +283,7 @@ return [
         ],
         [
             'text' => 'Creación de Servicios',
-            'route'  => 'CreationService.index',
+            'url'  => '#',
             'icon' => 'fas fa-tools',
         ],
 

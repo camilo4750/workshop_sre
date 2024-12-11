@@ -42,11 +42,13 @@
     <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/global.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('js/Toastr/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/datatable.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/responsive.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/Select2/select2.min.css') }}">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css"
@@ -110,6 +112,9 @@
     <script src="{{ asset('js/DataTables/dataTables.responsive.js') }}"></script>
     <script src="{{ asset('js/DataTables/responsive.bootstrap4.js') }}"></script>
 
+     {{-- Select2 --}}
+     <script src="{{ asset('js/Select2/select2.min.js') }}"></script>
+     <script src="{{ asset('js/Select2Utils.js') }}"></script>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>

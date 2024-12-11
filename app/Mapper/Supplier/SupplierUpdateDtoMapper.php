@@ -3,6 +3,7 @@
 namespace App\Mapper\Supplier;
 
 use App\Dto\Supplier\SupplierUpdateDto;
+use Illuminate\Http\Request;
 
 class SupplierUpdateDtoMapper
 {
@@ -11,16 +12,17 @@ class SupplierUpdateDtoMapper
         return new SupplierUpdateDto();
     }
 
-    public function createFormRequest($request): SupplierUpdateDto
+    public function createFromRequest(Request $request): SupplierUpdateDto
     {
         $dto = $this->getNewDto();
-        $dto->company_name = $request['companyName'];
-        $dto->nit = $request['nit'];
-        $dto->phone_company = $request['phoneCompany'];
-        $dto->email = $request['email'];
-        $dto->address = $request['address'];
-        $dto->representative = $request['representative'];
-        $dto->phone_representative = $request['phoneRepresentative'];
+        $dto->company_name = $request->get('companyName');
+        $dto->company_phone = $request->get('companyPhone');
+        $dto->contact_information = $request->get('contactInformation');
+        $dto->nit = $request->get('nit');
+        $dto->address = $request->get('address');
+        $dto->email = $request->get('email');
+        $dto->municipality_id = $request->get('municipalityId');
+        $dto->status_id = $request->get('statusId');
         return $dto;
     }
 }

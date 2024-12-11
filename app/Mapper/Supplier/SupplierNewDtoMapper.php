@@ -4,6 +4,7 @@ namespace App\Mapper\Supplier;
 
 use App\Dto\Supplier\SupplierNewDto;
 use App\Mapper\CoreMapper;
+use Illuminate\Http\Request;
 
 class SupplierNewDtoMapper extends CoreMapper
 {
@@ -12,17 +13,17 @@ class SupplierNewDtoMapper extends CoreMapper
         return new SupplierNewDto();
     }
 
-    public function createFormRequest($request): SupplierNewDto
+    public function createFormRequest(Request $request): SupplierNewDto
     {
         $dto = $this->getNewDto();
-        $dto->company_name = $request['companyName'];
-        $dto->nit = $request['nit'];
-        $dto->phone_company = $request['phoneCompany'];
-        $dto->email = $request['email'];
-        $dto->address = $request['address'];
-        $dto->representative = $request['representative'];
-        $dto->phone_representative = $request['phoneRepresentative'];
-        $dto->active = $request['active'];
+        $dto->company_name = $request->get('companyName');
+        $dto->company_phone = $request->get('companyPhone');
+        $dto->contact_information = $request->get('contactInformation');
+        $dto->nit = $request->get('nit');
+        $dto->address = $request->get('address');
+        $dto->email = $request->get('email');
+        $dto->municipality_id = $request->get('municipalityId');
+        $dto->status_id = $request->get('statusId');
         return $dto;
     }
 }
