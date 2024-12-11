@@ -10,9 +10,4 @@ class SupplierEntity extends CoreEntity
     use HasFactory;
 
     protected $table = 'suppliers';
-
-    public function getRepo()
-    {
-        // TODO: Implement getRepo() method.
-    }
 }

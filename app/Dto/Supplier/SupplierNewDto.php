@@ -8,17 +8,17 @@ class SupplierNewDto extends CoreDto
 {
     public string $company_name;
 
-    public int $nit;
+    public string $company_phone;
 
-    public string $phone_company;
+    public string $contact_information;
 
-    public string $email;
+    public string $nit;
 
     public string $address;
 
-    public string $representative;
+    public string $email;
 
-    public string $phone_representative;
+    public int $municipality_id;
 
-    public bool $active;
+    public int $status_id;
 }

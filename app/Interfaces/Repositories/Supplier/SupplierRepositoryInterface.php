@@ -4,17 +4,19 @@ namespace App\Interfaces\Repositories\Supplier;
 
 use App\Dto\Supplier\supplierNewDto;
 use App\Dto\Supplier\SupplierUpdateDto;
+use App\Entities\Supplier\SupplierEntity;
 use App\Interfaces\Repositories\CoreRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 interface SupplierRepositoryInterface extends CoreRepositoryInterface
 {
-    public function findAll();
+    public function getById(int $id): ?SupplierEntity;
 
-    public function store(supplierNewDto $supplierNewDto): static;
+    public function findAll(): Collection;
 
-    public function toggleStatus(bool $active): static;
+    public function store(supplierNewDto $dto): SupplierEntity;
 
-    public function update(SupplierUpdateDto $supplierUpdateDto): static;
-
+    public function update(SupplierUpdateDto $dto): self;
+    
+    public function existByEmail(string $email): bool;
 }

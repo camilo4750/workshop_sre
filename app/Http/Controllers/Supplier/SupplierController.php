@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers\Supplier;
 
-use App\Exceptions\RepositoryBaseException;
 use App\Http\Controllers\Wrappers\ControllerWrapper;
-use App\Interfaces\services\Supplier\SupplierServiceInterface;
-use App\Mapper\Supplier\SupplierNewDtoMapper;
-use App\Mapper\Supplier\SupplierUpdateDtoMapper;
+use App\Interfaces\Services\Supplier\SupplierServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class SupplierController
 {
-    /**
-     * @var SupplierServiceInterface
-     */
     protected $supplierService;
 
     public function __construct(
         SupplierServiceInterface $supplierService
-    )
-    {
+    ) {
         $this->supplierService = $supplierService;
     }
 
@@ -29,12 +22,12 @@ class SupplierController
         return view('Supplier.index');
     }
 
-    public function allSuppliers(): array|JsonResponse
+    public function getSuppliers(): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () {
             return [
                 'message' => 'Lista de proveedores',
-                'suppliers' => $this->supplierService->getAllSuppliers()
+                'suppliers' => $this->supplierService->getSuppliers(),
             ];
         });
     }
@@ -42,43 +35,31 @@ class SupplierController
     public function store(Request $request): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            (new SupplierControllerValidate())->validateForm($request);
+            (new SupplierControllerValidate())
+                ->validateStoreRequest($request);
 
-            $supplierNewDto = (new SupplierNewDtoMapper())->createFormRequest($request->all());
-            $this->supplierService->createSupplier($supplierNewDto);
+            $supplier = $this->supplierService
+                ->store($request);
+
             return [
                 'message' => 'Proveedor registrado exitosamente',
+                'id' => $supplier->id,
             ];
         });
     }
 
-    public function toggleStatus(Request $request): array|JsonResponse
+    public function update(Request $request, int $supplierId): array|JsonResponse
     {
-        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            $this->supplierService->toggleStatus(
-                $request->input('active'),
-                $request->input('supplierId')
-            );
-            return [
-                "message" => 'Cambio de estado exitoso',
-            ];
-        });
-    }
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request, $supplierId) {
+            (new SupplierControllerValidate())
+                ->validateUpdateRequest($request);
 
-    public function update(Request $request): array|JsonResponse
-    {
-        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
-            (new SupplierControllerValidate())->validateForm($request);
-            $supplierUpdateDto = (new SupplierUpdateDtoMapper())->createFormRequest($request);
-            $this->supplierService->update(
-                $supplierUpdateDto,
-                $request->input('id')
-            );
+            $this->supplierService
+                ->update($supplierId, $request);
+
             return [
-                $this->supplierService
+                "message" => "Proveedor actualizado con exito"
             ];
         });
     }
 }
-
-

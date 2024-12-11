@@ -6,47 +6,74 @@ use App\Dto\Supplier\supplierNewDto;
 use App\Dto\Supplier\SupplierUpdateDto;
 use App\Entities\Supplier\SupplierEntity;
 use App\Interfaces\Repositories\Supplier\SupplierRepositoryInterface;
-use App\Mapper\Supplier\supplierDtoMapper;
 use App\Repositories\CoreRepository;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 
 class SupplierRepository extends CoreRepository implements SupplierRepositoryInterface
 {
-    public function getNewEntity(): SupplierEntity
+    public function getById(int $id): ?SupplierEntity
     {
-        return new SupplierEntity();
+        $supplier = SupplierEntity::findOrFail($id);
+        return $supplier;
     }
 
-    public function findAll(): array
+    public function findAll(): Collection
     {
-        $suppliers = SupplierEntity::orderBy('id')->get()->toArray();
-        return array_map(function ($suppliers) {
-            return (new supplierDtoMapper())
-                ->createFromDbRecord($suppliers);
-        }, $suppliers);
+        return SupplierEntity::query()
+            ->select(
+                'suppliers.*', 'municipalities.name as municipality_name', 'suppliers_status.name as status_name',
+                'departments.id as department_id', 'departments.name as department_name', 'departments.country_id',
+                'countries.id as country_id', 'countries.name as country_name'
+                )
+            ->leftJoin('municipalities', 'suppliers.municipality_id', '=', 'municipalities.id')
+            ->leftJoin('departments', 'municipalities.department_id', '=', 'departments.id')
+            ->leftJoin('countries', 'departments.country_id', '=', 'countries.id')
+            ->leftJoin('suppliers_status', 'suppliers.status_id', '=', 'suppliers_status.id')
+            ->orderBy('id')
+            ->get();
     }
 
-    public function store(supplierNewDto $supplierNewDto): static
+    public function store(supplierNewDto $dto): SupplierEntity
     {
-        $this->setNewEntity();
-        $this->fillDto($supplierNewDto);
-        $this->getEntity()->user_who_created_id = Auth::user()->id;
-        $this->getEntity()->save();
+        $userId = SupplierEntity::query()
+            ->insertGetId([
+                'company_name' => $dto->company_name,
+                'company_phone' => $dto->company_phone,
+                'contact_information' => $dto->contact_information,
+                'nit' => $dto->nit,
+                'address' => $dto->address,
+                'email' => $dto->email,
+                'municipality_id' => $dto->municipality_id,
+                'status_id' => $dto->status_id,
+                'user_who_created_id' => $this->user->id,
+                'created_at' => 'now()'
+            ]);
+
+        return $this->getById($userId);
+    }
+
+    public function update(SupplierUpdateDto $dto): self
+    {
+        SupplierEntity::query()
+            ->where("id", $dto->id)
+            ->update([
+                'company_name' => $dto->company_name,
+                'company_phone' => $dto->company_phone,
+                'contact_information' => $dto->contact_information,
+                'nit' => $dto->nit,
+                'address' => $dto->address,
+                'email' => $dto->email,
+                'municipality_id' => $dto->municipality_id,
+                'status_id' => $dto->status_id,
+                'user_who_updated_id' => $this->user->id,
+                'updated_at' => 'now()'
+            ]);
+
         return $this;
     }
 
-    public function toggleStatus(bool $active): static
+    public function existByEmail(string $email): bool
     {
-        $this->getEntity()->active = $active;
-        $this->getEntity()->save();
-        return $this;
-    }
-
-    public function update(SupplierUpdateDto $supplierUpdateDto): static
-    {
-        $this->fillDto($supplierUpdateDto);
-        $this->getEntity()->save();
-        return $this;
+        return SupplierEntity::where('email', $email)->exists();
     }
 }
