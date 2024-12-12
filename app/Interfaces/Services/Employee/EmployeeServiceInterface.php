@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 interface EmployeeServiceInterface
 {
-
+    public function getAll(): array;
 }

@@ -7,5 +7,5 @@ use Illuminate\Support\Collection;
 
 interface EmployeeRepositoryInterface extends CoreRepositoryInterface
 {
-
+    public function getAll(): Collection;
 }

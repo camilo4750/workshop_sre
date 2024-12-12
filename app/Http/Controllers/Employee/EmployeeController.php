@@ -21,4 +21,14 @@ class EmployeeController
     {
         return view('Employee.index');
     }
+
+    public function getEmployees(): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () {
+            return [
+                'message' => 'Lista de empleados',
+                'employees' => $this->employeeService->getAll(),
+            ];
+        });
+    }
 }
