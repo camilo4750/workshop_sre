@@ -4,7 +4,7 @@ namespace App\Dto\Employee;
 
 use App\Dto\CoreDto;
 
-class EmployeeUpdateDto extends CoreDto
+class EmployeeShowDto extends CoreDto
 {
     public int $id;
     public string $full_name;

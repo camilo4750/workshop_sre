@@ -100,6 +100,7 @@
             },
             mounted() {
                 this.getEmployees()
+                this.getTypesDocuments()
             },
             methods: {
                 initializeFieldsStatus() {
@@ -176,6 +177,15 @@
                     } catch (error) {
                         this.isLoading = false;
                         alert(error.message);
+                    }
+                },
+
+                async getTypesDocuments() {
+                    try {
+                        const response = await fetchUtils.fetchGet('{{ route('typeDocument.GetAll') }}');
+                        this.departments = response.data
+                    } catch (error) {
+                        alert(error)
                     }
                 },
 
