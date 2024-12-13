@@ -1,5 +1,11 @@
 @extends('adminlte::page')
 @section('title', 'Gestion de empleados')
+<style>
+    #showEmployee .modal-body {
+        max-height: 700px;
+        overflow-x: auto
+    }
+</style>
 @section('content_header')
 <div class="d-flex align-items-center">
     <h1 class="font-weight-bold ml-3">Gestion de empleados</h1>
@@ -27,12 +33,12 @@
                 </thead>
                 <tbody class="">
                     <tr v-for="(employee, index) in employees" :key="index">
-                        <td>@{{ employee.fullName }}</td>
-                        <td>@{{ employee.documentNumber }}</td>
-                        <td>@{{ employee.telephone }}</td>
-                        <td>@{{ employee.jobPositionName }}</td>
-                        <td>@{{ employee.entryDate}}</td>
-                        <td>@{{employee.status}}</td>
+                        <td>@{{ employee?.fullName }}</td>
+                        <td>@{{ employee?.documentNumber }}</td>
+                        <td>@{{ employee?.telephone }}</td>
+                        <td>@{{ employee?.jobPositionName }}</td>
+                        <td>@{{ employee?.entryDate }}</td>
+                        <td>@{{ employee?.employeeStatusName }}</td>
                         <td>
                             <div class="d-flex gap-2">
                                 <button type="button" class="btn btn-color-table-edit btn-table" data-toggle="tooltip"
@@ -40,7 +46,7 @@
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
                                 <button type="button" class="btn btn-table bg-primary" data-toggle="tooltip"
-                                    data-placement="top" title="Ver informacion completa" @click="openShowEmploteeModal(employee.id)">
+                                    data-placement="top" title="Ver informacion completa" @click="openShowEmployeeModal(employee.id)">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
@@ -49,7 +55,12 @@
                 </tbody>
             </table>
         </div>
+        <div class="d-flex justify-content-center align-items-center" v-else>
+            @include('preloader')
+        </div>
     </div>
+    
+    @include('Employee.Modals.show_employee')
 </div>
 
 <script>
@@ -57,13 +68,90 @@
             data() {
                 return {
                     isLoading: false,
+                    isModalLoading: false,
                     employees: [],
+                    createEmployee: {
+                        fullName: '',
+                        typeDocumentId: null,
+                        document_number: '',
+                        municipality_id: null,
+                        address: '',
+                        telephone: '',
+                        gender_id: null,
+                        job_position_id: null,
+                        eps_id: null,
+                        pension_fund_id: '',
+                        arl_id: null,
+                        contract_type_id: '',
+                        salary: 0,
+                        entry_date: '',
+                        withdrawal_date: '',
+                        bank_id: null,
+                        bank_account_number: '',
+                        emergency_contact: '',
+                        employee_status_id: null,
+                    },
+                    showEmployee: this.initializeFormEditAndShow()
                 }
             },
             mounted() {
                 this.getEmployees()
             },
             methods: {
+                initializeFieldsStatus() {
+                    return {
+                        fullName: false,
+                        typeDocumentId: false,
+                        document_number: false,
+                        municipality_id: false,
+                        address: false,
+                        telephone: false,
+                        gender_id: false,
+                        eps_id: false,
+                        pension_fund_id: false,
+                        arl_id: false,
+                        contract_type_id: false,
+                        salary: false,
+                        entry_date: false,
+                        bank_id: false,
+                        emergency_contact: false,
+                    };
+                },
+
+                initializeFormEditAndShow() {
+                    return {
+                        fullName: '',
+                        typeDocumentId: null,
+                        typeDocumentName: '',
+                        documentNumber: '',
+                        municipalityId: null,
+                        municipalityName: '',
+                        address: '',
+                        telephone: '',
+                        genderId: null,
+                        genderName: '',
+                        jobPositionId: null,
+                        jobPositionName: '',
+                        epsId: null,
+                        epsName: '',
+                        pensionFundId: null,
+                        pensionFundName: '',
+                        arlId: null,
+                        arlName: '',
+                        contractTypeId: null,
+                        contractTypeName: '',
+                        salary: 0,
+                        entryDate: '',
+                        withdrawalDate: '',
+                        bankId: null,
+                        bankName: '',
+                        bankAccountNumber: '',
+                        emergencyContact: '',
+                        employeeStatusId: null,
+                        employeeStatusName: '',
+                    }
+                },
+
                 async getEmployees() {
                     this.isLoading = true;
                     try {
@@ -87,12 +175,31 @@
                     }
                 },
 
-                openEditEmployeeModal($id) {
-                    $('#').modal('show')
+                async openEditEmployeeModal(id) {
+                    // $('#').modal('show')
+                    this.editEmployee = await this.loadDataEmployee(id)
+                    this.isModalLoading = false;
+                    
                 },
                 
-                openShowEmploteeModal($id) {
-                    $('#').modal('show')
+                async openShowEmployeeModal(id) {
+                    $('#showEmployee').modal('show')
+                    const employee = await this.loadDataEmployee(id)
+                    employee.salary = utilities.formatCurrency(employee.salary)
+                    this.showEmployee = employee
+                    this.isModalLoading = false;
+                },
+
+                async loadDataEmployee(id) {
+                    this.isModalLoading = true;
+                    try {
+                        let url = "{{ route('Employee.getById', ['employeeId' => '?']) }}".replace('?', id)
+                        const response = await fetchUtils.fetchGet(url)
+                        return response.data;
+                    } catch (error) {
+                        this.isModalLoading = false;
+                        alert(error)
+                    }
                 },
             }
         });

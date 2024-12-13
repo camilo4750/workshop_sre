@@ -31,4 +31,14 @@ class EmployeeController
             ];
         });
     }
+
+    public function getById(int $employeeId): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($employeeId) {
+            return [
+                'message' => 'Información del empleado',
+                'data' => $this->employeeService->getById($employeeId),
+            ];
+        });
+    }
 }
