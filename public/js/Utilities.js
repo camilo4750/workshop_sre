@@ -30,4 +30,13 @@ const utilities = {
         }
         return currentDate.toISOString().split("T")[0];
     },
+
+    formatCurrency (value, currency = "COP", locale = "es-CO") {
+        return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: currency,
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(value);
+    },
 };
