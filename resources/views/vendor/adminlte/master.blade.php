@@ -47,7 +47,6 @@
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('js/DataTables/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/datatable.css') }}">
-    <link rel="stylesheet" href="{{ asset('js/DataTables/responsive.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('js/Select2/select2.min.css') }}">
 
 
@@ -109,8 +108,6 @@
     <script src="{{ asset('js/DataTables/dataTables.js') }}"></script>
     <script src="{{ asset('js/DataTables/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/DataTables/es.js') }}"></script>
-    <script src="{{ asset('js/DataTables/dataTables.responsive.js') }}"></script>
-    <script src="{{ asset('js/DataTables/responsive.bootstrap4.js') }}"></script>
 
      {{-- Select2 --}}
      <script src="{{ asset('js/Select2/select2.min.js') }}"></script>
