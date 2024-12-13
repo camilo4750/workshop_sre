@@ -5,6 +5,10 @@
         max-height: 700px;
         overflow-x: auto
     }
+
+    #tableEmployees_wrapper .col-12 {
+        overflow-y: auto;
+    }
 </style>
 @section('content_header')
 <div class="d-flex align-items-center">

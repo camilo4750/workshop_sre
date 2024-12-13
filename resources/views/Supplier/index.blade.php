@@ -1,5 +1,10 @@
 @extends('adminlte::page')
 @section('title', 'Gestion de proveedores')
+<style>
+    #suppliersTable_wrapper .col-12 {
+        overflow-y: auto;
+    }
+</style>
 @section('content_header')
 <div class="d-flex align-items-center">
     <h1 class="font-weight-bold ml-3">Gestion de proveedores</h1>
