@@ -9,6 +9,7 @@ use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Arl\ArlRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Bank\BankRepositoryInterface;
 use App\Interfaces\Repositories\Lists\ContractType\ContractTypeRepositoryInterface;
+use App\Interfaces\Repositories\Lists\EmployeeStatus\EmployeeStatusRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Eps\EpsRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Gender\GenderRepositoryInterface;
 use App\Interfaces\Repositories\Lists\JobPosition\JobPositionRepositoryInterface;
@@ -24,6 +25,7 @@ use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
 use App\Interfaces\Services\Lists\Arl\ArlServiceInterface;
 use App\Interfaces\Services\Lists\Bank\BankServiceInterface;
 use App\Interfaces\Services\Lists\ContractType\ContractTypeServiceInterface;
+use App\Interfaces\Services\Lists\EmployeeStatus\EmployeeStatusServiceInterface;
 use App\Interfaces\Services\Lists\Eps\EpsServiceInterface;
 use App\Interfaces\Services\Lists\Gender\GenderServiceInterface;
 use App\Interfaces\Services\Lists\JobPosition\JobPositionServiceInterface;
@@ -39,6 +41,7 @@ use App\Repositories\Geographic\MunicipalityRepository;
 use App\Repositories\Lists\Arl\ArlRepository;
 use App\Repositories\Lists\Bank\BankRepository;
 use App\Repositories\Lists\ContractType\ContractTypeRepository;
+use App\Repositories\Lists\EmployeeStatus\EmployeeStatusRepository;
 use App\Repositories\Lists\Eps\EpsRepository;
 use App\Repositories\Lists\Gender\GenderRepository;
 use App\Repositories\Lists\JobPosition\JobPositionRepository;
@@ -54,6 +57,7 @@ use App\Services\Geographic\MunicipalityService;
 use App\Services\Lists\Arl\ArlService;
 use App\Services\Lists\Bank\BankService;
 use App\Services\Lists\ContractType\ContractTypeService;
+use App\Services\Lists\EmployeeStatus\EmployeeStatusService;
 use App\Services\Lists\Eps\EpsService;
 use App\Services\Lists\Gender\GenderService;
 use App\Services\Lists\JobPosition\JobPositionService;
@@ -101,6 +105,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ContractTypeRepositoryInterface::class, ContractTypeRepository::class);
         $this->app->bind(BankServiceInterface::class, BankService::class);
         $this->app->bind(BankRepositoryInterface::class, BankRepository::class);
+        $this->app->bind(EmployeeStatusServiceInterface::class, EmployeeStatusService::class);
+        $this->app->bind(EmployeeStatusRepositoryInterface::class, EmployeeStatusRepository::class);
     }
 
     /**
