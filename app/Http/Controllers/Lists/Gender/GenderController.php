@@ -20,7 +20,7 @@ class GenderController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () {
             return [
-                'message' => 'Lista de tipos documentos',
+                'message' => 'Lista de generos',
                 'data' => $this->genderService->getGenders(),
             ];
         });
