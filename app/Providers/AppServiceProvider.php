@@ -7,6 +7,7 @@ use App\Interfaces\Repositories\Geographic\CountryRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\DepartmentRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Arl\ArlRepositoryInterface;
+use App\Interfaces\Repositories\Lists\ContractType\ContractTypeRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Eps\EpsRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Gender\GenderRepositoryInterface;
 use App\Interfaces\Repositories\Lists\JobPosition\JobPositionRepositoryInterface;
@@ -20,6 +21,7 @@ use App\Interfaces\Services\Geographic\CountryServiceInterface;
 use App\Interfaces\Services\Geographic\DepartmentServiceInterface;
 use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
 use App\Interfaces\Services\Lists\Arl\ArlServiceInterface;
+use App\Interfaces\Services\Lists\ContractType\ContractTypeServiceInterface;
 use App\Interfaces\Services\Lists\Eps\EpsServiceInterface;
 use App\Interfaces\Services\Lists\Gender\GenderServiceInterface;
 use App\Interfaces\Services\Lists\JobPosition\JobPositionServiceInterface;
@@ -33,6 +35,7 @@ use App\Repositories\Geographic\CountryRepository;
 use App\Repositories\Geographic\DepartmentRepository;
 use App\Repositories\Geographic\MunicipalityRepository;
 use App\Repositories\Lists\Arl\ArlRepository;
+use App\Repositories\Lists\ContractType\ContractTypeRepository;
 use App\Repositories\Lists\Eps\EpsRepository;
 use App\Repositories\Lists\Gender\GenderRepository;
 use App\Repositories\Lists\JobPosition\JobPositionRepository;
@@ -46,6 +49,7 @@ use App\Services\Geographic\CountryService;
 use App\Services\Geographic\DepartmentService;
 use App\Services\Geographic\MunicipalityService;
 use App\Services\Lists\Arl\ArlService;
+use App\Services\Lists\ContractType\ContractTypeService;
 use App\Services\Lists\Eps\EpsService;
 use App\Services\Lists\Gender\GenderService;
 use App\Services\Lists\JobPosition\JobPositionService;
@@ -89,6 +93,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PensionFundRepositoryInterface::class, PensionFundRepository::class);
         $this->app->bind(ArlServiceInterface::class, ArlService::class);
         $this->app->bind(ArlRepositoryInterface::class, ArlRepository::class);
+        $this->app->bind(ContractTypeServiceInterface::class, ContractTypeService::class);
+        $this->app->bind(ContractTypeRepositoryInterface::class, ContractTypeRepository::class);
     }
 
     /**
