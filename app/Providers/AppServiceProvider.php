@@ -9,6 +9,7 @@ use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Eps\EpsRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Gender\GenderRepositoryInterface;
 use App\Interfaces\Repositories\Lists\JobPosition\JobPositionRepositoryInterface;
+use App\Interfaces\Repositories\Lists\PensionFund\PensionFundRepositoryInterface;
 use App\Interfaces\Repositories\Lists\TypeDocument\TypeDocumentRepositoryInterface;
 use App\Interfaces\Repositories\Supplier\SupplierRepositoryInterface;
 use App\Interfaces\Repositories\Supplier\SupplierStatusRepositoryInterface;
@@ -20,6 +21,7 @@ use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
 use App\Interfaces\Services\Lists\Eps\EpsServiceInterface;
 use App\Interfaces\Services\Lists\Gender\GenderServiceInterface;
 use App\Interfaces\Services\Lists\JobPosition\JobPositionServiceInterface;
+use App\Interfaces\Services\Lists\PensionFund\PensionFundServiceInterface;
 use App\Interfaces\Services\Lists\TypeDocument\TypeDocumentServiceInterface;
 use App\Interfaces\Services\Supplier\SupplierServiceInterface;
 use App\Interfaces\Services\Supplier\SupplierStatusServiceInterface;
@@ -31,6 +33,7 @@ use App\Repositories\Geographic\MunicipalityRepository;
 use App\Repositories\Lists\Eps\EpsRepository;
 use App\Repositories\Lists\Gender\GenderRepository;
 use App\Repositories\Lists\JobPosition\JobPositionRepository;
+use App\Repositories\Lists\PensionFund\PensionFundRepository;
 use App\Repositories\Lists\TypeDocument\TypeDocumentRepository;
 use App\Repositories\Supplier\SupplierRepository;
 use App\Repositories\Supplier\SupplierStatusRepository;
@@ -42,6 +45,7 @@ use App\Services\Geographic\MunicipalityService;
 use App\Services\Lists\Eps\EpsService;
 use App\Services\Lists\Gender\GenderService;
 use App\Services\Lists\JobPosition\JobPositionService;
+use App\Services\Lists\PensionFund\PensionFundService;
 use App\Services\Lists\TypeDocument\TypeDocumentService;
 use App\Services\Supplier\SupplierService;
 use App\Services\Supplier\SupplierStatusService;
@@ -76,7 +80,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(JobPositionServiceInterface::class, JobPositionService::class);
         $this->app->bind(JobPositionRepositoryInterface::class, JobPositionRepository::class);
         $this->app->bind(EpsServiceInterface::class, EpsService::class);
-        $this->app->bind(EpsRepositoryInterface::class, EpsRepository::class);        
+        $this->app->bind(EpsRepositoryInterface::class, EpsRepository::class);   
+        $this->app->bind(PensionFundServiceInterface::class, PensionFundService::class);
+        $this->app->bind(PensionFundRepositoryInterface::class, PensionFundRepository::class);      
     }
 
     /**

@@ -68,6 +68,9 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/App/EpsRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/PensionFundRoute.php'));
         });
     }
 }
