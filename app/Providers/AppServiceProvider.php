@@ -6,6 +6,7 @@ use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\CountryRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\DepartmentRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
+use App\Interfaces\Repositories\Lists\Eps\EpsRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Gender\GenderRepositoryInterface;
 use App\Interfaces\Repositories\Lists\JobPosition\JobPositionRepositoryInterface;
 use App\Interfaces\Repositories\Lists\TypeDocument\TypeDocumentRepositoryInterface;
@@ -16,6 +17,7 @@ use App\Interfaces\Services\Employee\EmployeeServiceInterface;
 use App\Interfaces\Services\Geographic\CountryServiceInterface;
 use App\Interfaces\Services\Geographic\DepartmentServiceInterface;
 use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
+use App\Interfaces\Services\Lists\Eps\EpsServiceInterface;
 use App\Interfaces\Services\Lists\Gender\GenderServiceInterface;
 use App\Interfaces\Services\Lists\JobPosition\JobPositionServiceInterface;
 use App\Interfaces\Services\Lists\TypeDocument\TypeDocumentServiceInterface;
@@ -26,6 +28,7 @@ use App\Repositories\Employee\EmployeeRepository;
 use App\Repositories\Geographic\CountryRepository;
 use App\Repositories\Geographic\DepartmentRepository;
 use App\Repositories\Geographic\MunicipalityRepository;
+use App\Repositories\Lists\Eps\EpsRepository;
 use App\Repositories\Lists\Gender\GenderRepository;
 use App\Repositories\Lists\JobPosition\JobPositionRepository;
 use App\Repositories\Lists\TypeDocument\TypeDocumentRepository;
@@ -36,6 +39,7 @@ use App\Services\Employee\EmployeeService;
 use App\Services\Geographic\CountryService;
 use App\Services\Geographic\DepartmentService;
 use App\Services\Geographic\MunicipalityService;
+use App\Services\Lists\Eps\EpsService;
 use App\Services\Lists\Gender\GenderService;
 use App\Services\Lists\JobPosition\JobPositionService;
 use App\Services\Lists\TypeDocument\TypeDocumentService;
@@ -70,7 +74,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(GenderServiceInterface::class, GenderService::class);
         $this->app->bind(GenderRepositoryInterface::class, GenderRepository::class);
         $this->app->bind(JobPositionServiceInterface::class, JobPositionService::class);
-        $this->app->bind(JobPositionRepositoryInterface::class, JobPositionRepository::class);      
+        $this->app->bind(JobPositionRepositoryInterface::class, JobPositionRepository::class);
+        $this->app->bind(EpsServiceInterface::class, EpsService::class);
+        $this->app->bind(EpsRepositoryInterface::class, EpsRepository::class);        
     }
 
     /**
