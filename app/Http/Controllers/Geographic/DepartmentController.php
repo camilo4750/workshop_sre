@@ -16,11 +16,21 @@ class DepartmentController
         $this->departmentService = $departmentService;
     }
 
+    public function getAll(): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function() {
+            return [
+                'message' => 'Lista departamentos',
+                'data' => $this->departmentService->getDepartments(),
+            ];
+        });
+    }
+
     public function getById(int $countryId): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function() use ($countryId) {
             return [
-                'message' => 'Lista departamentos',
+                'message' => 'departamento por id',
                 'data' => $this->departmentService->getById($countryId),
             ];
         });

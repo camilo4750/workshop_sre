@@ -20,7 +20,12 @@ class DepartmentRepository extends CoreRepository implements DepartmentRepositor
     public function getAll(): Collection
     {
         return DepartmentEntity::query()
-            ->select('id','name')
+            ->select([
+                'id',
+                'name',
+                'code',
+            ])
+            ->orderBy('id')
             ->get();
     }
 }
