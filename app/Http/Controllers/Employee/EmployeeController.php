@@ -41,4 +41,20 @@ class EmployeeController
             ];
         });
     }
+
+    public function store(Request $request): array|JsonResponse 
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
+            (new EmployeeControllerValidate)
+                ->validateStoreRequest($request);
+
+            $employee = $this->employeeService
+                ->store($request);
+
+            return [
+                'message' => 'Empleador registrado exitosamente',
+                'id' => $employee->id,
+            ];
+        });
+    }
 }

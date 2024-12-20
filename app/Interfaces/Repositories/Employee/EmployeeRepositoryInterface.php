@@ -2,13 +2,17 @@
 
 namespace App\Interfaces\Repositories\Employee;
 
+use App\Dto\Employee\EmployeeNewDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\CoreRepositoryInterface;
-use Illuminate\Support\Collection;
 
 interface EmployeeRepositoryInterface extends CoreRepositoryInterface
 {
-    public function getAll(): Collection;
+    public function getAll(): array;
 
-    public function getById(int $employeeId);
+    public function getById(int $employeeId): ?EmployeeEntity;
+
+    public function existByDocument(string $documentNumber): bool;
+
+    public function store(EmployeeNewDto $dto): ?EmployeeEntity;
 }
