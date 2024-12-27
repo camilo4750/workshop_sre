@@ -32,7 +32,7 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Numero documento</label>
+                            <label for="createDocumentNumber">Numero documento</label>
                             <input type="text" id="createDocumentNumber" name="createDocumentNumber"
                                 class="form-control" v-model="createEmployee.documentNumber">
                             <span class="text-danger text-sm" v-if="fieldsStatus.documentNumber">
@@ -40,8 +40,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">País</label>
-                            <select id="create" name="create" class="form-control">
+                            <label for="createCountry">País</label>
+                            <select id="createCountry" name="createCountry" class="form-control">
                                 <option value="" selected disabled>Seleccionar país</option>
                                 <option v-for="country in countries" :value="country.id">
                                     @{{ country.name }}
@@ -49,8 +49,9 @@
                             </select>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Departamento</label>
-                            <select id="create" name="create" class="form-control" @change="changeMunicipality($event)">
+                            <label for="createDepartment">Departamento</label>
+                            <select id="createDepartment" name="createDepartment" class="form-control"
+                                @change="changeMunicipality($event)">
                                 <option value="" selected disabled>Seleccionar departamento</option>
                                 <option v-for="department in departments" :value="department.id">
                                     @{{ department.name }}
@@ -58,8 +59,8 @@
                             </select>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Municipio</label>
-                            <select id="create" name="create" class="form-control"
+                            <label for="createMunicipalityId">Municipio</label>
+                            <select id="createMunicipalityId" name="createMunicipalityId" class="form-control"
                                 v-model="createEmployee.municipalityId">
                                 <option value="" selected disabled>Seleccionar municipio</option>
                                 <option v-for="municipality in municipalities" :value="municipality.id">
@@ -71,24 +72,25 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Dirección</label>
-                            <input type="text" id="create" name="create" class="form-control"
+                            <label for="createAddress">Dirección</label>
+                            <input type="text" id="createAddress" name="createAddress" class="form-control"
                                 v-model="createEmployee.address">
                             <span class="text-danger text-sm" v-if="fieldsStatus.address">
                                 @{{ fetchErrors?.address }}
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Teléfono</label>
-                            <input type="text" id="create" name="create" class="form-control"
+                            <label for="createTelephone">Teléfono</label>
+                            <input type="text" id="createTelephone" name="createTelephone" class="form-control"
                                 v-model="createEmployee.telephone">
                             <span class="text-danger text-sm" v-if="fieldsStatus.telephone">
                                 @{{ fetchErrors?.telephone }}
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Genero</label>
-                            <select id="create" name="create" class="form-control" v-model="createEmployee.genderId">
+                            <label for="createGender">Genero</label>
+                            <select id="createGender" name="createGender" class="form-control"
+                                v-model="createEmployee.genderId">
                                 <option v-for="gender in genders" :value="gender.id">
                                     @{{ gender.name }}
                                 </option>
@@ -98,8 +100,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Cargo</label>
-                            <select id="create" name="create" class="form-control"
+                            <label for="createJobPositionId">Cargo</label>
+                            <select id="createJobPositionId" name="createJobPositionId" class="form-control"
                                 v-model="createEmployee.jobPositionId">
                                 <option v-for="position in jobPositions" :value="position.id">
                                     @{{ position.name }}
@@ -110,8 +112,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Eps</label>
-                            <select id="create" name="create" class="form-control" v-model="createEmployee.epsId">
+                            <label for="createEps">Eps</label>
+                            <select id="createEps" name="createEps" class="form-control" v-model="createEmployee.epsId">
                                 <option v-for="ep in eps" :value="ep.id">
                                     @{{ ep.name }}
                                 </option>
@@ -121,8 +123,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Fondo pensión</label>
-                            <select id="create" name="create" class="form-control"
+                            <label for="createPensionFundId">Fondo pensión</label>
+                            <select id="createPensionFundId" name="createPensionFundId" class="form-control"
                                 v-model="createEmployee.pensionFundId">
                                 <option v-for="pension in pensionFunds" :value="pension.id">
                                     @{{ pension.name }}
@@ -133,8 +135,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Arl</label>
-                            <select id="create" name="create" class="form-control" v-model="createEmployee.arlId">
+                            <label for="createArl">Arl</label>
+                            <select id="createArl" name="createArl" class="form-control" v-model="createEmployee.arlId">
                                 <option v-for="arl in arls" :value="arl.id">
                                     @{{ arl.name }}
                                 </option>
@@ -144,8 +146,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Tipo contrato</label>
-                            <select id="create" name="create" class="form-control"
+                            <label for="createContractTypeId">Tipo contrato</label>
+                            <select id="createContractTypeId" name="createContractTypeId" class="form-control"
                                 v-model="createEmployee.contractTypeId">
                                 <option v-for="contract in contractTypes" :value="contract.id">
                                     @{{ contract.name }}
@@ -156,29 +158,30 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Salario Base</label>
-                            <input type="text" id="create" name="create" class="form-control"
+                            <label for="createSalary">Salario Base</label>
+                            <input type="text" id="createSalary" name="createSalary" class="form-control"
                                 v-model="createEmployee.salary">
                             <span class="text-danger text-sm" v-if="fieldsStatus.salary">
                                 @{{ fetchErrors?.salary }}
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Fecha ingreso</label>
-                            <input type="date" id="create" name="create" class="form-control"
+                            <label for="createEntryDate">Fecha ingreso</label>
+                            <input type="date" id="createEntryDate" name="createEntryDate" class="form-control"
                                 v-model="createEmployee.entryDate">
                             <span class="text-danger text-sm" v-if="fieldsStatus.entryDate">
                                 @{{ fetchErrors?.entryDate }}
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Fecha retiro</label>
-                            <input type="date" id="create" name="create" class="form-control"
-                                v-model="createEmployee.withdrawalDate">
+                            <label for="createWithdrawalDate">Fecha retiro</label>
+                            <input type="date" id="createWithdrawalDate" name="createWithdrawalDate"
+                                class="form-control" v-model="createEmployee.withdrawalDate">
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Banco</label>
-                            <select id="create" name="create" class="form-control" v-model="createEmployee.bankId">
+                            <label for="createBank">Banco</label>
+                            <select id="createBank" name="createBank" class="form-control"
+                                v-model="createEmployee.bankId">
                                 <option v-for="bank in banks" :value="bank.id">
                                     @{{ bank.name }}
                                 </option>
@@ -188,13 +191,13 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Cuenta bancanria</label>
-                            <input type="text" id="create" name="create" class="form-control"
-                                v-model="createEmployee.bankAccountNumber">
+                            <label for="createBankAccountNumber">Cuenta bancanria</label>
+                            <input type="text" id="createBankAccountNumber" name="createBankAccountNumber"
+                                class="form-control" v-model="createEmployee.bankAccountNumber">
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Estado</label>
-                            <select id="create" name="create" class="form-control"
+                            <label for="createEmployeeStatusId">Estado</label>
+                            <select id="createEmployeeStatusId" name="createEmployeeStatusId" class="form-control"
                                 v-model="createEmployee.employeeStatusId">
                                 <option v-for="status in employeesStatus" :value="status.id">
                                     @{{ status.name }}
@@ -205,9 +208,9 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Contacto de emeergencia</label>
-                            <input type="text" id="create" name="create" class="form-control"
-                                v-model="createEmployee.emergencyContact">
+                            <label for="createEmergencyContact">Contacto de emeergencia</label>
+                            <input type="text" id="createEmergencyContact" name="createEmergencyContact"
+                                class="form-control" v-model="createEmployee.emergencyContact">
                             <span class="text-danger text-sm" v-if="fieldsStatus.emergencyContact">
                                 @{{ fetchErrors?.emergencyContact }}
                             </span>
