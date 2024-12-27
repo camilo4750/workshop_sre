@@ -19,6 +19,8 @@ class EmployeeDtoMapper extends CoreMapper
         $dto->typeDocumentId = $dbRecord->type_document_id;
         $dto->typeDocumentName = $dbRecord->type_document_name;
         $dto->documentNumber = $dbRecord->document_number;
+        $dto->countryId = $dbRecord->country_id;
+        $dto->departmentId = $dbRecord->department_id;
         $dto->municipalityId = $dbRecord->municipality_id;
         $dto->municipalityName = $dbRecord->municipality_name;
         $dto->address = $dbRecord->address;

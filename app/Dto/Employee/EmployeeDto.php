@@ -15,6 +15,10 @@ class EmployeeDto extends CoreDto
 
     public string $documentNumber;  
 
+    public int $countryId;
+
+    public int $departmentId;
+    
     public int $municipalityId;
 
     public string $municipalityName;
