@@ -20,8 +20,8 @@
                             </span>
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label for="create">Tipo documento</label>
-                            <select id="create" name="create" class="form-control"
+                            <label for="createTypeDocument">Tipo documento</label>
+                            <select id="createTypeDocument" name="createTypeDocument" class="form-control"
                                 v-model="createEmployee.typeDocumentId">
                                 <option v-for="typeDocument in typesDocuments" :value="typeDocument.id">
                                     @{{ typeDocument.name }}
@@ -217,7 +217,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-success" id="btnStoreEmployee">Crear proveedor</button>
+                    <button type="submit" class="btn btn-color-create" id="btnCreateUser">Crear Empleador</button>
                 </div>
             </form>
         </div>
