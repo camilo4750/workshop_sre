@@ -1,3 +1,8 @@
+
+body:not(.layout-fixed) .main-sidebar {
+    background-color: #fff !important;
+}
+
 .main-header .navbar ul li  a {
     color: white !important;
 }
@@ -72,6 +77,12 @@
 
 [class*=sidebar-white-] .nav-sidebar>.nav-item.menu-open>.nav-link {
     background-color: #030025 !important    ;
+    color: #C0A241 !important;
+    font-weight: bold;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #030025 !important;
     color: #C0A241 !important;
     font-weight: bold;
 }

@@ -30,4 +30,22 @@ const utilities = {
         }
         return currentDate.toISOString().split("T")[0];
     },
+
+    formatCurrency (value, currency = "COP", locale = "es-CO") {
+        return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(value);
+    },
+
+    parseCurrency(formattedValue, locale = "es-CO") {
+        const numberFormat = new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: "COP",
+        });
+        const numberString = formattedValue.replace(new RegExp(`[^0-9]`, 'g'), '');
+        return parseFloat(numberString);
+    },
 };

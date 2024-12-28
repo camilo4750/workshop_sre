@@ -53,6 +53,36 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/App/SupplierStatusRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/EmployeeRoute.php'));
+                
+            Route::middleware('web')
+                ->group(base_path('routes/App/TypeDocumentRoute.php'));
+                
+            Route::middleware('web')
+                ->group(base_path('routes/App/GenderRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/JobPositionRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/EpsRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/PensionFundRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/ArlRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/ContractTypeRoute.php'));
+                
+            Route::middleware('web')
+                ->group(base_path('routes/App/BankRoute.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/App/EmployeeStatusRoute.php'));
         });
     }
 }

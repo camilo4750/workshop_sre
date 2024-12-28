@@ -282,25 +282,15 @@ return [
             'icon' => 'fas fa-truck',
         ],
         [
-            'text' => 'Creación de Servicios',
-            'url'  => '#',
-            'icon' => 'fas fa-tools',
+            'text'    => 'Gestión de empleados',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Empleados',
+                    'route'  => 'Employee.Index',
+                ],
+            ],
         ],
-
-//        [
-//            'text'    => 'Gestión de repuestos',
-//            'icon'    => 'fas fa-fw fa-share',
-//            'submenu' => [
-//                [
-//                    'text' => 'Proveedores',
-//                    'route'  => 'Supplier.Index',
-//                ],
-//                [
-//                    'text' => 'Repuestos',
-//                    'url'  => '#',
-//                ],
-//            ],
-//        ],
     ],
 
     /*

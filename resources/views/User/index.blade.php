@@ -4,6 +4,10 @@
     .mx-3px {
         padding-inline: 3px;
     }
+
+    #tableUsers_wrapper .col-12 {
+        overflow-y: auto;
+    }
 </style>
 @section('content_header')
 <div class="d-flex align-items-center">
