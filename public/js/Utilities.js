@@ -35,8 +35,17 @@ const utilities = {
         return new Intl.NumberFormat(locale, {
             style: "currency",
             currency: currency,
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
         }).format(value);
+    },
+
+    parseCurrency(formattedValue, locale = "es-CO") {
+        const numberFormat = new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: "COP",
+        });
+        const numberString = formattedValue.replace(new RegExp(`[^0-9]`, 'g'), '');
+        return parseFloat(numberString);
     },
 };
