@@ -7,6 +7,7 @@ use App\Dto\CoreDto;
 class EmployeeDto extends CoreDto
 {
     public int $id;
+    
     public string $fullName;
 
     public int $typeDocumentId;

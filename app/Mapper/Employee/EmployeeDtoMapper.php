@@ -15,6 +15,7 @@ class EmployeeDtoMapper extends CoreMapper
     public function createFromDbRecord(object  $dbRecord): EmployeeDto
     {
         $dto = $this->getNewDto();
+        $dto->id = $dbRecord->id;
         $dto->fullName = $dbRecord->full_name;
         $dto->typeDocumentId = $dbRecord->type_document_id;
         $dto->typeDocumentName = $dbRecord->type_document_name;

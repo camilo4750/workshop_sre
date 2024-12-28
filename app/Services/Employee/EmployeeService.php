@@ -4,6 +4,7 @@ namespace App\Services\Employee;
 
 use App\Dto\Employee\EmployeeDto;
 use App\Dto\Employee\EmployeeNewDto;
+use App\Dto\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Exceptions\Employee\CustomValidationException;
 use App\Exceptions\Employee\EmployeeNotFoundException;
@@ -11,6 +12,7 @@ use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Interfaces\Services\Employee\EmployeeServiceInterface;
 use App\Mapper\Employee\EmployeeDtoMapper;
 use App\Mapper\Employee\EmployeeNewDtoMapper;
+use App\Mapper\Employee\EmployeeUpdateDtoMapper;
 use Illuminate\Http\Request;
 
 class EmployeeService implements EmployeeServiceInterface
@@ -73,5 +75,36 @@ class EmployeeService implements EmployeeServiceInterface
         return $this->employeeRepo
             ->setUser(auth()->user())
             ->store($dto);
+    }
+
+    public function update(int $employeeId, Request $request): self
+    {
+        $employee = $this->employeeRepo->getById($employeeId);
+
+        if (
+            $employee->email !== $request->get('email') &&
+            $this->employeeRepo->existByDocument($request->get('email'))
+        ) {
+            $this->errors['documentNumber'] = 'Numero de documento ya se encuentra registrado en el sistema.';
+        }
+     
+        throw_if(
+            !empty($this->errors),
+            new CustomValidationException($this->errors)
+        );
+
+        $dto = (new EmployeeUpdateDtoMapper())->createFromRequest($request);
+        $dto->id = $employeeId;
+
+        $this->updateEmployee($dto);
+        
+        return $this;
+    }
+
+    public function updateEmployee(EmployeeUpdateDto $dto): object
+    {
+        return $this->employeeRepo
+        ->setUser(auth()->user())
+        ->update($dto);
     }
 }

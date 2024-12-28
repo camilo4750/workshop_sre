@@ -3,6 +3,7 @@
 namespace App\Repositories\Employee;
 
 use App\Dto\Employee\EmployeeNewDto;
+use App\Dto\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Mapper\Employee\EmployeeTableDtoMapper;
@@ -106,5 +107,36 @@ class EmployeeRepository extends CoreRepository implements EmployeeRepositoryInt
             ]);
 
         return $this->getById($employeeId);
+    }
+
+    public function update(EmployeeUpdateDto $dto): self
+    {
+        EmployeeEntity::query()
+            ->where("id", $dto->id)
+            ->update([
+                'full_name' => $dto->full_name,
+                'type_document_id' => $dto->type_document_id,
+                'document_number' => $dto->document_number,
+                'municipality_id' => $dto->municipality_id,
+                'address' => $dto->address,
+                'telephone' => $dto->telephone,
+                'gender_id' => $dto->gender_id,
+                'job_position_id' => $dto->job_position_id,
+                'eps_id' => $dto->eps_id,
+                'pension_fund_id' => $dto->pension_fund_id,
+                'arl_id' => $dto->arl_id,
+                'contract_type_id' => $dto->contract_type_id,
+                'salary' => $dto->salary,
+                'entry_date' => $dto->entry_date,
+                'withdrawal_date' => $dto->withdrawal_date,
+                'bank_id' => $dto->bank_id,
+                'bank_account_number' => $dto->bank_account_number,
+                'emergency_contact' => $dto->emergency_contact,
+                'employee_status_id' => $dto->employee_status_id,
+                'user_who_updated_id' => $this->user->id,
+                'updated_at' => 'now()',
+            ]);
+
+        return $this;
     }
 }

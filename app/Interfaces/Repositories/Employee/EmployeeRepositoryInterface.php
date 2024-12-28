@@ -3,6 +3,7 @@
 namespace App\Interfaces\Repositories\Employee;
 
 use App\Dto\Employee\EmployeeNewDto;
+use App\Dto\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\CoreRepositoryInterface;
 
@@ -15,4 +16,6 @@ interface EmployeeRepositoryInterface extends CoreRepositoryInterface
     public function existByDocument(string $documentNumber): bool;
 
     public function store(EmployeeNewDto $dto): ?EmployeeEntity;
+
+    public function update(EmployeeUpdateDto $dto): self;
 }

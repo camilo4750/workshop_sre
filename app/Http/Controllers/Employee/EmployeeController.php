@@ -42,7 +42,7 @@ class EmployeeController
         });
     }
 
-    public function store(Request $request): array|JsonResponse 
+    public function store(Request $request): array|JsonResponse
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
             (new EmployeeControllerValidate)
@@ -54,6 +54,21 @@ class EmployeeController
             return [
                 'message' => 'Empleador registrado exitosamente',
                 'id' => $employee->id,
+            ];
+        });
+    }
+
+    public function update(Request $request, int $employeeId): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request, $employeeId) {
+            (new EmployeeControllerValidate)
+                ->validateUpdatedRequest($request);
+
+            $employee = $this->employeeService
+                ->update($employeeId, $request);
+
+            return [
+                'message' => 'Empleador Actualizado exitosamente',
             ];
         });
     }
