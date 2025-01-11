@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Mapper\Employee;
+namespace App\Mapper\EmployeeManagement\Employee;
 
-use App\Dto\Employee\EmployeeTableDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeTableDto;
 use App\Mapper\CoreMapper;
 
 class EmployeeTableDtoMapper extends CoreMapper

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Mapper\Employee;
+namespace App\Mapper\EmployeeManagement\Employee;
 
-use App\Dto\Employee\EmployeeUpdateDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Mapper\CoreMapper;
 use Illuminate\Http\Request;
 

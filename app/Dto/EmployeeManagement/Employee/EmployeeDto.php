@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\Employee;
+namespace App\Dto\EmployeeManagement\Employee;
 
 use App\Dto\CoreDto;
 

@@ -6,7 +6,7 @@ use App\Dto\Employee\EmployeeNewDto;
 use App\Dto\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
-use App\Mapper\Employee\EmployeeTableDtoMapper;
+use App\Mapper\EmployeeManagement\Employee\EmployeeTableDtoMapper;
 use App\Repositories\CoreRepository;
 
 class EmployeeRepository extends CoreRepository implements EmployeeRepositoryInterface
