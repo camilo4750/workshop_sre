@@ -5,7 +5,7 @@ namespace App\Interfaces\Services\EmployeeManagement\Employee;
 use App\Dto\EmployeeManagement\Employee\EmployeeDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
-use App\Entities\Employee\EmployeeEntity;
+use App\Entities\EmployeeManagement\Employee\EmployeeEntity;
 use Illuminate\Http\Request;
 
 interface EmployeeServiceInterface

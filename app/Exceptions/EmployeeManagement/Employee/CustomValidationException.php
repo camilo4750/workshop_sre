@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions\Employee;
+namespace App\Exceptions\EmployeeManagement\Employee;
 
 use App\Exceptions\BusinessLogicException;
 

@@ -4,7 +4,7 @@ namespace App\Repositories\EmployeeManagement\Employee;
 
 use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
-use App\Entities\Employee\EmployeeEntity;
+use App\Entities\EmployeeManagement\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
 use App\Mapper\EmployeeManagement\Employee\EmployeeTableDtoMapper;
 use App\Repositories\CoreRepository;
