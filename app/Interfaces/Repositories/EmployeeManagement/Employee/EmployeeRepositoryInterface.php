@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Repositories\Employee;
+namespace App\Interfaces\Repositories\EmployeeManagement\Employee;
 
 use App\Dto\Employee\EmployeeNewDto;
 use App\Dto\Employee\EmployeeUpdateDto;

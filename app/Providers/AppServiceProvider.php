@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
+use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\CountryRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\DepartmentRepositoryInterface;
 use App\Interfaces\Repositories\Geographic\MunicipalityRepositoryInterface;
@@ -34,7 +34,7 @@ use App\Interfaces\Services\Lists\TypeDocument\TypeDocumentServiceInterface;
 use App\Interfaces\Services\Supplier\SupplierServiceInterface;
 use App\Interfaces\Services\Supplier\SupplierStatusServiceInterface;
 use App\Interfaces\Services\User\UserServiceInterface;
-use App\Repositories\Employee\EmployeeRepository;
+use App\Repositories\EmployeeManagement\Employee\EmployeeRepository;
 use App\Repositories\Geographic\CountryRepository;
 use App\Repositories\Geographic\DepartmentRepository;
 use App\Repositories\Geographic\MunicipalityRepository;

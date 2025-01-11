@@ -8,7 +8,7 @@ use App\Dto\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Exceptions\Employee\CustomValidationException;
 use App\Exceptions\Employee\EmployeeNotFoundException;
-use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
+use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
 use App\Interfaces\Services\EmployeeManagement\Employee\EmployeeServiceInterface;
 use App\Mapper\Employee\EmployeeDtoMapper;
 use App\Mapper\Employee\EmployeeNewDtoMapper;
