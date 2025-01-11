@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Employee;
+namespace App\Http\Controllers\EmployeeManagement\Employee;
 
 use App\Http\Controllers\Wrappers\ControllerWrapper;
 use App\Interfaces\Services\Employee\EmployeeServiceInterface;
