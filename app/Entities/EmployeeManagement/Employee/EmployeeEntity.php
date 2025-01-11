@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\Employee;
+namespace App\Entities\EmployeeManagement\Employee;
 
 use App\Entities\CoreEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

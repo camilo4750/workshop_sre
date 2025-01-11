@@ -66,9 +66,9 @@
         </div>
     </div>
 
-    @include('Employee.Modals.show_employee')
-    @include('Employee.Modals.create_employee')
-    @include('Employee.Modals.edit_employee')
+    @include('EmployeeManagement.Employee.Modals.show_employee')
+    @include('EmployeeManagement.Employee.Modals.create_employee')
+    @include('EmployeeManagement.Employee.Modals.edit_employee')
 </div>
 
 <script>

@@ -19,7 +19,7 @@ class EmployeeController
 
     public function index()
     {
-        return view('Employee.index');
+        return view('EmployeeManagement.Employee.index');
     }
 
     public function getEmployees(): array|JsonResponse
