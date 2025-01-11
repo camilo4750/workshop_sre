@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Services\Employee;
+namespace App\Services\EmployeeManagement\Employee;
 
-use App\Dto\Employee\EmployeeDto;
-use App\Dto\Employee\EmployeeNewDto;
-use App\Dto\Employee\EmployeeUpdateDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Exceptions\Employee\CustomValidationException;
 use App\Exceptions\Employee\EmployeeNotFoundException;
-use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
-use App\Interfaces\Services\Employee\EmployeeServiceInterface;
-use App\Mapper\Employee\EmployeeDtoMapper;
-use App\Mapper\Employee\EmployeeNewDtoMapper;
-use App\Mapper\Employee\EmployeeUpdateDtoMapper;
+use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
+use App\Interfaces\Services\EmployeeManagement\Employee\EmployeeServiceInterface;
+use App\Mapper\EmployeeManagement\Employee\EmployeeDtoMapper;
+use App\Mapper\EmployeeManagement\Employee\EmployeeNewDtoMapper;
+use App\Mapper\EmployeeManagement\Employee\EmployeeUpdateDtoMapper;
 use Illuminate\Http\Request;
 
 class EmployeeService implements EmployeeServiceInterface

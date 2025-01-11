@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Interfaces\Services\Employee;
+namespace App\Interfaces\Services\EmployeeManagement\Employee;
 
-use App\Dto\Employee\EmployeeDto;
-use App\Dto\Employee\EmployeeNewDto;
-use App\Dto\Employee\EmployeeUpdateDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use Illuminate\Http\Request;
 

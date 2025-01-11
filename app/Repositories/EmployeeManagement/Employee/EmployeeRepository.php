@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Repositories\Employee;
+namespace App\Repositories\EmployeeManagement\Employee;
 
-use App\Dto\Employee\EmployeeNewDto;
-use App\Dto\Employee\EmployeeUpdateDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
-use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
-use App\Mapper\Employee\EmployeeTableDtoMapper;
+use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
+use App\Mapper\EmployeeManagement\Employee\EmployeeTableDtoMapper;
 use App\Repositories\CoreRepository;
-use Illuminate\Support\Collection;
 
 class EmployeeRepository extends CoreRepository implements EmployeeRepositoryInterface
 {
