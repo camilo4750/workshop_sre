@@ -2,8 +2,8 @@
 
 namespace App\Repositories\EmployeeManagement\Employee;
 
-use App\Dto\Employee\EmployeeNewDto;
-use App\Dto\Employee\EmployeeUpdateDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
+use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Entities\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
 use App\Mapper\EmployeeManagement\Employee\EmployeeTableDtoMapper;
