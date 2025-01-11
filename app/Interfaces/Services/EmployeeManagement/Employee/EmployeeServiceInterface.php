@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Services\Employee;
+namespace App\Interfaces\Services\EmployeeManagement\Employee;
 
 use App\Dto\Employee\EmployeeDto;
 use App\Dto\Employee\EmployeeNewDto;

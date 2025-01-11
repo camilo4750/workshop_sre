@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\EmployeeManagement\Employee;
 
 use App\Http\Controllers\Wrappers\ControllerWrapper;
-use App\Interfaces\Services\Employee\EmployeeServiceInterface;
+use App\Interfaces\Services\EmployeeManagement\Employee\EmployeeServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 

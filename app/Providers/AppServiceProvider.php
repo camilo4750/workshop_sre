@@ -18,7 +18,7 @@ use App\Interfaces\Repositories\Lists\TypeDocument\TypeDocumentRepositoryInterfa
 use App\Interfaces\Repositories\Supplier\SupplierRepositoryInterface;
 use App\Interfaces\Repositories\Supplier\SupplierStatusRepositoryInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\Services\Employee\EmployeeServiceInterface;
+use App\Interfaces\Services\EmployeeManagement\Employee\EmployeeServiceInterface;
 use App\Interfaces\Services\Geographic\CountryServiceInterface;
 use App\Interfaces\Services\Geographic\DepartmentServiceInterface;
 use App\Interfaces\Services\Geographic\MunicipalityServiceInterface;
@@ -50,7 +50,7 @@ use App\Repositories\Lists\TypeDocument\TypeDocumentRepository;
 use App\Repositories\Supplier\SupplierRepository;
 use App\Repositories\Supplier\SupplierStatusRepository;
 use App\Repositories\System\user\UserRepository;
-use App\Services\Employee\EmployeeService;
+use App\Services\EmployeeManagement\Employee\EmployeeService;
 use App\Services\Geographic\CountryService;
 use App\Services\Geographic\DepartmentService;
 use App\Services\Geographic\MunicipalityService;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Employee;
+namespace App\Services\EmployeeManagement\Employee;
 
 use App\Dto\Employee\EmployeeDto;
 use App\Dto\Employee\EmployeeNewDto;
@@ -9,7 +9,7 @@ use App\Entities\Employee\EmployeeEntity;
 use App\Exceptions\Employee\CustomValidationException;
 use App\Exceptions\Employee\EmployeeNotFoundException;
 use App\Interfaces\Repositories\Employee\EmployeeRepositoryInterface;
-use App\Interfaces\Services\Employee\EmployeeServiceInterface;
+use App\Interfaces\Services\EmployeeManagement\Employee\EmployeeServiceInterface;
 use App\Mapper\Employee\EmployeeDtoMapper;
 use App\Mapper\Employee\EmployeeNewDtoMapper;
 use App\Mapper\Employee\EmployeeUpdateDtoMapper;
