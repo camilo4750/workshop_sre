@@ -289,6 +289,10 @@ return [
                     'text' => 'Empleados',
                     'route'  => 'Employee.Index',
                 ],
+                [
+                    'text' => 'Pagos',
+                    'route'  => 'EmployeePayment.Index',
+                ],
             ],
         ],
     ],
