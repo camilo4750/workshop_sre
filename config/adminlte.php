@@ -290,7 +290,7 @@ return [
                     'route'  => 'Employee.Index',
                 ],
                 [
-                    'text' => 'Pagos',
+                    'text' => 'Pago nominas',
                     'route'  => 'EmployeePayment.Index',
                 ],
             ],
