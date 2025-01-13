@@ -107,4 +107,9 @@ class EmployeeService implements EmployeeServiceInterface
         ->setUser(auth()->user())
         ->update($dto);
     }
+
+    public function getListActiveEmployees(): object
+    {
+        return $this->employeeRepo->getListActiveEmployees();
+    }
 }

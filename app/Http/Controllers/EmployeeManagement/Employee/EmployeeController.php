@@ -72,4 +72,14 @@ class EmployeeController
             ];
         });
     }
+
+    public function getListActiveEmployees(): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () {
+            return [
+                'activeEmployees' => $this->employeeService->getListActiveEmployees(),
+                'message' => 'Empleados activos',
+            ];
+        });
+    }
 }

@@ -8,6 +8,7 @@ use App\Entities\EmployeeManagement\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
 use App\Mapper\EmployeeManagement\Employee\EmployeeTableDtoMapper;
 use App\Repositories\CoreRepository;
+use Illuminate\Support\Collection;
 
 class EmployeeRepository extends CoreRepository implements EmployeeRepositoryInterface
 {
@@ -137,5 +138,13 @@ class EmployeeRepository extends CoreRepository implements EmployeeRepositoryInt
             ]);
 
         return $this;
+    }
+
+    public function getListActiveEmployees(): object
+    {
+        return EmployeeEntity::query()
+            ->select(['id', 'full_name', 'document_number'])
+            ->where('employee_status_id', 1)
+            ->get();
     }
 }

@@ -21,4 +21,6 @@ interface EmployeeServiceInterface
     public function update(int $employeeId, Request $request): self;
 
     public function updateEmployee(EmployeeUpdateDto $dto): object;
+
+    public function getListActiveEmployees(): object;
 }

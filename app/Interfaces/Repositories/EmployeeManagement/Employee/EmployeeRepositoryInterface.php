@@ -18,4 +18,6 @@ interface EmployeeRepositoryInterface extends CoreRepositoryInterface
     public function store(EmployeeNewDto $dto): ?EmployeeEntity;
 
     public function update(EmployeeUpdateDto $dto): self;
+
+    public function getListActiveEmployees(): object;
 }
