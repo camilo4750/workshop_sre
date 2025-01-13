@@ -15,6 +15,7 @@ use App\Interfaces\Repositories\Lists\Eps\EpsRepositoryInterface;
 use App\Interfaces\Repositories\Lists\Gender\GenderRepositoryInterface;
 use App\Interfaces\Repositories\Lists\JobPosition\JobPositionRepositoryInterface;
 use App\Interfaces\Repositories\Lists\PaymentMethod\PaymentMethodRepositoryInterface;
+use App\Interfaces\Repositories\Lists\PaymentStatus\PaymentStatusRepositoryInterface;
 use App\Interfaces\Repositories\Lists\PensionFund\PensionFundRepositoryInterface;
 use App\Interfaces\Repositories\Lists\TypeDocument\TypeDocumentRepositoryInterface;
 use App\Interfaces\Repositories\Supplier\SupplierRepositoryInterface;
@@ -33,6 +34,7 @@ use App\Interfaces\Services\Lists\Eps\EpsServiceInterface;
 use App\Interfaces\Services\Lists\Gender\GenderServiceInterface;
 use App\Interfaces\Services\Lists\JobPosition\JobPositionServiceInterface;
 use App\Interfaces\Services\Lists\PaymentMethod\PaymentMethodServiceInterface;
+use App\Interfaces\Services\Lists\PaymentStatus\PaymentStatusServiceInterface;
 use App\Interfaces\Services\Lists\PensionFund\PensionFundServiceInterface;
 use App\Interfaces\Services\Lists\TypeDocument\TypeDocumentServiceInterface;
 use App\Interfaces\Services\Supplier\SupplierServiceInterface;
@@ -51,6 +53,7 @@ use App\Repositories\Lists\Eps\EpsRepository;
 use App\Repositories\Lists\Gender\GenderRepository;
 use App\Repositories\Lists\JobPosition\JobPositionRepository;
 use App\Repositories\Lists\PaymentMethod\PaymentMethodRepository;
+use App\Repositories\Lists\PaymentStatus\PaymentStatusRepository;
 use App\Repositories\Lists\PensionFund\PensionFundRepository;
 use App\Repositories\Lists\TypeDocument\TypeDocumentRepository;
 use App\Repositories\Supplier\SupplierRepository;
@@ -69,6 +72,7 @@ use App\Services\Lists\Eps\EpsService;
 use App\Services\Lists\Gender\GenderService;
 use App\Services\Lists\JobPosition\JobPositionService;
 use App\Services\Lists\PaymentMethod\PaymentMethodService;
+use App\Services\Lists\PaymentStatus\PaymentStatusService;
 use App\Services\Lists\PensionFund\PensionFundService;
 use App\Services\Lists\TypeDocument\TypeDocumentService;
 use App\Services\Supplier\SupplierService;
@@ -119,6 +123,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PaymentRepositoryInterface::class, PaymentRepository::class);
         $this->app->bind(PaymentMethodServiceInterface::class, PaymentMethodService::class);
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
+        $this->app->bind(PaymentStatusServiceInterface::class, PaymentStatusService::class);
+        $this->app->bind(PaymentStatusRepositoryInterface::class, PaymentStatusRepository::class);
     }
 
     /**
