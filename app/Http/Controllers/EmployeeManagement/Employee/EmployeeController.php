@@ -77,7 +77,7 @@ class EmployeeController
     {
         return ControllerWrapper::execWithJsonSuccessResponse(function () {
             return [
-                'activeEmployees' => $this->employeeService->getListActiveEmployees(),
+                'data' => $this->employeeService->getListActiveEmployees(),
                 'message' => 'Empleados activos',
             ];
         });
