@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mapper\user;
+namespace App\Mapper\User;
 
 use App\Dto\User\UserNewDto;
 use App\Mapper\CoreMapper;
@@ -13,7 +13,7 @@ class UserNewDtoMapper extends CoreMapper
         return new UserNewDto();
     }
 
-    public function createFormRequest(Request $request): UserNewDto  
+    public function createFormRequest(Request $request): UserNewDto
     {
         $dto = $this->getNewDto();
         $dto->full_name = $request->get('fullName');

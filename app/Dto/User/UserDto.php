@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\user;
+namespace App\Dto\User;
 
 use App\Dto\CoreDto;
 

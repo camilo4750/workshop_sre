@@ -32,10 +32,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => $this->faker->uuid(),
             'full_name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->phoneNumber,
-            'password' => bcrypt('password'), // O usar un hash de tu preferencia
+            'password' => bcrypt('password'),
             'active' => $this->faker->boolean,
         ];
     }
