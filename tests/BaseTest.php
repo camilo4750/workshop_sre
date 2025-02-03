@@ -7,9 +7,6 @@ use Tests\TestCase;
 
 class BaseTest extends TestCase
 {
-    protected string $user_password = 'secret';
-    protected int $user_id = 0;
-
     protected User $user;
 
     public function setUp():void
