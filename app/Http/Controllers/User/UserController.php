@@ -39,7 +39,6 @@ class UserController
             (new UserControllerValidate())
                 ->validateStoreRequest($request);
 
-
             $user = $this->userService
                 ->store($request);
 
@@ -58,7 +57,7 @@ class UserController
 
             $this->userService
                 ->update($userId, $request);
-                
+
             return [
                 "message" => "usuario actualizado"
             ];
