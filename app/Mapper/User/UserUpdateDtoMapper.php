@@ -13,7 +13,7 @@ class UserUpdateDtoMapper extends CoreMapper
         return new UserUpdateDto();
     }
 
-    public function createFromRequest(Request $request): UserUpdateDto
+    public function createFormRequest(Request $request): UserUpdateDto
     {
         $dto = $this->getNewDto();
         $dto->full_name = $request->get('fullName');
