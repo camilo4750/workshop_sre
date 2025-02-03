@@ -1,5 +1,3 @@
-version: "3.9"
-
 #Puerto_maquina:puerto_contenedor
 services:
   workshop-sre-nginx:

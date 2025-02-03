@@ -1,5 +1,3 @@
-version: "3.9"
-
 # Ports se definen en override
 
 services:
@@ -28,5 +26,5 @@ services:
 #docker network create workshop-sre-network
 networks:
     default:
-        external:
-            name: workshop-sre-network
+        name: workshop-sre-network
+        external: true
