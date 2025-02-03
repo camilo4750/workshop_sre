@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\User;
 
+use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Session;
@@ -14,27 +15,28 @@ class UserTest extends BaseTest
     /**
      * @test
      */
-    public function is_store_working()
+    public function is_store_working(): void
     {
         $this->actingAs($this->user);
+
+        $userData = User::factory()->make()->toArray();
+
         $response = $this->post(route('User.Create'), [
-            'fullName' => 'Nombre de prueba 2',
-            'email' => 'prueba2@workshop.com',
+            'fullName' => $userData['full_name'],
+            'email' => $userData['email'],
             'password' => 'password',
             'password_confirmation' => 'password',
-            'phone' => '53455653',
-            'active' => 1,
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
 
         $response->assertStatus(200);
-        $this->assertNull(Session::get('errors'));
+        $this->assertNull(session('errors'));
         $response->assertJsonStructure(['success', 'message']);
 
         $this->assertDatabaseHas('users', [
-            'full_name' => 'Nombre de prueba 2',
-            'email' => 'prueba2@workshop.com',
-            'phone' => '53455653',
-            'active' => 1,
+            'full_name' => $userData['full_name'],
+            'email' => $userData['email'],
         ]);
     }
 
@@ -44,30 +46,27 @@ class UserTest extends BaseTest
      */
     public function is_update_working()
     {
-        $user = User::factory()->create([
-            'full_name' => 'Nombre Original',
-            'email' => 'original@workshop.com',
-            'phone' => '12345678',
-            'active' => 1,
-        ]);
-
         $this->actingAs($this->user);
-        $response = $this->post(route('User.Update', $user->id), [
-            'full_name' => 'Nombre Actualizado',
-            'email' => 'prueba@workshop.com',
-            'phone' => '34344444',
-            'active' => 1,
+
+        $userData = User::factory()->make()->toArray();
+
+        $response = $this->post(route('User.Update', ['userId' => $this->user->id]), [
+            'fullName' => $userData['full_name'],
+            'email' => $userData['email'],
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
 
         $response->assertStatus(200);
-        $this->assertNull(Session::get('errors'));
+        $this->assertNull(session('errors'));
         $response->assertJsonStructure(['success', 'message']);
 
         $this->assertDatabaseHas('users', [
-            'full_name' => 'Nombre Actualizado',
-            'email' => 'prueba2@workshop.com',
-            'phone' => '34344444',
-            'active' => 1,
+            'id' => $this->user->id,
+            'full_name' => $userData['full_name'],
+            'email' => $userData['email'],
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
     }
 }

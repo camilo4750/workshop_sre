@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Repositories\User;
 
-use App\Dto\user\UserNewDto;
+use App\Dto\User\UserNewDto;
 use App\Dto\User\UserUpdateDto;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Models\User;
@@ -20,12 +20,14 @@ class UserRepositoryTest extends BaseTest
     {
         $this->actingAs($this->user);
 
+        $userData = User::factory()->make()->toArray();
+
         $userNewDto = new UserNewDto();
-        $userNewDto->full_name = "Nombre de prueba 2";
-        $userNewDto->email = "prueba3@workshop.com";
+        $userNewDto->full_name = $userData['full_name'];
+        $userNewDto->email = $userData['email'];
         $userNewDto->password = bcrypt('password');
-        $userNewDto->phone = "53455653";
-        $userNewDto->active = 1;
+        $userNewDto->phone = $userData['phone'];
+        $userNewDto->active = $userData['active'];
 
         (App::make(UserRepositoryInterface::class))
             ->setUser($this->user)
@@ -34,10 +36,8 @@ class UserRepositoryTest extends BaseTest
         $this->assertNull(Session::get('errors'));
 
         $this->assertDatabaseHas('users', [
-            'full_name' => 'Nombre de prueba 2',
-            'email' => 'prueba3@workshop.com',
-            'phone' => '53455653',
-            'active' => 1,
+            'full_name' => $userData['full_name'],
+            'email' => $userData['email'],
         ]);
     }
 
@@ -49,19 +49,14 @@ class UserRepositoryTest extends BaseTest
     {
         $this->actingAs($this->user);
 
-        $existingUser = User::factory()->create([
-            'full_name' => 'Nombre de prueba',
-            'email' => 'prueba@workshop.com',
-            'phone' => '12345678',
-            'active' => 1,
-        ]);
+        $userData = User::factory()->make()->toArray();
 
         $userUpdateDto = new UserUpdateDto();
-        $userUpdateDto->id = $existingUser->id;
-        $userUpdateDto->full_name = "Nombre de prueba actualizado";
-        $userUpdateDto->email = "prueba_actualizada@workshop.com";
-        $userUpdateDto->phone = "87654321";
-        $userUpdateDto->active = 1;
+        $userUpdateDto->id = $this->user->id;
+        $userUpdateDto->full_name = $userData['full_name'];
+        $userUpdateDto->email = $userData['email'];
+        $userUpdateDto->phone = $userData['phone'];
+        $userUpdateDto->active = $userData['active'];
 
         (App::make(UserRepositoryInterface::class))
             ->setUser($this->user)
@@ -70,11 +65,10 @@ class UserRepositoryTest extends BaseTest
         $this->assertNull(Session::get('errors'));
 
         $this->assertDatabaseHas('users', [
-            'id' => $existingUser->id,
-            'full_name' => 'Nombre de prueba actualizado',
-            'email' => 'prueba_actualizada@workshop.com',
-            'phone' => '87654321',
-            'active' => 1,
+            'id' => $this->user->id,
+            'email' => $userData['email'],
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
     }
 }

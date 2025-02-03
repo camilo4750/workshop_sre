@@ -3,7 +3,7 @@
 namespace Tests\Integration\Services\User;
 
 use App\Interfaces\Services\User\UserServiceInterface;
-use App\Mapper\user\UserNewDtoMapper;
+use App\Mapper\User\UserNewDtoMapper;
 use App\Mapper\User\UserUpdateDtoMapper;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -19,21 +19,20 @@ class UserServiceTest extends BaseTest
     /**
      * @test
      */
-    public function is_store_working()
+    public function is_store_service()
     {
         $this->actingAs($this->user);
 
+        $userData = User::factory()->make()->toArray();
+
         $request = (new Request())->merge([
-            'fullName' => 'Nombre de prueba 2',
-            'email' => 'prueba3@workshop.com',
+            'fullName' => $userData['full_name'],
+            'email' => $userData['email'],
             'password' => 'password',
             'password_confirmation' => 'password',
-            'phone' => '53455653',
-            'active' => 1,
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
-
-        (App::make(UserServiceInterface::class))
-            ->store($request);
 
         $userNewDto = (App::make(UserNewDtoMapper::class))
             ->createFormRequest($request);
@@ -44,10 +43,8 @@ class UserServiceTest extends BaseTest
         $this->assertNull(Session::get('errors'));
 
         $this->assertDatabaseHas('users', [
-            'full_name' => 'Nombre de prueba 2',
-            'email' => 'prueba3@workshop.com',
-            'phone' => '53455653',
-            'active' => 1,
+            'full_name' => $userData['full_name'],
+            'email' => $userData['email'],
         ]);
     }
 
@@ -55,31 +52,26 @@ class UserServiceTest extends BaseTest
     /**
      * @test
      */
-    public function is_user_updating_correctly()
+    public function is_user_updating_service()
     {
         $this->actingAs($this->user);
-        $existingUser = User::factory()->create([
-            'full_name' => 'Nombre de prueba',
-            'email' => 'prueba@workshop.com',
-            'phone' => '12345678',
-            'active' => 1,
-        ]);
+
+        $userData = User::factory()->make()->toArray();
 
         $request = (new Request())->merge([
-            'id' => $existingUser->id,
-            'fullName' => 'Nombre de prueba actualizado',
-            'email' => 'prueba_actualizada@workshop.com',
+            'id' => $this->user->id,
+            'fullName' => $userData['full_name'],
+            'email' => $userData['email'],
             'password' => 'nuevopassword',
             'password_confirmation' => 'nuevopassword',
-            'phone' => '87654321',
-            'active' => 1,
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
-
-        (App::make(UserServiceInterface::class))
-            ->update($request);
 
         $userUpdateDto = (App::make(UserUpdateDtoMapper::class))
             ->createFormRequest($request);
+
+        $userUpdateDto->id = $this->user->id;
 
         (App::make(UserServiceInterface::class))
             ->updateUser($userUpdateDto);
@@ -87,11 +79,11 @@ class UserServiceTest extends BaseTest
         $this->assertNull(Session::get('errors'));
 
         $this->assertDatabaseHas('users', [
-            'id' => $existingUser->id,
-            'full_name' => 'Nombre de prueba actualizado',
-            'email' => 'prueba_actualizada@workshop.com',
-            'phone' => '87654321',
-            'active' => 1,
+            'id' => $this->user->id,
+            'full_name' => $userData['full_name'],
+            'email' => $userData['email'],
+            'phone' => $userData['phone'],
+            'active' => $userData['active'],
         ]);
     }
 }
