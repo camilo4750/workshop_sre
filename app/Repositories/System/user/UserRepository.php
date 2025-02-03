@@ -42,7 +42,7 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
 
     public function existByEmail(string $email): bool
     {
-        return User::where("email", $email)->exists();
+        return User::query()->where("email", '=', $email)->exists();
     }
 
     public function update(UserUpdateDto $dto): self
@@ -57,7 +57,7 @@ class UserRepository extends CoreRepository implements UserRepositoryInterface
                 'user_who_updated_id' => $this->user->id,
                 'updated_at' => now(),
             ]);
-        
+
         return $this;
     }
 }
