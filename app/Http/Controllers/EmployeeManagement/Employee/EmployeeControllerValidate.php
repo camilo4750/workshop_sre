@@ -11,7 +11,7 @@ class EmployeeControllerValidate
         $request->validate([
             'fullName' => ['required', 'string'],
             'typeDocumentId' => ['required', 'int'],
-            'documentNumber' => ['required', 'string', 'max:20'],
+            'documentNumber' => ['required', 'max:20'],
             'municipalityId' => ['required', 'int'],
             'address' => ['required', 'string'],
             'telephone' => ['required', 'string', 'max:20'],
@@ -21,7 +21,7 @@ class EmployeeControllerValidate
             'pensionFundId' => ['required', 'int'],
             'arlId' => ['required', 'int'],
             'contractTypeId' => ['required', 'int'],
-            'salary' => ['required', 'string'],
+            'salary' => ['required'],
             'entryDate' => ['required', 'string'],
             'bankId' => ['required', 'int'],
             'emergencyContact' => ['required', 'string'],
