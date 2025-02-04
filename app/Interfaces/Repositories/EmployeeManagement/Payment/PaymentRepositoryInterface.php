@@ -6,5 +6,5 @@ use App\Interfaces\Repositories\CoreRepositoryInterface;
 
 interface PaymentRepositoryInterface extends CoreRepositoryInterface
 {
-
+    public function getAll():array;
 }
