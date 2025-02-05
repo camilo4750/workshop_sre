@@ -7,6 +7,8 @@ use App\Exceptions\EmployeeManagement\EmployeePayment\EmployeePaymentNotFoundExc
 use App\Interfaces\Repositories\EmployeeManagement\Payment\PaymentRepositoryInterface;
 use App\Interfaces\Services\EmployeeManagement\Payment\PaymentServiceInterface;
 use App\Mapper\EmployeeManagement\Payment\PaymentDtoMapper;
+use App\Mapper\EmployeeManagement\Payment\PaymentNewDtoMapper;
+use Illuminate\Http\Request;
 
 class PaymentService implements PaymentServiceInterface
 {
@@ -41,5 +43,15 @@ class PaymentService implements PaymentServiceInterface
         );
 
         return $payment;
+    }
+
+    public function store(Request $request)
+    {
+        $paymentDto = (new PaymentNewDtoMapper())
+            ->createFormRequest($request);
+
+        return $this->paymentRepo
+            ->setUser(auth()->user())
+            ->store($paymentDto);
     }
 }

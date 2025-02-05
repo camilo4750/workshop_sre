@@ -16,7 +16,7 @@ class PaymentDtoMapper extends CoreMapper
     {
         $dto = $this->getNewDto();
         $dto->id = $dbRecord->id;
-        $dto->employeeId = $dbRecord->employe_id;
+        $dto->employeeId = $dbRecord->employee_id;
         $dto->employeeName = $dbRecord->employee_name;
         $dto->startPeriod = $dbRecord->start_period;
         $dto->endPeriod = $dbRecord->end_period;

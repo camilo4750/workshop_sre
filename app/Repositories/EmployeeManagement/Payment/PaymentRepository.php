@@ -3,6 +3,7 @@
 namespace App\Repositories\EmployeeManagement\Payment;
 
 use App\Dto\EmployeeManagement\EmployeePayment\EmployeePaymentDto;
+use App\Dto\EmployeeManagement\EmployeePayment\EmployeePaymentNewDto;
 use App\Entities\EmployeeManagement\Payment\PaymentEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Payment\PaymentRepositoryInterface;
 use App\Mapper\EmployeeManagement\Payment\PaymentDtoMapper;
@@ -37,7 +38,7 @@ class PaymentRepository extends CoreRepository implements PaymentRepositoryInter
         $payment = PaymentEntity::query()
             ->select([
                 'employee_payments.id',
-                'employee_payments.employe_id',
+                'employee_payments.employee_id',
                 'employees.full_name as employee_name',
                 'employee_payments.start_period',
                 'employee_payments.end_period',
@@ -58,7 +59,7 @@ class PaymentRepository extends CoreRepository implements PaymentRepositoryInter
                 'employee_payments.created_at',
                 'employee_payments.updated_at',
             ])
-            ->leftJoin('employees', 'employee_payments.employe_id', '=', 'employees.id')
+            ->leftJoin('employees', 'employee_payments.employee_id', '=', 'employees.id')
             ->leftJoin('payment_methods', 'employee_payments.payment_method_id', '=', 'payment_methods.id')
             ->leftJoin('payment_status', 'employee_payments.payment_status_id', '=', 'payment_status.id')
             ->leftJoin('users as user_created', 'employee_payments.user_who_created_id', '=', 'user_created.id')
@@ -66,5 +67,24 @@ class PaymentRepository extends CoreRepository implements PaymentRepositoryInter
             ->find($paymentId);
 
         return (new PaymentDtoMapper())->createFromDbRecord($payment);
+    }
+
+    public function store(EmployeePaymentNewDto $dto): EmployeePaymentDto
+    {
+        $paymentId = PaymentEntity::query()->insertGetId([
+            'employee_id' => $dto->employee_id,
+            'start_period' => $dto->start_period,
+            'end_period' => $dto->end_period,
+            'payment_method_id' => $dto->payment_method_id,
+            'payment' => $dto->payment,
+            'overtime_total' => $dto->overtime_total,
+            'overtime_payment' => $dto->overtime_payment,
+            'bonus' => $dto->bonus,
+            'total_accrued' => $dto->total_accrued,
+            'payment_status_id' => $dto->payment_status_id,
+            'observations' => $dto->observations,
+        ]);
+
+        return $this->getById($paymentId);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\EmployeeManagement\Payment;
 use App\Http\Controllers\Wrappers\ControllerWrapper;
 use App\Interfaces\Services\EmployeeManagement\Payment\PaymentServiceInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PaymentController
 {
@@ -37,6 +38,22 @@ class PaymentController
             return [
                 'message' => 'Información del pago',
                 'data' => $this->paymentService->getById($paymentId),
+            ];
+        });
+    }
+
+    public function store(Request $request): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request) {
+            (new PaymentControllerValidate())
+                ->validateStoreRequest($request);
+
+            $payment = $this->paymentService
+                ->store($request);
+
+            return [
+                'message' => 'Pago registrado exitosamente',
+                'id' => $payment->id,
             ];
         });
     }
