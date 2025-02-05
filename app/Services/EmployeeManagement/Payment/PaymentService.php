@@ -2,9 +2,11 @@
 
 namespace App\Services\EmployeeManagement\Payment;
 
+use App\Dto\EmployeeManagement\EmployeePayment\EmployeePaymentDto;
 use App\Exceptions\EmployeeManagement\EmployeePayment\EmployeePaymentNotFoundException;
 use App\Interfaces\Repositories\EmployeeManagement\Payment\PaymentRepositoryInterface;
 use App\Interfaces\Services\EmployeeManagement\Payment\PaymentServiceInterface;
+use App\Mapper\EmployeeManagement\Payment\PaymentDtoMapper;
 
 class PaymentService implements PaymentServiceInterface
 {
@@ -27,5 +29,17 @@ class PaymentService implements PaymentServiceInterface
         );
 
         return $payments;
+    }
+
+    public function getById(int $paymentId): EmployeePaymentDto
+    {
+        $payment = $this->paymentRepo->getById($paymentId);
+
+        throw_if(
+            !$payment,
+            new EmployeePaymentNotFoundException()
+        );
+
+        return $payment;
     }
 }

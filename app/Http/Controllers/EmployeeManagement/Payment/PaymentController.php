@@ -30,4 +30,14 @@ class PaymentController
             ];
         });
     }
+
+    public function getById(int $paymentId): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($paymentId) {
+            return [
+                'message' => 'Información del pago',
+                'data' => $this->paymentService->getById($paymentId),
+            ];
+        });
+    }
 }
