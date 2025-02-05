@@ -24,4 +24,21 @@ class PaymentRepositoryTest extends BaseTest
             'id' => $employees[0]->id,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function is_get_by_id_repo():void
+    {
+        $this->actingAs($this->user);
+
+        $employee = (App::make(PaymentRepositoryInterface::class))
+            ->getById(1);
+
+        $this->assertNull(session('errors'));
+
+        $this->assertDatabaseHas('employee_payments', [
+            'id' => $employee->id,
+        ]);
+    }
 }

@@ -18,4 +18,17 @@ class PaymentTest extends BaseTest
         $response->assertStatus(200);
         $response->assertJsonStructure(['message', 'data']);
     }
+
+    /**
+     * @test
+     */
+    public function is_get_by_id_working():void
+    {
+        $this->actingAs($this->user);
+
+        $response = $this->getJson(route('EmployeePayment.GetById', ['paymentId' => 1]));
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['message', 'data']);
+    }
 }

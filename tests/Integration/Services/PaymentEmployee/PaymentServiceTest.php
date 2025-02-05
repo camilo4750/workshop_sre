@@ -24,4 +24,21 @@ class PaymentServiceTest extends BaseTest
             'id' => $employees[0]->id,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function is_get_by_id_service():void
+    {
+        $this->actingAs($this->user);
+
+        $employee = (App::make(PaymentServiceInterface::class))
+            ->getById(1);
+
+        $this->assertNull(session('errors'));
+
+        $this->assertDatabaseHas('employees', [
+            'id' => $employee->id,
+        ]);
+    }
 }
