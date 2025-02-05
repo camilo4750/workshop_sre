@@ -11,6 +11,6 @@ interface PaymentServiceInterface
 
     public function getById(int $paymentId): EmployeePaymentDto;
 
-    public function store(Request $request);
+    public function store(Request $request): EmployeePaymentDto;
 
 }

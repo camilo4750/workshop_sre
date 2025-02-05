@@ -45,7 +45,7 @@ class PaymentService implements PaymentServiceInterface
         return $payment;
     }
 
-    public function store(Request $request)
+    public function store(Request $request): EmployeePaymentDto
     {
         $paymentDto = (new PaymentNewDtoMapper())
             ->createFormRequest($request);
