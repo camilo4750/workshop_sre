@@ -78,4 +78,38 @@ class PaymentServiceTest extends BaseTest
             'start_period' => $paymentData['start_period'],
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function is_update_service():void
+    {
+        $this->actingAs($this->user);
+
+        $paymentData = PaymentEntity::factory()->make()->toArray();
+
+        $request = (new Request())->merge([
+            'employeeId' => $paymentData['employee_id'],
+            'startPeriod' => $paymentData['start_period'],
+            'endPeriod' => $paymentData['end_period'],
+            'paymentMethodId' => $paymentData['payment_method_id'],
+            'payment' => $paymentData['payment'],
+            'overtimeTotal' => $paymentData['overtime_total'],
+            'overtimePayment' => $paymentData['overtime_payment'],
+            'bonus' => $paymentData['bonus'],
+            'totalAccrued' => $paymentData['total_accrued'],
+            'paymentStatusId' => $paymentData['payment_status_id'],
+            'observations' => $paymentData['observations'],
+        ]);
+
+        (App::make(PaymentServiceInterface::class))
+            ->update($request, 1);
+
+        $this->assertNull(session('errors'));
+
+        $this->assertDatabaseHas('employee_payments', [
+            'employee_id' => $paymentData['employee_id'],
+            'start_period' => $paymentData['start_period'],
+        ]);
+    }
 }
