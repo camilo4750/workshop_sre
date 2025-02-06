@@ -12,11 +12,11 @@ class EmployeePaymentTableDto extends CoreDto
 
     public string $endPeriod;
 
-    public string $paymentMethodId;
+    public string $paymentMethodName;
 
     public int $overtimeTotal;
 
     public float $bonus;
 
-    public string $paymentStatusId;
+    public string $paymentStatusName;
 }

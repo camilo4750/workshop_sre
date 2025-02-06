@@ -18,10 +18,10 @@ class PaymentTableDtoMapper extends CoreMapper
         $dto->id = $dbRecord->id;
         $dto->startPeriod = $dbRecord->start_period;
         $dto->endPeriod = $dbRecord->end_period;
-        $dto->paymentMethodId = $dbRecord->payment_method;
+        $dto->paymentMethodName = $dbRecord->payment_method;
         $dto->overtimeTotal = $dbRecord->overtime_total;
         $dto->bonus = $dbRecord->bonus;
-        $dto->paymentStatusId = $dbRecord->payment_status;
+        $dto->paymentStatusName = $dbRecord->payment_status;
         return $dto;
     }
 }
