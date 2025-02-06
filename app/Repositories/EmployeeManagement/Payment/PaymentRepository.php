@@ -4,6 +4,7 @@ namespace App\Repositories\EmployeeManagement\Payment;
 
 use App\Dto\EmployeeManagement\EmployeePayment\EmployeePaymentDto;
 use App\Dto\EmployeeManagement\EmployeePayment\EmployeePaymentNewDto;
+use App\Dto\EmployeeManagement\EmployeePayment\EmployeePaymentUpdateDto;
 use App\Entities\EmployeeManagement\Payment\PaymentEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Payment\PaymentRepositoryInterface;
 use App\Mapper\EmployeeManagement\Payment\PaymentDtoMapper;
@@ -83,8 +84,33 @@ class PaymentRepository extends CoreRepository implements PaymentRepositoryInter
             'total_accrued' => $dto->total_accrued,
             'payment_status_id' => $dto->payment_status_id,
             'observations' => $dto->observations,
+            'user_who_created_id' => $this->user->id,
+            'created_at' => 'now()'
         ]);
 
         return $this->getById($paymentId);
+    }
+
+    public function update(EmployeePaymentUpdateDto $dto): static
+    {
+        PaymentEntity::query()
+            ->where("id", $dto->id)
+            ->update([
+                'employee_id' => $dto->employee_id,
+                'start_period' => $dto->start_period,
+                'end_period' => $dto->end_period,
+                'payment_method_id' => $dto->payment_method_id,
+                'payment' => $dto->payment,
+                'overtime_total' => $dto->overtime_total,
+                'overtime_payment' => $dto->overtime_payment,
+                'bonus' => $dto->bonus,
+                'total_accrued' => $dto->total_accrued,
+                'payment_status_id' => $dto->payment_status_id,
+                'observations' => $dto->observations,
+                'user_who_updated_id' => $this->user->id,
+                'updated_at' => now()
+            ]);
+
+        return $this;
     }
 }

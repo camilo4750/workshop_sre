@@ -57,4 +57,19 @@ class PaymentController
             ];
         });
     }
+
+    public function update(Request $request, int $paymentId): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($request, $paymentId) {
+            (new PaymentControllerValidate)
+                ->validateUpdateRequest($request);
+
+            $this->paymentService
+                ->update($request, $paymentId);
+
+            return [
+                'message' => 'Pago Actualizado exitosamente',
+            ];
+        });
+    }
 }
