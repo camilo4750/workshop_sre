@@ -18,6 +18,7 @@ class PaymentRepository extends CoreRepository implements PaymentRepositoryInter
         $payments = PaymentEntity::query()
             ->select([
                 'employee_payments.id',
+                'employees.full_name as employee_name',
                 'employee_payments.start_period',
                 'employee_payments.end_period',
                 'payment_methods.name as payment_method',
@@ -27,6 +28,8 @@ class PaymentRepository extends CoreRepository implements PaymentRepositoryInter
             ])
             ->leftJoin('payment_methods', 'employee_payments.payment_method_id', '=', 'payment_methods.id')
             ->leftJoin('payment_status', 'employee_payments.payment_status_id', '=', 'payment_status.id')
+            ->leftJoin('employees', 'employee_payments.employee_id', '=', 'employees.id')
+            ->orderByDesc('employee_payments.id')
             ->get();
 
         return  $payments->map(function ($employee) {

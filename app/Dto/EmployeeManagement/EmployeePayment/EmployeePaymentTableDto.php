@@ -8,6 +8,8 @@ class EmployeePaymentTableDto extends CoreDto
 {
     public int $id;
 
+    public string $employeeName;
+
     public string $startPeriod;
 
     public string $endPeriod;
