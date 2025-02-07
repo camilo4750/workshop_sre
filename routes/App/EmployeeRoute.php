@@ -10,4 +10,5 @@ Route::middleware(['auth', 'session.timeout'])->prefix('employee')->group(functi
     Route::post('/store', [EmployeeController::class, 'store'])->name('Employee.Store');
     Route::post('/update/{employeeId}', [EmployeeController::class, 'update'])->name('Employee.Update');
     Route::get('/getListActiveEmployees', [EmployeeController::class, 'getListActiveEmployees'])->name('Employee.GetListActiveEmployees');
+    Route::get('/getBasicInfo/{employeeId}', [EmployeeController::class, 'getBasicInfoById'])->name('Employee.getBasicInfoById');
 });

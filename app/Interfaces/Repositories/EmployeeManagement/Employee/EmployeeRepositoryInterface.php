@@ -2,6 +2,7 @@
 
 namespace App\Interfaces\Repositories\EmployeeManagement\Employee;
 
+use App\Dto\EmployeeManagement\Employee\EmployeeBasicInfoDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Entities\EmployeeManagement\Employee\EmployeeEntity;
@@ -20,4 +21,6 @@ interface EmployeeRepositoryInterface extends CoreRepositoryInterface
     public function update(EmployeeUpdateDto $dto): self;
 
     public function getListActiveEmployees(): object;
+
+    public function getBasicInfoById(int $employeeId): EmployeeBasicInfoDto;
 }

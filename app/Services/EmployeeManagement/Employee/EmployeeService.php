@@ -2,6 +2,7 @@
 
 namespace App\Services\EmployeeManagement\Employee;
 
+use App\Dto\EmployeeManagement\Employee\EmployeeBasicInfoDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
@@ -87,7 +88,7 @@ class EmployeeService implements EmployeeServiceInterface
         ) {
             $this->errors['documentNumber'] = 'Numero de documento ya se encuentra registrado en el sistema.';
         }
-     
+
         throw_if(
             !empty($this->errors),
             new CustomValidationException($this->errors)
@@ -97,7 +98,7 @@ class EmployeeService implements EmployeeServiceInterface
         $dto->id = $employeeId;
 
         $this->updateEmployee($dto);
-        
+
         return $this;
     }
 
@@ -111,5 +112,10 @@ class EmployeeService implements EmployeeServiceInterface
     public function getListActiveEmployees(): object
     {
         return $this->employeeRepo->getListActiveEmployees();
+    }
+
+    public function getBasicInfoById(int $employeeId): EmployeeBasicInfoDto
+    {
+        return $this->employeeRepo->getBasicInfoById($employeeId);
     }
 }

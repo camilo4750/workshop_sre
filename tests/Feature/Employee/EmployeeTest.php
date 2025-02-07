@@ -143,4 +143,17 @@ class EmployeeTest extends BaseTest
         $response->assertStatus(200);
         $response->assertJsonStructure(['message', 'data']);
     }
+
+    /**
+     * @test
+     */
+    public function is_get_basic_info_by_id_working()
+    {
+        $this->actingAs($this->user);
+
+        $response = $this->getJson(route('Employee.getBasicInfoById', ['employeeId' => 1]));
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['message', 'data']);
+    }
 }

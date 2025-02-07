@@ -2,6 +2,7 @@
 
 namespace App\Interfaces\Services\EmployeeManagement\Employee;
 
+use App\Dto\EmployeeManagement\Employee\EmployeeBasicInfoDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
@@ -23,4 +24,6 @@ interface EmployeeServiceInterface
     public function updateEmployee(EmployeeUpdateDto $dto): object;
 
     public function getListActiveEmployees(): object;
+
+    public function getBasicInfoById(int $employeeId): EmployeeBasicInfoDto;
 }

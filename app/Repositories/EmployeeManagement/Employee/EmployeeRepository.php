@@ -2,10 +2,12 @@
 
 namespace App\Repositories\EmployeeManagement\Employee;
 
+use App\Dto\EmployeeManagement\Employee\EmployeeBasicInfoDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeNewDto;
 use App\Dto\EmployeeManagement\Employee\EmployeeUpdateDto;
 use App\Entities\EmployeeManagement\Employee\EmployeeEntity;
 use App\Interfaces\Repositories\EmployeeManagement\Employee\EmployeeRepositoryInterface;
+use App\Mapper\EmployeeManagement\Employee\EmployeeBasicInfoMapper;
 use App\Mapper\EmployeeManagement\Employee\EmployeeTableDtoMapper;
 use App\Repositories\CoreRepository;
 use Illuminate\Support\Collection;
@@ -146,5 +148,20 @@ class EmployeeRepository extends CoreRepository implements EmployeeRepositoryInt
             ->select(['id', 'full_name', 'document_number'])
             ->where('employee_status_id', 1)
             ->get();
+    }
+
+    public function getBasicInfoById(int $employeeId): EmployeeBasicInfoDto
+    {
+        $employee = EmployeeEntity::query()
+            ->select([
+                'id',
+                'full_name',
+                'document_number',
+                'salary',
+            ])
+            ->where('id', '=', $employeeId)
+            ->find($employeeId);
+
+        return (new EmployeeBasicInfoMapper())->createFromDbRecord($employee);
     }
 }

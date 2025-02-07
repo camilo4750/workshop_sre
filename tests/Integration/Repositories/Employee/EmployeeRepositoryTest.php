@@ -142,4 +142,23 @@ class EmployeeRepositoryTest extends BaseTest
             'full_name' => $employees[0]->full_name,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function is_get_basic_info_by_id_repo()
+    {
+        $this->actingAs($this->user);
+
+        $employee = (App::make(EmployeeRepositoryInterface::class))
+            ->getBasicInfoById(1);
+
+        $this->assertNull(session('errors'));
+        $this->assertDatabaseHas('employees', [
+            'id' => $employee->id,
+            'full_name' => $employee->fullName,
+            'document_number' => $employee->documentNumber,
+            'salary' => $employee->salary,
+        ]);
+    }
 }

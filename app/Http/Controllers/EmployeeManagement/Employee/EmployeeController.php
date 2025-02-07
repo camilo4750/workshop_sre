@@ -82,4 +82,14 @@ class EmployeeController
             ];
         });
     }
+
+    public function getBasicInfoById(int $employeeId): array|JsonResponse
+    {
+        return ControllerWrapper::execWithJsonSuccessResponse(function () use ($employeeId) {
+            return [
+                'message' => "Datos basicos del empleador",
+                'data' => $this->employeeService->getBasicInfoById($employeeId),
+            ];
+        });
+    }
 }
