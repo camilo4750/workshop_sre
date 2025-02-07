@@ -111,11 +111,25 @@ class EmployeeService implements EmployeeServiceInterface
 
     public function getListActiveEmployees(): object
     {
-        return $this->employeeRepo->getListActiveEmployees();
+        $activeEmployees = $this->employeeRepo->getListActiveEmployees();
+
+        throw_if(
+            !$activeEmployees,
+            new EmployeeNotFoundException(message: 'Fallo al obtener los empleados activos en el sistema.')
+        );
+
+        return $activeEmployees;
     }
 
     public function getBasicInfoById(int $employeeId): EmployeeBasicInfoDto
     {
-        return $this->employeeRepo->getBasicInfoById($employeeId);
+        $employee = $this->employeeRepo->getBasicInfoById($employeeId);
+
+        throw_if(
+            !$employee,
+            new EmployeeNotFoundException()
+        );
+
+        return $employee;
     }
 }
